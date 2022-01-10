@@ -9,6 +9,15 @@ import UIKit
 
 class PhoneViewController: UIViewController, UITextFieldDelegate {
     var accountType:Int!
+    private var isBottomSheetShown = false
+
+    @IBOutlet var bottomView: UIView!
+    
+    @IBOutlet weak var bottomViewBottomConstraint: NSLayoutConstraint!
+    @IBOutlet weak var bottomViewHeightConstraint: NSLayoutConstraint!
+    @IBOutlet weak var bottomViewTrailingConstraint: NSLayoutConstraint!
+    @IBOutlet weak var bottomViewLeadingConstraint: NSLayoutConstraint!
+   
     @IBOutlet var phoneField: UITextField!
     
     override func viewDidLoad() {
@@ -17,29 +26,29 @@ class PhoneViewController: UIViewController, UITextFieldDelegate {
         
         self.setBackgroundImage("greenBG", contentMode: .scaleAspectFit)
     
-        //phoneField design
+        //MARK: Phonefield design
         var bottomLine = CALayer()
         bottomLine.frame = CGRect(x: 0.0, y: phoneField.frame.height - 2, width: phoneField.frame.width, height: 1.0)
         bottomLine.backgroundColor = UIColor.black.cgColor
         phoneField.borderStyle = UITextField.BorderStyle.none
         phoneField.layer.addSublayer(bottomLine)
-       // phoneField.keyboardType = .numberPad
-    
+        // phoneField.keyboardType = .numberPad
+        
+        //MARK: bottomsheet design
+        bottomView.layer.cornerRadius = 30
+        bottomView.clipsToBounds = true
+        
+        showBottomSheet()
+        
+        //makes UIView clickable
+        let tap = UITapGestureRecognizer(target: self, action: #selector(dismissBottomSheet))
+        view.addGestureRecognizer(tap)
+        
     }
+    
 
     @IBAction func submitPressed(_ sender: UIButton) {
-        
-    }
-    
-    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        textField.resignFirstResponder()
-    
-      
-  
-           
-      
-        
-        if let text = textField.text {
+        if let text = phoneField.text {
             let number = "+962\(text)"
             AuthManager.shared.startAuth(phoneNumber: number) { [weak self] success in
                 guard success else {
@@ -53,10 +62,10 @@ class PhoneViewController: UIViewController, UITextFieldDelegate {
               
             }
         }
-        
-        return true
     }
     
+  
+    //Max length
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
         let maxLength = 9
         let currentString: NSString = (textField.text ?? "") as NSString
@@ -64,5 +73,59 @@ class PhoneViewController: UIViewController, UITextFieldDelegate {
             currentString.replacingCharacters(in: range, with: string) as NSString
         return newString.length <= maxLength
     }
+    
+    //open bottom sheet when phone field is clicked
+    func textFieldDidBeginEditing(_ textField: UITextField) {
+            //open bottom sheet
+        stretchBottomSheet()
+    }
+    
+  
+    
+    //MARK: Bottom Sheet Animation (NEDINE)
+    public func showBottomSheet(){
+        if (isBottomSheetShown) {
+            //default Bottom sheet
+            UIView.animate(withDuration: 0.3) {
+                self.bottomViewHeightConstraint.constant = 400
+                // update view layout immediately
+                self.view.layoutIfNeeded()
+            } completion: { status in
+                self.isBottomSheetShown = false
+            }
+        }
+        
+    }
+    
+    
+    public func stretchBottomSheet(){
+        UIView.animate(withDuration: 0.3) {
+            self.bottomViewHeightConstraint.constant = 620
+            // update view layout immediately
+            self.view.layoutIfNeeded()
+        } completion: { status in
+            self.isBottomSheetShown = true
+            
+            //bouncing animation when card is shown
+            UIView.animate(withDuration: 0.3) {
+                self.bottomViewHeightConstraint.constant = 600
+                
+                self.view.layoutIfNeeded()
+            } completion: { status in
+                
+            }
+        
+        }
+    }
+    
+    
+    
+    @objc func dismissBottomSheet() {
+        //return to min height
+        showBottomSheet()
+        //removes focus of phoneField
+        phoneField.resignFirstResponder()
+    }
+    
 }
 

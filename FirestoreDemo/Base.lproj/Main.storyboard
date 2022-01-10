@@ -96,33 +96,54 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
+                            <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="113-V2-CFz">
+                                <rect key="frame" x="0.0" y="462" width="414" height="434"/>
+                                <subviews>
+                                    <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="qv3-Ym-roq">
+                                        <rect key="frame" x="125" y="93" width="165" height="34"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <textInputTraits key="textInputTraits" textContentType="tel"/>
+                                    </textField>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="+962" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="p1e-Rz-EDJ">
+                                        <rect key="frame" x="56" y="100" width="41" height="21"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <color key="textColor" red="0.4647450447" green="0.47976690529999999" blue="0.48402631280000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="400" id="Cb7-J4-7Yy"/>
+                                </constraints>
+                            </view>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Eom-XK-cbt">
-                                <rect key="frame" x="184" y="473" width="46" height="30"/>
+                                <rect key="frame" x="10" y="377" width="394" height="40"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="Button"/>
+                                <color key="backgroundColor" red="0.87699774909999995" green="1" blue="2.2204460490000001e-16" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <state key="normal" title="ارسل الرمز"/>
                                 <connections>
                                     <action selector="submitPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Ot9-6I-utC"/>
                                 </connections>
                             </button>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="+962" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="p1e-Rz-EDJ">
-                                <rect key="frame" x="66" y="252" width="41" height="21"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" red="0.4647450447" green="0.47976690529999999" blue="0.48402631280000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="qv3-Ym-roq">
-                                <rect key="frame" x="125" y="245" width="165" height="34"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits" textContentType="tel"/>
-                            </textField>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                         <color key="backgroundColor" red="1" green="0.48588009033542223" blue="0.40042699891567146" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <gestureRecognizers/>
+                        <constraints>
+                            <constraint firstAttribute="bottom" secondItem="113-V2-CFz" secondAttribute="bottom" id="DFq-kp-xPs"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="113-V2-CFz" secondAttribute="trailing" id="Ofv-cK-rYB"/>
+                            <constraint firstItem="113-V2-CFz" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="Qeh-Ea-pec"/>
+                        </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="27A-2A-Smw"/>
                     <connections>
+                        <outlet property="bottomView" destination="113-V2-CFz" id="IRF-ld-5ig"/>
+                        <outlet property="bottomViewBottomConstraint" destination="DFq-kp-xPs" id="5Zg-XV-pVb"/>
+                        <outlet property="bottomViewHeightConstraint" destination="Cb7-J4-7Yy" id="pvY-BF-gb7"/>
+                        <outlet property="bottomViewLeadingConstraint" destination="Qeh-Ea-pec" id="xmp-I7-Dk7"/>
+                        <outlet property="bottomViewTrailingConstraint" destination="Ofv-cK-rYB" id="OeM-qa-JFX"/>
                         <outlet property="phoneField" destination="qv3-Ym-roq" id="2y2-ZU-pfm"/>
                     </connections>
                 </viewController>
@@ -141,12 +162,26 @@
                             <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="cnZ-qt-gEo" customClass="CodeTextFieldViewController" customModule="FirestoreDemo" customModuleProvider="target">
                                 <rect key="frame" x="50" y="258" width="315" height="74"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" systemColor="systemRedColor"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="iWS-ml-fQ5">
+                                <rect key="frame" x="0.0" y="496" width="414" height="400"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="400" id="iVu-ub-RoP"/>
+                                    <constraint firstAttribute="height" constant="400" id="ttV-ei-QAB"/>
+                                </constraints>
+                            </view>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="baT-kq-gEq"/>
                         <color key="backgroundColor" red="0.95733465080000002" green="1" blue="0.50732198549999996" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstItem="iWS-ml-fQ5" firstAttribute="trailing" secondItem="baT-kq-gEq" secondAttribute="trailing" id="4NR-GN-ud3"/>
+                            <constraint firstAttribute="bottom" secondItem="iWS-ml-fQ5" secondAttribute="bottom" id="I91-2e-hli"/>
+                            <constraint firstItem="iWS-ml-fQ5" firstAttribute="leading" secondItem="baT-kq-gEq" secondAttribute="leading" id="oUm-ZW-9g5"/>
+                        </constraints>
                     </view>
                     <connections>
                         <outlet property="codeTextField" destination="cnZ-qt-gEo" id="MjO-oH-6WP"/>
@@ -326,6 +361,9 @@
         <image name="doctorButton" width="158" height="198"/>
         <image name="patientButton" width="158" height="198"/>
         <image name="plus" catalog="system" width="128" height="113"/>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
         <systemColor name="systemGreenColor">
             <color red="0.20392156862745098" green="0.7803921568627451" blue="0.34901960784313724" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
@@ -334,6 +372,9 @@
         </systemColor>
         <systemColor name="systemPinkColor">
             <color red="1" green="0.17647058823529413" blue="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
+        <systemColor name="systemRedColor">
+            <color red="1" green="0.23137254901960785" blue="0.18823529411764706" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
     </resources>
 </document>
