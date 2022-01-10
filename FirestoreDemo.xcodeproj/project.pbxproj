@@ -16,6 +16,7 @@
 		125C1D41272734810053377B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 125C1D40272734810053377B /* Assets.xcassets */; };
 		125C1D44272734810053377B /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 125C1D42272734810053377B /* LaunchScreen.storyboard */; };
 		125C1D4D2727355E0053377B /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 125C1D4C2727355E0053377B /* GoogleService-Info.plist */; };
+		1260154D278C5F3B000AE491 /* ttf in Resources */ = {isa = PBXBuildFile; fileRef = 1260154C278C5F3B000AE491 /* ttf */; };
 		128F2EBE2780FF5A009248EB /* CodeTextFieldViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 128F2EBD2780FF5A009248EB /* CodeTextFieldViewController.swift */; };
 		12CD913527273A7C00F3C5C8 /* AuthManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12CD913427273A7C00F3C5C8 /* AuthManager.swift */; };
 		12CD91382727420400F3C5C8 /* SMSViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12CD91372727420400F3C5C8 /* SMSViewController.swift */; };
@@ -35,6 +36,7 @@
 		125C1D43272734810053377B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		125C1D45272734810053377B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		125C1D4C2727355E0053377B /* GoogleService-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "GoogleService-Info.plist"; sourceTree = SOURCE_ROOT; };
+		1260154C278C5F3B000AE491 /* ttf */ = {isa = PBXFileReference; lastKnownFileType = folder; path = ttf; sourceTree = "<group>"; };
 		128F2EBD2780FF5A009248EB /* CodeTextFieldViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CodeTextFieldViewController.swift; sourceTree = "<group>"; };
 		12CD913427273A7C00F3C5C8 /* AuthManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthManager.swift; sourceTree = "<group>"; };
 		12CD91372727420400F3C5C8 /* SMSViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SMSViewController.swift; sourceTree = "<group>"; };
@@ -71,6 +73,7 @@
 		125C1D2B2727347D0053377B = {
 			isa = PBXGroup;
 			children = (
+				1260154B278C5F2E000AE491 /* Fonts */,
 				125C1D362727347E0053377B /* FirestoreDemo */,
 				125C1D352727347E0053377B /* Products */,
 				813E513080CCFD5438A09023 /* Pods */,
@@ -100,6 +103,14 @@
 				125C1D45272734810053377B /* Info.plist */,
 			);
 			path = FirestoreDemo;
+			sourceTree = "<group>";
+		};
+		1260154B278C5F2E000AE491 /* Fonts */ = {
+			isa = PBXGroup;
+			children = (
+				1260154C278C5F3B000AE491 /* ttf */,
+			);
+			path = Fonts;
 			sourceTree = "<group>";
 		};
 		128F2EBC2780FF11009248EB /* Controllers */ = {
@@ -190,6 +201,7 @@
 				125C1D44272734810053377B /* LaunchScreen.storyboard in Resources */,
 				125C1D4D2727355E0053377B /* GoogleService-Info.plist in Resources */,
 				125C1D41272734810053377B /* Assets.xcassets in Resources */,
+				1260154D278C5F3B000AE491 /* ttf in Resources */,
 				125C1D3F2727347E0053377B /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

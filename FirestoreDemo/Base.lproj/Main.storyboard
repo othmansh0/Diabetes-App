@@ -159,19 +159,66 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="cnZ-qt-gEo" customClass="CodeTextFieldViewController" customModule="FirestoreDemo" customModuleProvider="target">
-                                <rect key="frame" x="50" y="258" width="315" height="74"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <color key="backgroundColor" systemColor="systemRedColor"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits"/>
-                            </textField>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="iWS-ml-fQ5">
                                 <rect key="frame" x="0.0" y="496" width="414" height="400"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VDY-Gt-Mxg">
+                                        <rect key="frame" x="141" y="39" width="143" height="41"/>
+                                        <attributedString key="attributedText">
+                                            <fragment content=" رمز التحقق">
+                                                <attributes>
+                                                    <color key="NSColor" red="0.72941178080000002" green="0.8156862855" blue="0.78823530669999997" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                                    <font key="NSFont" size="35" name="MarkaziText-Regular"/>
+                                                    <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
+                                                </attributes>
+                                            </fragment>
+                                        </attributedString>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="_____________" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LXg-Wg-xR9">
+                                        <rect key="frame" x="285" y="49" width="116" height="21"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <color key="textColor" red="0.94217193129999999" green="0.94217187170000005" blue="0.94217187170000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="_____________" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ixy-el-l0c">
+                                        <rect key="frame" x="13" y="49" width="116" height="21"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <color key="textColor" red="0.94217193129999999" green="0.94217187170000005" blue="0.94217187170000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="cnZ-qt-gEo" customClass="CodeTextFieldViewController" customModule="FirestoreDemo" customModuleProvider="target">
+                                        <rect key="frame" x="55" y="163" width="304" height="74"/>
+                                        <color key="backgroundColor" systemColor="systemRedColor"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="74" id="div-QH-n99"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <textInputTraits key="textInputTraits"/>
+                                    </textField>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="right" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="لقد تم ارسال رمز التحقق على" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cfW-WL-b0r">
+                                        <rect key="frame" x="119" y="95.5" width="192" height="22.5"/>
+                                        <fontDescription key="fontDescription" name="MarkaziText-Medium" family="Markazi Text" pointSize="19"/>
+                                        <color key="textColor" red="0.40000003579999999" green="0.40784314269999999" blue="0.41176474089999998" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                        <color key="highlightedColor" systemColor="systemTealColor"/>
+                                    </label>
+                                </subviews>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="400" id="iVu-ub-RoP"/>
+                                    <constraint firstItem="LXg-Wg-xR9" firstAttribute="leading" secondItem="VDY-Gt-Mxg" secondAttribute="trailing" constant="1" id="1fR-GV-y2S"/>
+                                    <constraint firstItem="VDY-Gt-Mxg" firstAttribute="centerY" secondItem="LXg-Wg-xR9" secondAttribute="centerY" id="48N-uF-Tkk"/>
+                                    <constraint firstItem="cnZ-qt-gEo" firstAttribute="centerX" secondItem="iWS-ml-fQ5" secondAttribute="centerX" id="4zY-b5-fwI"/>
+                                    <constraint firstItem="VDY-Gt-Mxg" firstAttribute="top" secondItem="iWS-ml-fQ5" secondAttribute="top" constant="39" id="5uf-QI-BQV"/>
+                                    <constraint firstItem="cfW-WL-b0r" firstAttribute="top" relation="lessThanOrEqual" secondItem="VDY-Gt-Mxg" secondAttribute="bottom" constant="14" id="8Qk-BC-R5D"/>
+                                    <constraint firstItem="cfW-WL-b0r" firstAttribute="leading" secondItem="iWS-ml-fQ5" secondAttribute="leading" constant="119" id="Ksc-ZN-GeQ"/>
+                                    <constraint firstItem="cnZ-qt-gEo" firstAttribute="top" relation="greaterThanOrEqual" secondItem="cfW-WL-b0r" secondAttribute="bottom" constant="42" id="MWM-Ky-rtB"/>
+                                    <constraint firstItem="VDY-Gt-Mxg" firstAttribute="leading" secondItem="ixy-el-l0c" secondAttribute="trailing" constant="12" id="QfT-SI-DOC"/>
+                                    <constraint firstItem="ixy-el-l0c" firstAttribute="baseline" secondItem="LXg-Wg-xR9" secondAttribute="baseline" id="RGy-36-75o"/>
+                                    <constraint firstAttribute="trailing" secondItem="cfW-WL-b0r" secondAttribute="trailing" constant="103" id="hI8-25-txa"/>
+                                    <constraint firstItem="cnZ-qt-gEo" firstAttribute="centerY" secondItem="iWS-ml-fQ5" secondAttribute="centerY" id="pJO-VZ-TcK"/>
                                     <constraint firstAttribute="height" constant="400" id="ttV-ei-QAB"/>
+                                    <constraint firstItem="cnZ-qt-gEo" firstAttribute="leading" secondItem="iWS-ml-fQ5" secondAttribute="leading" constant="55" id="vL6-Q9-5GW"/>
+                                    <constraint firstItem="ixy-el-l0c" firstAttribute="leading" secondItem="iWS-ml-fQ5" secondAttribute="leading" constant="13" id="x9w-Tx-jxL"/>
                                 </constraints>
                             </view>
                         </subviews>
@@ -184,6 +231,11 @@
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="bottomView" destination="iWS-ml-fQ5" id="wVd-Xe-B7T"/>
+                        <outlet property="bottomViewBottomConstraint" destination="I91-2e-hli" id="bhM-ai-kZi"/>
+                        <outlet property="bottomViewHeightConstraint" destination="ttV-ei-QAB" id="149-qe-WD9"/>
+                        <outlet property="bottomViewLeadingConstraint" destination="oUm-ZW-9g5" id="INj-Tu-nDb"/>
+                        <outlet property="bottomViewTrailingConstraint" destination="4NR-GN-ud3" id="IUt-Hw-hhJ"/>
                         <outlet property="codeTextField" destination="cnZ-qt-gEo" id="MjO-oH-6WP"/>
                     </connections>
                 </viewController>
@@ -375,6 +427,9 @@
         </systemColor>
         <systemColor name="systemRedColor">
             <color red="1" green="0.23137254901960785" blue="0.18823529411764706" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
+        <systemColor name="systemTealColor">
+            <color red="0.18823529411764706" green="0.69019607843137254" blue="0.7803921568627451" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
     </resources>
 </document>
