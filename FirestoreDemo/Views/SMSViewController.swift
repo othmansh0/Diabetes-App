@@ -53,8 +53,6 @@ class SMSViewController: UIViewController, UISearchTextFieldDelegate {
         stretchBottomSheet()
     }
     
-    
-    
 }
 
 extension SMSViewController {
