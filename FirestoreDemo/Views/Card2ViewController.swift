@@ -7,11 +7,11 @@
 import Firebase
 import UIKit
 
-class PatientViewController:UIViewController, UICollectionViewDataSource, UICollectionViewDelegate {
-    
+class Card2ViewController:UIViewController, UICollectionViewDataSource, UICollectionViewDelegate {
+
     @IBOutlet private weak var collectionViewLayout: UICollectionViewFlowLayout!
     
-    var beforeReadings = ["1","2","3","4","5","6","7"]
+    var afterReadings = ["1","1","1"]
     var readingCard = ReadingCard()
     
     private var indexOfCellBeforeDragging = 0
@@ -30,6 +30,28 @@ class PatientViewController:UIViewController, UICollectionViewDataSource, UIColl
     }
     
     
+   
+
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return afterReadings.count
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+
+        let cell = readingCard.setupCell(collectionView: collectionView, indexPath: indexPath, readings: afterReadings)
+        return cell
+        
+    }
+
+    
+
+    
+ 
+}
+
+extension Card2ViewController {
+    
+    //MARK: Scrolling behaviour
     private func calculateSectionInset() -> CGFloat {
         let deviceIsIpad = UIDevice.current.userInterfaceIdiom == .pad
         let deviceOrientationIsLandscape = UIDevice.current.orientation.isLandscape
@@ -53,46 +75,12 @@ class PatientViewController:UIViewController, UICollectionViewDataSource, UIColl
         let itemWidth = collectionViewLayout.itemSize.width
         let proportionalOffset = collectionViewLayout.collectionView!.contentOffset.x / itemWidth
         let index = Int(round(proportionalOffset))
-        let safeIndex = max(0, min(beforeReadings.count - 1, index))
+        let safeIndex = max(0, min(afterReadings.count - 1, index))
         return safeIndex
     }
     
-    // ===================================
-    // MARK: - UICollectionViewDataSource:
-    // ===================================
-    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return beforeReadings.count
-    }
     
-    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-//        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "ColorsPaletteCollectionViewCell", for: indexPath) as! ColorsPaletteCollectionViewCell
-//
-//        cell.configure(colors: readings[indexPath.row]) { (selectedColor: UIColor) in
-//            self.view.backgroundColor = selectedColor
-//        }
-//
-//        // You can color the cells so you could see how they behave:
-//        //        let isEvenCell = CGFloat(indexPath.row).truncatingRemainder(dividingBy: 2) == 0
-//        //        cell.backgroundColor = isEvenCell ? UIColor(white: 0.9, alpha: 1) : .white
-//
-//        return cell
-
-        
-        
-        
-        let cell = readingCard.setupCell(collectionView: collectionView, indexPath: indexPath, readings: beforeReadings)
-        
-        return cell
-        
-    }
-
     
-
-    
- 
-}
-
-extension PatientViewController {
     func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
         indexOfCellBeforeDragging = indexOfMajorCell()
     }
@@ -106,7 +94,7 @@ extension PatientViewController {
         
         // calculate conditions:
         let swipeVelocityThreshold: CGFloat = 0.5 // after some trail and error
-        let hasEnoughVelocityToSlideToTheNextCell = indexOfCellBeforeDragging + 1 < beforeReadings.count && velocity.x > swipeVelocityThreshold
+        let hasEnoughVelocityToSlideToTheNextCell = indexOfCellBeforeDragging + 1 < afterReadings.count && velocity.x > swipeVelocityThreshold
         let hasEnoughVelocityToSlideToThePreviousCell = indexOfCellBeforeDragging - 1 >= 0 && velocity.x < -swipeVelocityThreshold
         let majorCellIsTheCellBeforeDragging = indexOfMajorCell == indexOfCellBeforeDragging
         let didUseSwipeToSkipCell = majorCellIsTheCellBeforeDragging && (hasEnoughVelocityToSlideToTheNextCell || hasEnoughVelocityToSlideToThePreviousCell)

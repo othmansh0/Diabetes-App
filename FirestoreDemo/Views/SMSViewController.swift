@@ -67,7 +67,7 @@ extension SMSViewController {
                         self?.navigationController?.pushViewController(vc, animated: true)
                     }
                 } else {
-                    if let vc = self?.storyboard?.instantiateViewController(identifier: "Patient") as? PatientViewController {
+                    if let vc = self?.storyboard?.instantiateViewController(identifier: "PatientR") as? PatientRegisterationViewController {
                         self?.navigationController?.pushViewController(vc, animated: true)
                     }
                 }

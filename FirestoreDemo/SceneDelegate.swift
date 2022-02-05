@@ -16,7 +16,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
         let window = UIWindow(frame: UIScreen.main.bounds)
 
-
+//if not registered navigate to registeration form
         if Auth.auth().currentUser != nil {
             
             let storyboard = UIStoryboard.init(name: "Main", bundle: nil)
@@ -30,6 +30,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
                 let viewController = storyboard.instantiateViewController(withIdentifier: "Patient") as! PatientViewController
                 self.window?.rootViewController = viewController
             }
+                
            
 //            let navigationController = UINavigationController.init(rootViewController: viewController)
             
