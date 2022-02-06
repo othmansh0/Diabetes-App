@@ -493,7 +493,7 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="7" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="urL-2s-Jnj">
-                                                    <rect key="frame" x="18" y="28" width="30" height="64"/>
+                                                    <rect key="frame" x="18" y="28" width="53" height="64"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="53"/>
                                                     <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -556,8 +556,8 @@
                                     <outlet property="delegate" destination="rly-1u-pRK" id="Ohp-8X-HKl"/>
                                 </connections>
                             </collectionView>
-                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="gaN-qW-mm2" userLabel="Collection View 2">
-                                <rect key="frame" x="20" y="655" width="381" height="128"/>
+                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" misplaced="YES" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="gaN-qW-mm2" userLabel="Collection View 2">
+                                <rect key="frame" x="48" y="655" width="381" height="128"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="10" minimumInteritemSpacing="10" id="YXg-nd-loJ">
                                     <size key="itemSize" width="319" height="100"/>
@@ -574,7 +574,7 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="7" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KEa-qF-6bd">
-                                                    <rect key="frame" x="18" y="28" width="30" height="64"/>
+                                                    <rect key="frame" x="18" y="28" width="56" height="64"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="53"/>
                                                     <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -622,7 +622,7 @@
                                                 </label>
                                             </subviews>
                                         </collectionViewCellContentView>
-                                        <color key="backgroundColor" red="0.38431376220000002" green="0.47450977560000002" blue="0.50196081400000003" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                        <color key="backgroundColor" red="0.72941178080000002" green="0.8156862855" blue="0.78823530669999997" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                         <directionalEdgeInsets key="directionalLayoutMargins" top="8" leading="9" bottom="8" trailing="8"/>
                                         <size key="customSize" width="321" height="100"/>
                                         <connections>
@@ -637,6 +637,30 @@
                                     <outlet property="delegate" destination="rly-1u-pRK" id="OKG-VQ-Fa9"/>
                                 </connections>
                             </collectionView>
+                            <button opaque="NO" tag="1" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="v9W-CO-bcK">
+                                <rect key="frame" x="20" y="166" width="176" height="136"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="plain" image="afterButton" imagePlacement="bottom" title="بعد الأكل">
+                                    <fontDescription key="titleFontDescription" name="Helvetica" family="Helvetica" pointSize="25"/>
+                                    <attributedString key="attributedSubtitle"/>
+                                </buttonConfiguration>
+                                <connections>
+                                    <action selector="readingButtonPressed:" destination="rly-1u-pRK" eventType="touchUpInside" id="X8o-NN-niQ"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" tag="2" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="KSf-FE-1da">
+                                <rect key="frame" x="218" y="166" width="176" height="136"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="plain" image="beforeButton" imagePlacement="bottom" title="قبل الأكل">
+                                    <fontDescription key="titleFontDescription" name="Helvetica" family="Helvetica" pointSize="25"/>
+                                    <attributedString key="attributedSubtitle"/>
+                                </buttonConfiguration>
+                                <connections>
+                                    <action selector="readingButtonPressed:" destination="rly-1u-pRK" eventType="touchUpInside" id="XtZ-LW-crv"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="A3a-z5-2Ta"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -685,6 +709,8 @@
     </scenes>
     <resources>
         <image name="Rectangle 24" width="375" height="531"/>
+        <image name="afterButton" width="152" height="145"/>
+        <image name="beforeButton" width="162" height="150"/>
         <image name="doctorButton" width="158" height="198"/>
         <image name="patientButton" width="158" height="198"/>
         <image name="plus" catalog="system" width="128" height="113"/>

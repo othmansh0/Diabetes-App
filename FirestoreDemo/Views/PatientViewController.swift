@@ -14,10 +14,11 @@ class PatientViewController:UIViewController, UICollectionViewDataSource, UIColl
     @IBOutlet private weak var collectionViewLayout: UICollectionViewFlowLayout!
     
     @IBOutlet weak var collectionViewLayout2: UICollectionViewFlowLayout!
+    
     //  @IBOutlet weak var collectionViewLayout2: UICollectionViewFlowLayout!
     
-    var beforeReadings = ["1","2","3","4","5","6","7"]
-    var afterReadings = ["1","2","3","4"]
+    var afterReadings = ["1","2","3","4","5","6","7"]
+    var beforeReadings = ["1","2","3","4"]
     var readingCard = ReadingCard()
     
     private var indexOfCellBeforeDragging = 0
@@ -39,6 +40,44 @@ class PatientViewController:UIViewController, UICollectionViewDataSource, UIColl
     }
     
     
+   
+
+    
+    @IBAction func readingButtonPressed(_ sender: UIButton) {
+        //after or before eating button got pressed
+        addReading(tag: sender.tag)
+    }
+    
+
+    func addReading(tag:Int){
+        let alert = UIAlertController(title: "أدخل قراءة بعد الأكل", message: "", preferredStyle: .alert)
+        alert.addTextField()
+        let action = UIAlertAction(title: "enter please", style: .default) { action in
+            guard let reading = alert.textFields?[0].text else {return}
+            print(reading)
+            if tag == 1{
+                //collectionViewOne.insert
+                self.afterReadings.insert(reading, at: 0)
+            }else {
+                self.beforeReadings.insert(reading, at: 0)
+            }
+            self.collectionViewOne.reloadData()
+            self.collectionViewTwo.reloadData()
+        }
+        alert.addAction(action)
+        present(alert, animated: true)
+
+    }
+    
+ 
+}
+
+
+
+
+//MARK: CollectionView
+
+extension PatientViewController {
     private func calculateSectionInset(collectionViewLayout:UICollectionViewFlowLayout) -> CGFloat {
         let deviceIsIpad = UIDevice.current.userInterfaceIdiom == .pad
         let deviceOrientationIsLandscape = UIDevice.current.orientation.isLandscape
@@ -62,7 +101,7 @@ class PatientViewController:UIViewController, UICollectionViewDataSource, UIColl
         let itemWidth = collectionViewLayout.itemSize.width
         let proportionalOffset = collectionViewLayout.collectionView!.contentOffset.x / itemWidth
         let index = Int(round(proportionalOffset))
-        let safeIndex = max(0, min(beforeReadings.count - 1, index))
+        let safeIndex = max(0, min(afterReadings.count - 1, index))
         return safeIndex
     }
     
@@ -72,10 +111,10 @@ class PatientViewController:UIViewController, UICollectionViewDataSource, UIColl
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         
         if collectionView == collectionViewTwo {
-            return afterReadings.count
+            return beforeReadings.count
         }
         
-        return beforeReadings.count
+        return afterReadings.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -94,21 +133,16 @@ class PatientViewController:UIViewController, UICollectionViewDataSource, UIColl
         
         
         if collectionView == collectionViewTwo {
-            let cell2 = readingCard.setupCell(collectionView: collectionView, indexPath: indexPath, readings: afterReadings,cellName: "Cell2")
+            let cell2 = readingCard.setupCell(collectionView: collectionView, indexPath: indexPath, readings: beforeReadings,cellName: "Cell2")
             return cell2
         }
-        let cell = readingCard.setupCell(collectionView: collectionView, indexPath: indexPath, readings: beforeReadings,cellName: "Cell")
-        
+        else {
+        let cell = readingCard.setupCell(collectionView: collectionView, indexPath: indexPath, readings: afterReadings,cellName: "Cell")
         return cell
+        }
         
     }
-
-    
-
-    
- 
 }
-
 extension PatientViewController {
     func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
         if scrollView.tag == 2 {
@@ -135,9 +169,9 @@ extension PatientViewController {
         
         // calculate conditions:
         let swipeVelocityThreshold: CGFloat = 0.5 // after some trail and error
-        var hasEnoughVelocityToSlideToTheNextCell = indexOfCellBeforeDragging + 1 < beforeReadings.count && velocity.x > swipeVelocityThreshold
+        var hasEnoughVelocityToSlideToTheNextCell = indexOfCellBeforeDragging + 1 < afterReadings.count && velocity.x > swipeVelocityThreshold
         if scrollView.tag == 2 {
-             hasEnoughVelocityToSlideToTheNextCell = indexOfCellBeforeDragging + 1 < afterReadings.count && velocity.x > swipeVelocityThreshold
+             hasEnoughVelocityToSlideToTheNextCell = indexOfCellBeforeDragging + 1 < beforeReadings.count && velocity.x > swipeVelocityThreshold
         }
         
         let hasEnoughVelocityToSlideToThePreviousCell = indexOfCellBeforeDragging - 1 >= 0 && velocity.x < -swipeVelocityThreshold
