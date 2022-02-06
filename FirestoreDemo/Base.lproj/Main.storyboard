@@ -644,11 +644,12 @@
                             <constraint firstItem="gaN-qW-mm2" firstAttribute="height" secondItem="Tw7-8f-Seb" secondAttribute="height" id="5zl-XV-cic"/>
                             <constraint firstItem="A3a-z5-2Ta" firstAttribute="trailing" secondItem="gaN-qW-mm2" secondAttribute="trailing" constant="13" id="7cL-RO-5cl"/>
                             <constraint firstItem="gaN-qW-mm2" firstAttribute="leading" secondItem="A3a-z5-2Ta" secondAttribute="leading" constant="20" id="JAe-GT-ASi"/>
+                            <constraint firstItem="A3a-z5-2Ta" firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="gaN-qW-mm2" secondAttribute="bottom" constant="79" id="UnG-mz-qxa"/>
                             <constraint firstItem="gaN-qW-mm2" firstAttribute="top" secondItem="Tw7-8f-Seb" secondAttribute="bottom" constant="8" symbolic="YES" id="aPB-XL-Mpf"/>
                             <constraint firstItem="A3a-z5-2Ta" firstAttribute="trailing" secondItem="Tw7-8f-Seb" secondAttribute="trailing" constant="13" id="agV-oJ-eg1" userLabel="Safe Area.trailing = Collection View.trailing + 13"/>
                             <constraint firstItem="Tw7-8f-Seb" firstAttribute="leading" secondItem="A3a-z5-2Ta" secondAttribute="leading" constant="20" id="eZa-S5-w1s"/>
                             <constraint firstItem="A3a-z5-2Ta" firstAttribute="bottom" secondItem="Tw7-8f-Seb" secondAttribute="bottom" priority="750" constant="133" id="h5I-fv-8Gy"/>
-                            <constraint firstItem="Tw7-8f-Seb" firstAttribute="top" secondItem="A3a-z5-2Ta" secondAttribute="top" constant="475" id="rCx-la-Bsg"/>
+                            <constraint firstItem="Tw7-8f-Seb" firstAttribute="top" relation="lessThanOrEqual" secondItem="A3a-z5-2Ta" secondAttribute="top" constant="475" id="rCx-la-Bsg"/>
                             <constraint firstItem="gaN-qW-mm2" firstAttribute="width" secondItem="Tw7-8f-Seb" secondAttribute="width" id="zzk-eg-0v0"/>
                         </constraints>
                     </view>
