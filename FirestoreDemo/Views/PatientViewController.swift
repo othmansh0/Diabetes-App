@@ -9,9 +9,15 @@ import UIKit
 
 class PatientViewController:UIViewController, UICollectionViewDataSource, UICollectionViewDelegate {
     
+    @IBOutlet weak var collectionViewTwo: UICollectionView!
+    @IBOutlet weak var collectionViewOne: UICollectionView!
     @IBOutlet private weak var collectionViewLayout: UICollectionViewFlowLayout!
     
+    @IBOutlet weak var collectionViewLayout2: UICollectionViewFlowLayout!
+    //  @IBOutlet weak var collectionViewLayout2: UICollectionViewFlowLayout!
+    
     var beforeReadings = ["1","2","3","4","5","6","7"]
+    var afterReadings = ["1","2","3","4"]
     var readingCard = ReadingCard()
     
     private var indexOfCellBeforeDragging = 0
@@ -20,17 +26,20 @@ class PatientViewController:UIViewController, UICollectionViewDataSource, UIColl
         super.viewDidLoad()
         
         collectionViewLayout.minimumLineSpacing = 5
-        
+        collectionViewLayout2.minimumLineSpacing = 5
+        collectionViewOne.tag = 1
+        collectionViewTwo.tag = 2
     }
     
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         
-        configureCollectionViewLayoutItemSize()
+        configureCollectionViewLayoutItemSize(collectionViewLayout: collectionViewLayout)
+        configureCollectionViewLayoutItemSize(collectionViewLayout: collectionViewLayout2)
     }
     
     
-    private func calculateSectionInset() -> CGFloat {
+    private func calculateSectionInset(collectionViewLayout:UICollectionViewFlowLayout) -> CGFloat {
         let deviceIsIpad = UIDevice.current.userInterfaceIdiom == .pad
         let deviceOrientationIsLandscape = UIDevice.current.orientation.isLandscape
         let cellBodyViewIsExpended = deviceIsIpad || deviceOrientationIsLandscape
@@ -42,14 +51,14 @@ class PatientViewController:UIViewController, UICollectionViewDataSource, UIColl
         return inset
     }
     
-    private func configureCollectionViewLayoutItemSize() {
-        let inset: CGFloat = calculateSectionInset() // This inset calculation is some magic so the next and the previous cells will peek from the sides. Don't worry about it
+    private func configureCollectionViewLayoutItemSize(collectionViewLayout:UICollectionViewFlowLayout) {
+        let inset: CGFloat = calculateSectionInset(collectionViewLayout: collectionViewLayout) // This inset calculation is some magic so the next and the previous cells will peek from the sides. Don't worry about it
         collectionViewLayout.sectionInset = UIEdgeInsets(top: 0, left: inset, bottom: 0, right: inset)
         
         collectionViewLayout.itemSize = CGSize(width: collectionViewLayout.collectionView!.frame.size.width - inset * 2, height: collectionViewLayout.collectionView!.frame.size.height)
     }
     
-    private func indexOfMajorCell() -> Int {
+    private func indexOfMajorCell(collectionViewLayout:UICollectionViewFlowLayout) -> Int {
         let itemWidth = collectionViewLayout.itemSize.width
         let proportionalOffset = collectionViewLayout.collectionView!.contentOffset.x / itemWidth
         let index = Int(round(proportionalOffset))
@@ -61,6 +70,11 @@ class PatientViewController:UIViewController, UICollectionViewDataSource, UIColl
     // MARK: - UICollectionViewDataSource:
     // ===================================
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        
+        if collectionView == collectionViewTwo {
+            return afterReadings.count
+        }
+        
         return beforeReadings.count
     }
     
@@ -79,8 +93,11 @@ class PatientViewController:UIViewController, UICollectionViewDataSource, UIColl
 
         
         
-        
-        let cell = readingCard.setupCell(collectionView: collectionView, indexPath: indexPath, readings: beforeReadings)
+        if collectionView == collectionViewTwo {
+            let cell2 = readingCard.setupCell(collectionView: collectionView, indexPath: indexPath, readings: afterReadings,cellName: "Cell2")
+            return cell2
+        }
+        let cell = readingCard.setupCell(collectionView: collectionView, indexPath: indexPath, readings: beforeReadings,cellName: "Cell")
         
         return cell
         
@@ -94,7 +111,13 @@ class PatientViewController:UIViewController, UICollectionViewDataSource, UIColl
 
 extension PatientViewController {
     func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
-        indexOfCellBeforeDragging = indexOfMajorCell()
+        if scrollView.tag == 2 {
+            indexOfCellBeforeDragging = indexOfMajorCell(collectionViewLayout: collectionViewLayout2)
+            print("hey2")
+        } else {
+            print("hey1")
+        indexOfCellBeforeDragging = indexOfMajorCell(collectionViewLayout: collectionViewLayout)
+        }
     }
     
     func scrollViewWillEndDragging(_ scrollView: UIScrollView, withVelocity velocity: CGPoint, targetContentOffset: UnsafeMutablePointer<CGPoint>) {
@@ -102,11 +125,21 @@ extension PatientViewController {
         targetContentOffset.pointee = scrollView.contentOffset
         
         // calculate where scrollView should snap to:
-        let indexOfMajorCell = self.indexOfMajorCell()
+        var indexOfMajorCell = self.indexOfMajorCell(collectionViewLayout: collectionViewLayout)
+        if scrollView.tag == 2 {
+             indexOfMajorCell = self.indexOfMajorCell(collectionViewLayout: collectionViewLayout2)
+        }
+        
+        
+       
         
         // calculate conditions:
         let swipeVelocityThreshold: CGFloat = 0.5 // after some trail and error
-        let hasEnoughVelocityToSlideToTheNextCell = indexOfCellBeforeDragging + 1 < beforeReadings.count && velocity.x > swipeVelocityThreshold
+        var hasEnoughVelocityToSlideToTheNextCell = indexOfCellBeforeDragging + 1 < beforeReadings.count && velocity.x > swipeVelocityThreshold
+        if scrollView.tag == 2 {
+             hasEnoughVelocityToSlideToTheNextCell = indexOfCellBeforeDragging + 1 < afterReadings.count && velocity.x > swipeVelocityThreshold
+        }
+        
         let hasEnoughVelocityToSlideToThePreviousCell = indexOfCellBeforeDragging - 1 >= 0 && velocity.x < -swipeVelocityThreshold
         let majorCellIsTheCellBeforeDragging = indexOfMajorCell == indexOfCellBeforeDragging
         let didUseSwipeToSkipCell = majorCellIsTheCellBeforeDragging && (hasEnoughVelocityToSlideToTheNextCell || hasEnoughVelocityToSlideToThePreviousCell)
@@ -114,7 +147,12 @@ extension PatientViewController {
         if didUseSwipeToSkipCell {
             
             let snapToIndex = indexOfCellBeforeDragging + (hasEnoughVelocityToSlideToTheNextCell ? 1 : -1)
-            let toValue = collectionViewLayout.itemSize.width * CGFloat(snapToIndex)
+            var toValue = collectionViewLayout.itemSize.width * CGFloat(snapToIndex)
+            if scrollView.tag == 2 {
+                toValue = collectionViewLayout2.itemSize.width * CGFloat(snapToIndex)
+            }
+            
+             
             
             // Damping equal 1 => no oscillations => decay animation:
             UIView.animate(withDuration: 0.3, delay: 0, usingSpringWithDamping: 1, initialSpringVelocity: velocity.x, options: .allowUserInteraction, animations: {
@@ -124,8 +162,16 @@ extension PatientViewController {
             
         } else {
             // This is a much better way to scroll to a cell:
-            let indexPath = IndexPath(row: indexOfMajorCell, section: 0)
-            collectionViewLayout.collectionView!.scrollToItem(at: indexPath, at: .centeredHorizontally, animated: true)
+            
+            if scrollView.tag == 2 {
+                let indexPath = IndexPath(row: indexOfMajorCell, section: 0)
+                collectionViewLayout2.collectionView!.scrollToItem(at: indexPath, at: .centeredHorizontally, animated: true)
+            }
+            else {
+                let indexPath = IndexPath(row: indexOfMajorCell, section: 0)
+                collectionViewLayout.collectionView!.scrollToItem(at: indexPath, at: .centeredHorizontally, animated: true)
+            }
+           
         }
     }
 }

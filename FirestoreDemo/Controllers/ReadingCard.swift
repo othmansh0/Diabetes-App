@@ -77,8 +77,8 @@ class ReadingCard {
     
     
     
-    func setupCell(collectionView:UICollectionView,indexPath:IndexPath,readings:[String])->CollectionViewCell{
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "Cell", for: indexPath) as! CollectionViewCell
+    func setupCell(collectionView:UICollectionView,indexPath:IndexPath,readings:[String],cellName:String)->CollectionViewCell{
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellName, for: indexPath) as! CollectionViewCell
         cell.readingLabel.text = readings[indexPath.row]
         
         cell.layer.cornerRadius = 15
