@@ -682,10 +682,10 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <stackView opaque="NO" contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="q3d-t1-4wf">
-                                <rect key="frame" x="24" y="239" width="369" height="170.5"/>
+                                <rect key="frame" x="24" y="239" width="371" height="170.5"/>
                                 <subviews>
                                     <button opaque="NO" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="v9W-CO-bcK">
-                                        <rect key="frame" x="0.0" y="0.0" width="184.5" height="170.5"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="185.5" height="170.5"/>
                                         <state key="normal" title="Button"/>
                                         <buttonConfiguration key="configuration" style="plain" image="afterButton" imagePlacement="bottom" title="بعد الأكل">
                                             <fontDescription key="titleFontDescription" name="Helvetica" family="Helvetica" pointSize="25"/>
@@ -697,7 +697,7 @@
                                         </connections>
                                     </button>
                                     <button opaque="NO" tag="2" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="KSf-FE-1da">
-                                        <rect key="frame" x="184.5" y="0.0" width="184.5" height="170.5"/>
+                                        <rect key="frame" x="185.5" y="0.0" width="185.5" height="170.5"/>
                                         <state key="normal" title="Button"/>
                                         <buttonConfiguration key="configuration" style="plain" image="beforeButton" imagePlacement="bottom" title="قبل الأكل">
                                             <fontDescription key="titleFontDescription" name="Helvetica" family="Helvetica" pointSize="25"/>

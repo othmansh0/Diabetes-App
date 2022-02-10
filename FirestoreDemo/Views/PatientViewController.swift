@@ -30,9 +30,10 @@ class PatientViewController:UIViewController, UICollectionViewDataSource, UIColl
     var afterReadings = ["1","2","3","4","5","6","7"]
     var beforeReadings = ["1","2","3","4"]
     var readingCard = ReadingCard()
-    var blurView:UIVisualEffectView!
     private var isBottomSheetShown = false
-    
+    var blurView = UIVisualEffectView()
+    var blurEffect = UIBlurEffect()
+
     private var indexOfCellBeforeDragging = 0
     
     
@@ -49,6 +50,9 @@ class PatientViewController:UIViewController, UICollectionViewDataSource, UIColl
         bottomSheet.layer.cornerRadius = 30
         bottomSheet.clipsToBounds = true
         
+        //makes UIView clickable
+             let tap = UITapGestureRecognizer(target: self, action: #selector(dismissSheet))
+             view.addGestureRecognizer(tap)
     }
     
     override func viewDidLayoutSubviews() {
@@ -58,13 +62,11 @@ class PatientViewController:UIViewController, UICollectionViewDataSource, UIColl
     }
     
     
-   
-
-    
     @IBAction func plusButtonPressed(_ sender: UIButton) {
         //after or before eating button got pressed
         //addReading(tag: sender.tag)
         //showBottomSheet()
+        
         
         //before button pressed
         if sender.tag == 2 {
@@ -73,20 +75,20 @@ class PatientViewController:UIViewController, UICollectionViewDataSource, UIColl
         }
         else {//after button pressed
             sheetLabel.text = "بعد الأكل"
+            plusButtonTag = 1
         }
         
-        // 1
-        //view.backgroundColor = .clear
         // 2 create blur effect
-        let blurEffect = UIBlurEffect(style: .light)
-        // 3 display the blur effect created
-        blurView = UIVisualEffectView(effect: blurEffect)
+        blurEffect = UIBlurEffect(style: .light)
+       
         // 4
         blurView.translatesAutoresizingMaskIntoConstraints = false
-        UIView.animate(withDuration: 4){
+        // 3 display the blur effect created with animation
+        UIView.animate(withDuration: 2){
+            self.blurView.effect = self.blurEffect
             self.view.insertSubview(self.blurView, at:5)
         }
-        
+
         // 1
         let vibrancyEffect = UIVibrancyEffect(blurEffect: blurEffect)
         // 2
@@ -107,65 +109,43 @@ class PatientViewController:UIViewController, UICollectionViewDataSource, UIColl
           blurView.heightAnchor.constraint(equalTo: view.heightAnchor),
           blurView.widthAnchor.constraint(equalTo: view.widthAnchor)
         ])
-        
-        
-        
-//        lazy var blurredView: UIView = {
-//            // 1. create container view
-//            let containerView = UIView()
-//            // 2. create custom blur view
-//            let blurEffect = UIBlurEffect(style: .light)
-//            let customBlurEffectView = CustomVisualEffectView(effect: blurEffect, intensity: 0.2)
-//            customBlurEffectView.frame = self.view.bounds
-//            // 3. create semi-transparent black view
-//            let dimmedView = UIView()
-//            dimmedView.backgroundColor = .black.withAlphaComponent(0.6)
-//            dimmedView.frame = self.view.bounds
-//
-//            // 4. add both as subviews
-//            containerView.addSubview(customBlurEffectView)
-//            containerView.addSubview(dimmedView)
-//            return containerView
-//        }()
-//        setupView(blurredView: blurredView)
+
         stretchBottomSheet()
-        //addReading(tag: sender.tag)
-        
-        
     }
     
     //Bottom sheet button pressed
     @IBAction func addReading(_ sender: UIButton) {
-        guard let reading = readingField.text else { return }
+        guard let reading = readingField.text else {
+            dismissSheet()
+            return }
         if  plusButtonTag == 1{
              afterReadings.insert(reading, at: 0)
             }else {
                     beforeReadings.insert(reading, at: 0)
                     
                  }
-        closeSheet()
-        readingField.text = ""
+        dismissSheet()
+        //readingField.text = ""
         collectionViewOne.reloadData()
         collectionViewTwo.reloadData()
-        removeBlur(with: blurView)
+        removeBlur()
 
     }
     
     @IBAction func closeSheet(_ sender: UIButton) {
-      closeSheet()
-        removeBlur(with: blurView)
+dismissSheet()
+        removeBlur()
     
     }
     
-    func removeBlur(with blurView: UIView){
+    func removeBlur(){
         for subview in view.subviews {
             if subview is UIVisualEffectView {
                 subview.removeFromSuperview()
             }
         }
         view.backgroundColor = .white
-        
-       
+        blurView.effect = nil
     }
     
     
@@ -190,28 +170,19 @@ class PatientViewController:UIViewController, UICollectionViewDataSource, UIColl
     }
     
     
-    
-    
-    
+}
+
+
+
+
+//MARK: Bottom Sheet
+extension PatientViewController {
     //MARK: Bottom Sheet Animation (NEDINE)
-    public func showBottomSheet(){
-        if (isBottomSheetShown) {
-            //default Bottom sheet
-            UIView.animate(withDuration: 0.3) {
-                self.bottomViewHeightConstraint.constant = 400
-                // update view layout immediately
-                self.view.layoutIfNeeded()
-            } completion: { status in
-                self.isBottomSheetShown = false
-            }
-        }
-        
-    }
-    
-    
     public func stretchBottomSheet(){
+        //shows keyboard when bottom sheet is open
+        readingField.becomeFirstResponder()
         UIView.animate(withDuration: 0.3) {
-            self.bottomViewHeightConstraint.constant = 420
+            self.bottomViewHeightConstraint.constant = 620
             // update view layout immediately
             self.view.layoutIfNeeded()
         } completion: { status in
@@ -219,7 +190,7 @@ class PatientViewController:UIViewController, UICollectionViewDataSource, UIColl
             
             //bouncing animation when card is shown
             UIView.animate(withDuration: 0.3) {
-                self.bottomViewHeightConstraint.constant = 400
+                self.bottomViewHeightConstraint.constant = 600
                 
                 self.view.layoutIfNeeded()
             } completion: { status in
@@ -228,10 +199,15 @@ class PatientViewController:UIViewController, UICollectionViewDataSource, UIColl
         
         }
     }
+    
     //MARK: bottom sheet closing animation (NEDINE)
-    func closeSheet(){
+    @objc func dismissSheet(){
+        readingField.text = ""
+        //closes keyboard
+        view.endEditing(true)
         UIView.animate(withDuration: 0.3) {
             self.bottomViewHeightConstraint.constant = 0
+            self.removeBlur()
             // update view layout immediately
             self.view.layoutIfNeeded()
         } completion: { status in
@@ -239,8 +215,10 @@ class PatientViewController:UIViewController, UICollectionViewDataSource, UIColl
         }
     }
     
-}
+    
 
+    
+}
 
 
 
@@ -296,11 +274,9 @@ extension PatientViewController {
         }
         
     }
-    
-   
-    
+  
 }
-
+//MARK: Scrolling behaviour
 extension PatientViewController {
     func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
         if scrollView.tag == 2 {
@@ -320,8 +296,6 @@ extension PatientViewController {
              indexOfMajorCell = self.indexOfMajorCell(collectionViewLayout: collectionViewLayout2)
         }
         
-        
-       
         
         // calculate conditions:
         let swipeVelocityThreshold: CGFloat = 0.5 // after some trail and error
