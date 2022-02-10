@@ -15,13 +15,26 @@ class PatientViewController:UIViewController, UICollectionViewDataSource, UIColl
     
     @IBOutlet weak var collectionViewLayout2: UICollectionViewFlowLayout!
     
-    //  @IBOutlet weak var collectionViewLayout2: UICollectionViewFlowLayout!
+    var plusButtonTag = 1
+    @IBOutlet weak var welcomeLabel: UILabel!
+ 
+    //Bottom Sheet
+    @IBOutlet weak var bottomSheet: UIView!
+    @IBOutlet weak var readingField: UITextField!
+    @IBOutlet weak var sheetLabel: UILabel!
+    @IBOutlet weak var bottomViewBottomConstraint: NSLayoutConstraint!
+    @IBOutlet weak var bottomViewHeightConstraint: NSLayoutConstraint!
+    @IBOutlet weak var bottomViewTrailingConstraint: NSLayoutConstraint!
+    @IBOutlet weak var bottomViewLeadingConstraint: NSLayoutConstraint!
     
     var afterReadings = ["1","2","3","4","5","6","7"]
     var beforeReadings = ["1","2","3","4"]
     var readingCard = ReadingCard()
+    var blurView:UIVisualEffectView!
+    private var isBottomSheetShown = false
     
     private var indexOfCellBeforeDragging = 0
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -30,12 +43,17 @@ class PatientViewController:UIViewController, UICollectionViewDataSource, UIColl
         collectionViewLayout2.minimumLineSpacing = 5
         collectionViewOne.tag = 1
         collectionViewTwo.tag = 2
+        let rgbColor =  UIColor(red: CGFloat(139.0/255.0), green: CGFloat(164.0/255.0), blue: CGFloat(170.0/255.0), alpha: 1)
+        readingField.addBorderAndColor(color: rgbColor, width: 3, corner_radius: 20, clipsToBounds: true)
+        //MARK: bottomsheet design
+        bottomSheet.layer.cornerRadius = 30
+        bottomSheet.clipsToBounds = true
+        
     }
     
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
-        
-        configureCollectionViewLayoutItemSize(collectionViewLayout: collectionViewLayout)
+       configureCollectionViewLayoutItemSize(collectionViewLayout: collectionViewLayout)
         configureCollectionViewLayoutItemSize(collectionViewLayout: collectionViewLayout2)
     }
     
@@ -43,12 +61,115 @@ class PatientViewController:UIViewController, UICollectionViewDataSource, UIColl
    
 
     
-    @IBAction func readingButtonPressed(_ sender: UIButton) {
+    @IBAction func plusButtonPressed(_ sender: UIButton) {
         //after or before eating button got pressed
-        addReading(tag: sender.tag)
+        //addReading(tag: sender.tag)
+        //showBottomSheet()
+        
+        //before button pressed
+        if sender.tag == 2 {
+            sheetLabel.text = "قبل الأكل"
+            plusButtonTag = 2
+        }
+        else {//after button pressed
+            sheetLabel.text = "بعد الأكل"
+        }
+        
+        // 1
+        //view.backgroundColor = .clear
+        // 2 create blur effect
+        let blurEffect = UIBlurEffect(style: .light)
+        // 3 display the blur effect created
+        blurView = UIVisualEffectView(effect: blurEffect)
+        // 4
+        blurView.translatesAutoresizingMaskIntoConstraints = false
+        UIView.animate(withDuration: 4){
+            self.view.insertSubview(self.blurView, at:5)
+        }
+        
+        // 1
+        let vibrancyEffect = UIVibrancyEffect(blurEffect: blurEffect)
+        // 2
+        let vibrancyView = UIVisualEffectView(effect: vibrancyEffect)
+        vibrancyView.translatesAutoresizingMaskIntoConstraints = false
+        // 3
+        for subview in self.blurView.subviews {
+            vibrancyView.contentView.addSubview(subview)
+        }
+
+        // 4
+        self.blurView.contentView.addSubview(vibrancyView)
+
+        
+        NSLayoutConstraint.activate([
+          blurView.topAnchor.constraint(equalTo: view.topAnchor),
+          blurView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+          blurView.heightAnchor.constraint(equalTo: view.heightAnchor),
+          blurView.widthAnchor.constraint(equalTo: view.widthAnchor)
+        ])
+        
+        
+        
+//        lazy var blurredView: UIView = {
+//            // 1. create container view
+//            let containerView = UIView()
+//            // 2. create custom blur view
+//            let blurEffect = UIBlurEffect(style: .light)
+//            let customBlurEffectView = CustomVisualEffectView(effect: blurEffect, intensity: 0.2)
+//            customBlurEffectView.frame = self.view.bounds
+//            // 3. create semi-transparent black view
+//            let dimmedView = UIView()
+//            dimmedView.backgroundColor = .black.withAlphaComponent(0.6)
+//            dimmedView.frame = self.view.bounds
+//
+//            // 4. add both as subviews
+//            containerView.addSubview(customBlurEffectView)
+//            containerView.addSubview(dimmedView)
+//            return containerView
+//        }()
+//        setupView(blurredView: blurredView)
+        stretchBottomSheet()
+        //addReading(tag: sender.tag)
+        
+        
     }
     
+    //Bottom sheet button pressed
+    @IBAction func addReading(_ sender: UIButton) {
+        guard let reading = readingField.text else { return }
+        if  plusButtonTag == 1{
+             afterReadings.insert(reading, at: 0)
+            }else {
+                    beforeReadings.insert(reading, at: 0)
+                    
+                 }
+        closeSheet()
+        readingField.text = ""
+        collectionViewOne.reloadData()
+        collectionViewTwo.reloadData()
+        removeBlur(with: blurView)
 
+    }
+    
+    @IBAction func closeSheet(_ sender: UIButton) {
+      closeSheet()
+        removeBlur(with: blurView)
+    
+    }
+    
+    func removeBlur(with blurView: UIView){
+        for subview in view.subviews {
+            if subview is UIVisualEffectView {
+                subview.removeFromSuperview()
+            }
+        }
+        view.backgroundColor = .white
+        
+       
+    }
+    
+    
+    //another option to enter readings using alert
     func addReading(tag:Int){
         let alert = UIAlertController(title: "أدخل قراءة بعد الأكل", message: "", preferredStyle: .alert)
         alert.addTextField()
@@ -56,7 +177,6 @@ class PatientViewController:UIViewController, UICollectionViewDataSource, UIColl
             guard let reading = alert.textFields?[0].text else {return}
             print(reading)
             if tag == 1{
-                //collectionViewOne.insert
                 self.afterReadings.insert(reading, at: 0)
             }else {
                 self.beforeReadings.insert(reading, at: 0)
@@ -69,14 +189,62 @@ class PatientViewController:UIViewController, UICollectionViewDataSource, UIColl
 
     }
     
- 
+    
+    
+    
+    
+    //MARK: Bottom Sheet Animation (NEDINE)
+    public func showBottomSheet(){
+        if (isBottomSheetShown) {
+            //default Bottom sheet
+            UIView.animate(withDuration: 0.3) {
+                self.bottomViewHeightConstraint.constant = 400
+                // update view layout immediately
+                self.view.layoutIfNeeded()
+            } completion: { status in
+                self.isBottomSheetShown = false
+            }
+        }
+        
+    }
+    
+    
+    public func stretchBottomSheet(){
+        UIView.animate(withDuration: 0.3) {
+            self.bottomViewHeightConstraint.constant = 420
+            // update view layout immediately
+            self.view.layoutIfNeeded()
+        } completion: { status in
+            self.isBottomSheetShown = true
+            
+            //bouncing animation when card is shown
+            UIView.animate(withDuration: 0.3) {
+                self.bottomViewHeightConstraint.constant = 400
+                
+                self.view.layoutIfNeeded()
+            } completion: { status in
+                
+            }
+        
+        }
+    }
+    //MARK: bottom sheet closing animation (NEDINE)
+    func closeSheet(){
+        UIView.animate(withDuration: 0.3) {
+            self.bottomViewHeightConstraint.constant = 0
+            // update view layout immediately
+            self.view.layoutIfNeeded()
+        } completion: { status in
+            self.isBottomSheetShown = false
+        }
+    }
+    
 }
 
 
 
 
 //MARK: CollectionView
-
 extension PatientViewController {
     private func calculateSectionInset(collectionViewLayout:UICollectionViewFlowLayout) -> CGFloat {
         let deviceIsIpad = UIDevice.current.userInterfaceIdiom == .pad
@@ -91,7 +259,7 @@ extension PatientViewController {
     }
     
     private func configureCollectionViewLayoutItemSize(collectionViewLayout:UICollectionViewFlowLayout) {
-        let inset: CGFloat = calculateSectionInset(collectionViewLayout: collectionViewLayout) // This inset calculation is some magic so the next and the previous cells will peek from the sides. Don't worry about it
+        let inset: CGFloat = calculateSectionInset(collectionViewLayout: collectionViewLayout) //inset calculation so the next and the previous cells will peek from the sides
         collectionViewLayout.sectionInset = UIEdgeInsets(top: 0, left: inset, bottom: 0, right: inset)
         
         collectionViewLayout.itemSize = CGSize(width: collectionViewLayout.collectionView!.frame.size.width - inset * 2, height: collectionViewLayout.collectionView!.frame.size.height)
@@ -118,20 +286,6 @@ extension PatientViewController {
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-//        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "ColorsPaletteCollectionViewCell", for: indexPath) as! ColorsPaletteCollectionViewCell
-//
-//        cell.configure(colors: readings[indexPath.row]) { (selectedColor: UIColor) in
-//            self.view.backgroundColor = selectedColor
-//        }
-//
-//        // You can color the cells so you could see how they behave:
-//        //        let isEvenCell = CGFloat(indexPath.row).truncatingRemainder(dividingBy: 2) == 0
-//        //        cell.backgroundColor = isEvenCell ? UIColor(white: 0.9, alpha: 1) : .white
-//
-//        return cell
-
-        
-        
         if collectionView == collectionViewTwo {
             let cell2 = readingCard.setupCell(collectionView: collectionView, indexPath: indexPath, readings: beforeReadings,cellName: "Cell2")
             return cell2
@@ -142,14 +296,16 @@ extension PatientViewController {
         }
         
     }
+    
+   
+    
 }
+
 extension PatientViewController {
     func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
         if scrollView.tag == 2 {
             indexOfCellBeforeDragging = indexOfMajorCell(collectionViewLayout: collectionViewLayout2)
-            print("hey2")
         } else {
-            print("hey1")
         indexOfCellBeforeDragging = indexOfMajorCell(collectionViewLayout: collectionViewLayout)
         }
     }
@@ -208,4 +364,32 @@ extension PatientViewController {
            
         }
     }
+    
+    func setupView(blurredView:UIView) {
+        // 6. add blur view and send it to back
+        view.addSubview(blurredView)
+        view.sendSubviewToBack(blurredView)
+    }
+    
+    @IBAction func dismissAction(_ sender: Any) {
+        dismiss(animated: true)
+    }
+
 }
+extension UIView {
+    func addBorderAndColor(color: UIColor, width: CGFloat, corner_radius: CGFloat = 0, clipsToBounds: Bool = false) {
+        self.layer.borderWidth = width
+        self.layer.borderColor = color.cgColor
+        self.layer.cornerRadius = corner_radius
+        self.clipsToBounds = clipsToBounds
+    }
+}
+
+
+
+
+
+    
+    
+    
+ 
