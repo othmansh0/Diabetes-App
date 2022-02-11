@@ -118,8 +118,6 @@ class PhoneViewController: UIViewController, UITextFieldDelegate {
         }
     }
     
-    
-    
     @objc func dismissBottomSheet() {
         //return to min height
         showBottomSheet()

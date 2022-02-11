@@ -93,7 +93,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="MQG-sq-wZC" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="453.62318840579712" y="150.66964285714286"/>
+            <point key="canvasLocation" x="2049" y="151"/>
         </scene>
         <!--Phone View Controller-->
         <scene sceneID="tne-QT-ifu">
@@ -156,7 +156,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1086.9565217391305" y="134.59821428571428"/>
+            <point key="canvasLocation" x="2907.2463768115945" y="134.59821428571428"/>
         </scene>
         <!--View Controller-->
         <scene sceneID="w8w-3U-rtv">
@@ -248,7 +248,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="c0D-iM-T9p" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1805.7971014492755" y="121.875"/>
+            <point key="canvasLocation" x="3626.0869565217395" y="121.875"/>
         </scene>
         <!--Doctor View Controller-->
         <scene sceneID="qed-TT-1Od">
@@ -315,7 +315,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="JcN-Ka-RBb" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2623" y="135"/>
+            <point key="canvasLocation" x="4442.0289855072469" y="134.59821428571428"/>
         </scene>
         <!--Patient Registeration View Controller-->
         <scene sceneID="W6C-t6-l8X">
@@ -682,10 +682,10 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <stackView opaque="NO" contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="q3d-t1-4wf">
-                                <rect key="frame" x="24" y="239" width="371" height="170.5"/>
+                                <rect key="frame" x="24" y="239" width="371" height="121.5"/>
                                 <subviews>
                                     <button opaque="NO" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="v9W-CO-bcK">
-                                        <rect key="frame" x="0.0" y="0.0" width="185.5" height="170.5"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="185.5" height="121.5"/>
                                         <state key="normal" title="Button"/>
                                         <buttonConfiguration key="configuration" style="plain" image="afterButton" imagePlacement="bottom" title="بعد الأكل">
                                             <fontDescription key="titleFontDescription" name="Helvetica" family="Helvetica" pointSize="25"/>
@@ -697,7 +697,7 @@
                                         </connections>
                                     </button>
                                     <button opaque="NO" tag="2" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="KSf-FE-1da">
-                                        <rect key="frame" x="185.5" y="0.0" width="185.5" height="170.5"/>
+                                        <rect key="frame" x="185.5" y="0.0" width="185.5" height="121.5"/>
                                         <state key="normal" title="Button"/>
                                         <buttonConfiguration key="configuration" style="plain" image="beforeButton" imagePlacement="bottom" title="قبل الأكل">
                                             <fontDescription key="titleFontDescription" name="Helvetica" family="Helvetica" pointSize="25"/>
@@ -780,20 +780,6 @@
                                         </attributedString>
                                         <color key="highlightedColor" red="0.38431376220000002" green="0.47450977560000002" blue="0.50196081400000003" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                     </label>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="iEs-pj-L76">
-                                        <rect key="frame" x="12" y="13" width="21" height="19"/>
-                                        <constraints>
-                                            <constraint firstAttribute="height" constant="19" id="VXD-Tb-iOg"/>
-                                            <constraint firstAttribute="width" constant="21" id="wQ0-d7-hwp"/>
-                                        </constraints>
-                                        <color key="tintColor" red="0.40000003579999999" green="0.40784314269999999" blue="0.41176474089999998" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
-                                        <buttonConfiguration key="configuration" style="plain">
-                                            <imageReference key="image" image="multiply" symbolScale="large"/>
-                                        </buttonConfiguration>
-                                        <connections>
-                                            <action selector="closeSheet:" destination="rly-1u-pRK" eventType="touchUpInside" id="aGu-Wh-yMR"/>
-                                        </connections>
-                                    </button>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zMr-06-bIH">
                                         <rect key="frame" x="169" y="183" width="76" height="21"/>
                                         <constraints>
@@ -810,22 +796,36 @@
                                         </attributedString>
                                         <nil key="highlightedColor"/>
                                     </label>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="iEs-pj-L76">
+                                        <rect key="frame" x="25" y="25" width="21" height="19"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="21" id="56Z-88-MgP"/>
+                                            <constraint firstAttribute="height" constant="19" id="I5s-IA-bdh"/>
+                                        </constraints>
+                                        <color key="tintColor" red="0.40000003579999999" green="0.40784314269999999" blue="0.41176474089999998" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                        <buttonConfiguration key="configuration" style="plain">
+                                            <imageReference key="image" image="multiply" symbolScale="large"/>
+                                        </buttonConfiguration>
+                                        <connections>
+                                            <action selector="closeSheet:" destination="rly-1u-pRK" eventType="touchUpInside" id="aGu-Wh-yMR"/>
+                                        </connections>
+                                    </button>
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstItem="zMr-06-bIH" firstAttribute="centerY" secondItem="hhC-BH-8XI" secondAttribute="centerY" id="41f-GL-PUL"/>
-                                    <constraint firstItem="iEs-pj-L76" firstAttribute="top" secondItem="9ei-oS-Xbk" secondAttribute="top" constant="13" id="4kX-Am-zqa"/>
                                     <constraint firstItem="zMr-06-bIH" firstAttribute="centerX" secondItem="hhC-BH-8XI" secondAttribute="centerX" id="5tf-sd-Hdk"/>
                                     <constraint firstItem="hhC-BH-8XI" firstAttribute="top" secondItem="AtX-8c-UFR" secondAttribute="bottom" constant="23" id="8d6-XJ-S60"/>
                                     <constraint firstItem="hhC-BH-8XI" firstAttribute="width" secondItem="AtX-8c-UFR" secondAttribute="width" multiplier="1.11765" id="DNX-29-Rxh"/>
                                     <constraint firstItem="zMr-06-bIH" firstAttribute="top" secondItem="AtX-8c-UFR" secondAttribute="bottom" constant="31.5" id="QXe-hg-YZC"/>
                                     <constraint firstItem="hhC-BH-8XI" firstAttribute="centerX" secondItem="AtX-8c-UFR" secondAttribute="centerX" id="QwU-u6-mB2"/>
+                                    <constraint firstItem="iEs-pj-L76" firstAttribute="leading" secondItem="9ei-oS-Xbk" secondAttribute="leading" constant="25" id="Ras-4A-tp9"/>
                                     <constraint firstItem="AtX-8c-UFR" firstAttribute="centerX" secondItem="xh1-ec-3Sf" secondAttribute="centerX" id="SQX-BX-1su"/>
                                     <constraint firstItem="hhC-BH-8XI" firstAttribute="width" secondItem="AtX-8c-UFR" secondAttribute="height" multiplier="114:29" id="T9Z-NU-XYQ"/>
                                     <constraint firstItem="AtX-8c-UFR" firstAttribute="centerX" secondItem="9ei-oS-Xbk" secondAttribute="centerX" id="WEB-Bh-urf"/>
                                     <constraint firstItem="AtX-8c-UFR" firstAttribute="top" secondItem="xh1-ec-3Sf" secondAttribute="bottom" constant="19.5" id="cYk-SA-9Rf"/>
-                                    <constraint firstItem="iEs-pj-L76" firstAttribute="leading" secondItem="9ei-oS-Xbk" secondAttribute="leading" constant="12" id="fgG-Wr-bvm"/>
                                     <constraint firstItem="xh1-ec-3Sf" firstAttribute="top" secondItem="9ei-oS-Xbk" secondAttribute="top" constant="46" id="o2L-Es-n7z"/>
+                                    <constraint firstItem="iEs-pj-L76" firstAttribute="top" secondItem="9ei-oS-Xbk" secondAttribute="top" constant="25" id="xDw-xd-02l"/>
                                     <constraint firstItem="xh1-ec-3Sf" firstAttribute="centerX" secondItem="9ei-oS-Xbk" secondAttribute="centerX" id="yUq-BO-H2J"/>
                                     <constraint firstAttribute="height" id="zVO-mF-FOW"/>
                                 </constraints>
@@ -870,6 +870,7 @@
                             <constraint firstItem="gaN-qW-mm2" firstAttribute="width" secondItem="Tw7-8f-Seb" secondAttribute="width" id="zzk-eg-0v0"/>
                         </constraints>
                     </view>
+                    <tabBarItem key="tabBarItem" title="" image="homeIcon" landscapeImage="homeIcon" selectedImage="homeIcon" id="i0p-NS-IbW"/>
                     <connections>
                         <outlet property="bottomSheet" destination="9ei-oS-Xbk" id="LWs-ds-oQH"/>
                         <outlet property="bottomViewBottomConstraint" destination="OMx-fH-6Ff" id="NC9-p1-ck6"/>
@@ -887,27 +888,34 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="VLv-vY-HQm" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3782.608695652174" y="522.99107142857144"/>
+            <point key="canvasLocation" x="4297" y="861"/>
         </scene>
-        <!--View Controller-->
+        <!--Second Patient View Controller-->
         <scene sceneID="q71-65-KNb">
             <objects>
-                <viewController id="qNW-uo-0TJ" sceneMemberID="viewController">
+                <viewController id="qNW-uo-0TJ" customClass="SecondPatientViewController" customModule="FirestoreDemo" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="RVm-Te-6sp">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <viewLayoutGuide key="safeArea" id="BfG-8D-fep"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                     </view>
+                    <tabBarItem key="tabBarItem" title="" image="ChartIcon" id="2pW-i2-Jbf">
+                        <color key="badgeColor" red="0.38431376220000002" green="0.47450977560000002" blue="0.50196081400000003" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                    </tabBarItem>
+                    <navigationItem key="navigationItem" id="nAt-zi-rSh"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="veE-k5-1Ue" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4548" y="606"/>
+            <point key="canvasLocation" x="5020" y="1507"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="96A-5b-eQf">
             <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="YBQ-wk-7C5" sceneMemberID="viewController">
+                <navigationController storyboardIdentifier="LoginNavigationController" automaticallyAdjustsScrollViewInsets="NO" id="YBQ-wk-7C5" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" systemItem="more" id="oRF-Xh-XJv">
+                        <color key="badgeColor" red="0.87699774909999995" green="1" blue="2.2204460490000001e-16" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    </tabBarItem>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="9SU-PA-iMf">
                         <rect key="frame" x="0.0" y="44" width="414" height="44"/>
@@ -920,16 +928,39 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="wLC-vv-r4z" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-251" y="135"/>
+            <point key="canvasLocation" x="1203" y="151"/>
+        </scene>
+        <!--Tab Bar Controller-->
+        <scene sceneID="zt6-X7-Rrg">
+            <objects>
+                <tabBarController storyboardIdentifier="MainTabBarController" id="rxO-zF-8BW" sceneMemberID="viewController">
+                    <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="Eud-Nk-uFP">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="49"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <color key="backgroundColor" red="0.94901961089999998" green="0.95686274770000002" blue="0.94509804249999996" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                        <color key="tintColor" red="0.23921570180000001" green="0.35294118520000001" blue="0.38823530080000002" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                        <color key="barTintColor" red="0.23921570180000001" green="0.35294118520000001" blue="0.38823530080000002" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                        <color key="selectedImageTintColor" red="0.23921570180000001" green="0.35294118520000001" blue="0.38823530080000002" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                    </tabBar>
+                    <connections>
+                        <segue destination="rly-1u-pRK" kind="relationship" relationship="viewControllers" id="6zZ-Ha-Osf"/>
+                        <segue destination="qNW-uo-0TJ" kind="relationship" relationship="viewControllers" id="GqW-bh-M0X"/>
+                    </connections>
+                </tabBarController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="FdZ-tO-2us" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3461" y="861"/>
         </scene>
     </scenes>
     <resources>
+        <image name="ChartIcon" width="33" height="31"/>
         <image name="Rectangle 24" width="375" height="531"/>
         <image name="addReading3" width="204" height="37"/>
         <image name="afterButton" width="152" height="145"/>
         <image name="beforeButton" width="162" height="150"/>
         <image name="burgerMenu" width="24" height="21"/>
         <image name="doctorButton" width="158" height="198"/>
+        <image name="homeIcon" width="30" height="30"/>
         <image name="multiply" width="9" height="9"/>
         <image name="patientButton" width="158" height="198"/>
         <image name="person.circle" catalog="system" width="128" height="121"/>

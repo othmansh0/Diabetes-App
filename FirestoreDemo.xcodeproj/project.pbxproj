@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		121ABB2C27B6A06F008247EF /* SecondPatientViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 121ABB2B27B6A06F008247EF /* SecondPatientViewController.swift */; };
 		121FD1AA273868E50034B476 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 121FD1A9273868E50034B476 /* HomeViewController.swift */; };
 		1228641A27B11EEA00B449B1 /* MarkaziText-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 1228641C27B11EEA00B449B1 /* MarkaziText-Bold.ttf */; };
 		1228641E27B11EF700B449B1 /* MarkaziText-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 1228642027B11EF700B449B1 /* MarkaziText-Medium.ttf */; };
@@ -24,7 +25,6 @@
 		12742FE427AE99B400360551 /* CollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12742FE327AE99B400360551 /* CollectionViewCell.swift */; };
 		12742FE627AEC19C00360551 /* ReadingCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12742FE527AEC19C00360551 /* ReadingCard.swift */; };
 		12742FE827AEC1CC00360551 /* CardTwoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12742FE727AEC1CC00360551 /* CardTwoViewController.swift */; };
-		12742FEA27AF161900360551 /* Card2ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12742FE927AF161900360551 /* Card2ViewController.swift */; };
 		128F2EBE2780FF5A009248EB /* CodeTextFieldViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 128F2EBD2780FF5A009248EB /* CodeTextFieldViewController.swift */; };
 		12CD913527273A7C00F3C5C8 /* AuthManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12CD913427273A7C00F3C5C8 /* AuthManager.swift */; };
 		12CD91382727420400F3C5C8 /* SMSViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12CD91372727420400F3C5C8 /* SMSViewController.swift */; };
@@ -33,6 +33,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		121ABB2B27B6A06F008247EF /* SecondPatientViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecondPatientViewController.swift; sourceTree = "<group>"; };
 		121FD1A9273868E50034B476 /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 		1228641B27B11EEA00B449B1 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file; name = Base; path = "Base.lproj/MarkaziText-Bold.ttf"; sourceTree = "<group>"; };
 		1228641D27B11EED00B449B1 /* en */ = {isa = PBXFileReference; lastKnownFileType = file; name = en; path = "en.lproj/MarkaziText-Bold.ttf"; sourceTree = "<group>"; };
@@ -57,7 +58,6 @@
 		12742FE327AE99B400360551 /* CollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CollectionViewCell.swift; sourceTree = "<group>"; };
 		12742FE527AEC19C00360551 /* ReadingCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReadingCard.swift; sourceTree = "<group>"; };
 		12742FE727AEC1CC00360551 /* CardTwoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardTwoViewController.swift; sourceTree = "<group>"; };
-		12742FE927AF161900360551 /* Card2ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Card2ViewController.swift; sourceTree = "<group>"; };
 		128F2EBD2780FF5A009248EB /* CodeTextFieldViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CodeTextFieldViewController.swift; sourceTree = "<group>"; };
 		12CD913427273A7C00F3C5C8 /* AuthManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthManager.swift; sourceTree = "<group>"; };
 		12CD91372727420400F3C5C8 /* SMSViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SMSViewController.swift; sourceTree = "<group>"; };
@@ -87,7 +87,7 @@
 				12CD91372727420400F3C5C8 /* SMSViewController.swift */,
 				12742FE127AD94D100360551 /* PatientRegisterationViewController.swift */,
 				124E9387273878B40091F395 /* PatientViewController.swift */,
-				12742FE927AF161900360551 /* Card2ViewController.swift */,
+				121ABB2B27B6A06F008247EF /* SecondPatientViewController.swift */,
 				12CD913E272745DB00F3C5C8 /* DoctorViewController.swift */,
 				12742FE727AEC1CC00360551 /* CardTwoViewController.swift */,
 			);
@@ -287,7 +287,7 @@
 				12742FE627AEC19C00360551 /* ReadingCard.swift in Sources */,
 				125C1D382727347E0053377B /* AppDelegate.swift in Sources */,
 				12CD91382727420400F3C5C8 /* SMSViewController.swift in Sources */,
-				12742FEA27AF161900360551 /* Card2ViewController.swift in Sources */,
+				121ABB2C27B6A06F008247EF /* SecondPatientViewController.swift in Sources */,
 				121FD1AA273868E50034B476 /* HomeViewController.swift in Sources */,
 				12742FE227AD94D100360551 /* PatientRegisterationViewController.swift in Sources */,
 				12742FE827AEC1CC00360551 /* CardTwoViewController.swift in Sources */,

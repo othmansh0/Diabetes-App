@@ -39,7 +39,7 @@ class PatientViewController:UIViewController, UICollectionViewDataSource, UIColl
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        tabBarController?.tabBar.layer.cornerRadius = 15
         collectionViewLayout.minimumLineSpacing = 5
         collectionViewLayout2.minimumLineSpacing = 5
         collectionViewOne.tag = 1
@@ -47,7 +47,7 @@ class PatientViewController:UIViewController, UICollectionViewDataSource, UIColl
         let rgbColor =  UIColor(red: CGFloat(139.0/255.0), green: CGFloat(164.0/255.0), blue: CGFloat(170.0/255.0), alpha: 1)
         readingField.addBorderAndColor(color: rgbColor, width: 3, corner_radius: 20, clipsToBounds: true)
         //MARK: bottomsheet design
-        bottomSheet.layer.cornerRadius = 30
+        bottomSheet.layer.cornerRadius = 40
         bottomSheet.clipsToBounds = true
         
         //makes UIView clickable
@@ -79,12 +79,12 @@ class PatientViewController:UIViewController, UICollectionViewDataSource, UIColl
         }
         
         // 2 create blur effect
-        blurEffect = UIBlurEffect(style: .light)
+        blurEffect = UIBlurEffect(style: .systemUltraThinMaterialLight)
        
         // 4
         blurView.translatesAutoresizingMaskIntoConstraints = false
         // 3 display the blur effect created with animation
-        UIView.animate(withDuration: 2){
+        UIView.animate(withDuration: 1){
             self.blurView.effect = self.blurEffect
             self.view.insertSubview(self.blurView, at:5)
         }

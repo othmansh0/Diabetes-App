@@ -40,9 +40,18 @@ class PatientRegisterationViewController: UIViewController {
             let newPatient = db.collection("doctors").document(doctorID).collection("patients").document(Auth.auth().currentUser!.uid)
             newPatient.setData(["Name":Patientname,"Age":pateintAge,"Height":patientHeight,"Weight":patientWeight,"DiabetesType":diabetesType,"ID":newPatient.documentID,"beforeReadings":[],"afterReadings":[]])
             
-            if let vc = storyboard?.instantiateViewController(withIdentifier: "Patient") as? PatientViewController {
-                navigationController?.pushViewController(vc, animated: true)
-            }
+            
+            let storyboard = UIStoryboard(name: "Main", bundle: nil)
+            let mainTabBarController = storyboard.instantiateViewController(identifier: "MainTabBarController")
+                
+                // This is to get the SceneDelegate object from your view controller
+                // then call the change root view controller function to change to main tab bar
+                (UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate)?.changeRootViewController(mainTabBarController)
+            
+//            if let vc = storyboard?.instantiateViewController(withIdentifier: "Patient") as? PatientViewController {
+//                navigationController?.pushViewController(tabBarController!, animated: true)
+//                navigationController?.pushViewController(vc, animated: true)
+//            }
         
         }
        

@@ -27,8 +27,15 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
                 let viewController = storyboard.instantiateViewController(withIdentifier: "Doctor") as! DoctorViewController
                 self.window?.rootViewController = viewController
             } else {
-                let viewController = storyboard.instantiateViewController(withIdentifier: "Patient") as! PatientViewController
-                self.window?.rootViewController = viewController
+                
+             
+                
+               
+                
+                let mainTabBarController = storyboard.instantiateViewController(identifier: "MainTabBarController")
+                
+                     (UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate)?.changeRootViewController(mainTabBarController)
+                window.rootViewController = mainTabBarController
             }
                 
            
@@ -41,6 +48,9 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
             let viewController = storyboard.instantiateViewController(withIdentifier: "Home") as! HomeViewController
                     let navigationController = UINavigationController.init(rootViewController: viewController)
             self.window?.rootViewController = navigationController
+            
+            let loginNavController = storyboard.instantiateViewController(identifier: "LoginNavigationController")
+            window.rootViewController = loginNavController
         }
 
 
@@ -86,6 +96,15 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         // to restore the scene back to its current state.
     }
 
+    
+    func changeRootViewController(_ vc: UIViewController, animated: Bool = true) {
+        guard let window = self.window else {
+            return
+        }
+        
+        // change the root view controller to your specific view controller
+        window.rootViewController = vc
+    }
 
 }
 
