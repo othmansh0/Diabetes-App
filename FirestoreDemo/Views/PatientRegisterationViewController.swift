@@ -33,7 +33,8 @@ class PatientRegisterationViewController: UIViewController {
             
             
             
-            
+            let defualts = UserDefaults.standard
+            defualts.set(doctorID, forKey: "doctorID")
             
             
             

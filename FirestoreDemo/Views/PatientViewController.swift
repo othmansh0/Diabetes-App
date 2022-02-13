@@ -17,7 +17,9 @@ class PatientViewController:UIViewController, UICollectionViewDataSource, UIColl
     
     var plusButtonTag = 1
     @IBOutlet weak var welcomeLabel: UILabel!
- 
+    let db = Firestore.firestore()
+    let defaults = UserDefaults.standard
+    var doctorID:String!
     //Bottom Sheet
     @IBOutlet weak var bottomSheet: UIView!
     @IBOutlet weak var readingField: UITextField!
@@ -27,7 +29,7 @@ class PatientViewController:UIViewController, UICollectionViewDataSource, UIColl
     @IBOutlet weak var bottomViewTrailingConstraint: NSLayoutConstraint!
     @IBOutlet weak var bottomViewLeadingConstraint: NSLayoutConstraint!
     
-    var afterReadings = ["1","2","3","4","5","6","7"]
+    var afterReadings = [String]()
     var beforeReadings = ["1","2","3","4"]
     var readingCard = ReadingCard()
     private var isBottomSheetShown = false
@@ -36,9 +38,11 @@ class PatientViewController:UIViewController, UICollectionViewDataSource, UIColl
 
     private var indexOfCellBeforeDragging = 0
     
-    
     override func viewDidLoad() {
         super.viewDidLoad()
+        doctorID = defaults.string(forKey: "doctorID")
+        
+       
         tabBarController?.tabBar.layer.cornerRadius = 15
         collectionViewLayout.minimumLineSpacing = 5
         collectionViewLayout2.minimumLineSpacing = 5
@@ -53,7 +57,21 @@ class PatientViewController:UIViewController, UICollectionViewDataSource, UIColl
         //makes UIView clickable
              let tap = UITapGestureRecognizer(target: self, action: #selector(dismissSheet))
              view.addGestureRecognizer(tap)
+//        DispatchQueue.main.async {
+//
+//        }
+       afterReadings = fetchReadings(tag: 1)
+       beforeReadings = fetchReadings(tag: 2)
+       
+       
+ 
+       
     }
+//    override func viewDidAppear(_ animated: Bool) {
+//        super.viewDidAppear(animated)
+//
+//        print("helloooooo\(readArray(tag: 1))")
+//    }
     
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
@@ -120,6 +138,8 @@ class PatientViewController:UIViewController, UICollectionViewDataSource, UIColl
             return }
         if  plusButtonTag == 1{
              afterReadings.insert(reading, at: 0)
+           // readArray(tag: plusButtonTag)
+            
             }else {
                     beforeReadings.insert(reading, at: 0)
                     
@@ -158,6 +178,7 @@ dismissSheet()
             print(reading)
             if tag == 1{
                 self.afterReadings.insert(reading, at: 0)
+             
             }else {
                 self.beforeReadings.insert(reading, at: 0)
             }
@@ -169,6 +190,61 @@ dismissSheet()
 
     }
     
+    //MARK: Firestore
+
+    func fetchReadings(tag: Int) -> [String]{
+       //decides which array needs to be fetched from firestore
+       var readingsType = ""
+       var readingsArray = [String]()
+        
+        if tag == 1 {
+            readingsType = "afterReadings"
+            print("tag is\(tag)")
+        } else { readingsType = "beforeReadings"
+            print("tag is\(tag)")
+        }
+        
+        //get ref of patient
+        
+        DispatchQueue.main.async { [weak self] in
+            let patient = self?.db.collection("doctors").document(self?.doctorID ?? "").collection("patients").document(Auth.auth().currentUser!.uid)
+            
+            patient?.getDocument { document, error in
+                if let document = document,document.exists {
+                    guard let dataDescription = document.data() else {
+                        print("------------------------------------------------------------------------------------")
+                        print("error empty document")
+                        print("------------------------------------------------------------------------------------")
+                        return
+                        
+                    }
+                    print("------------------------------------------------------------------------------------")
+                    print("Document data: \(dataDescription)")
+                    print("------------------------------------------------------------------------------------")
+                    readingsArray = dataDescription[readingsType] as? [String] ?? ["!"]
+                    if tag == 1 {
+                        self?.afterReadings = readingsArray
+                    } else {
+                        self?.beforeReadings = readingsArray
+                    }
+                    
+                    self?.collectionViewOne.reloadData()
+                    self?.collectionViewTwo.reloadData()
+           
+                    print("------------------------------------------------------------------------------------")
+                    print(readingsArray)
+                    print("------------------------------------------------------------------------------------")
+                    //return readingsArray
+                } else {
+                    print("error")
+                    return
+                }
+            }
+            
+        }
+        
+       return readingsArray
+    }
     
 }
 
