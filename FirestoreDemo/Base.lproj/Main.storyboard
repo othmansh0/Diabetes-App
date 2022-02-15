@@ -37,52 +37,58 @@
                                     <constraint firstAttribute="width" secondItem="OwF-mp-jQm" secondAttribute="height" multiplier="575:584" id="R3G-XE-VCr"/>
                                 </constraints>
                             </imageView>
-                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="JAm-YU-Fln">
-                                <rect key="frame" x="34" y="460" width="158" height="198"/>
-                                <state key="normal" image="doctorButton">
-                                    <color key="titleColor" red="0.0" green="1" blue="0.038340258506710523" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                </state>
-                                <connections>
-                                    <action selector="AccountTypePressed:" destination="oPJ-cQ-Ggp" eventType="touchUpInside" id="ae0-2Z-dN7"/>
-                                </connections>
-                            </button>
-                            <button opaque="NO" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wzc-T4-NU8">
-                                <rect key="frame" x="172" y="460" width="233" height="198"/>
-                                <state key="normal" image="patientButton">
-                                    <color key="titleColor" red="0.0" green="1" blue="0.038340258510000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                </state>
-                                <connections>
-                                    <action selector="AccountTypePressed:" destination="oPJ-cQ-Ggp" eventType="touchUpInside" id="e3H-QZ-p9l"/>
-                                </connections>
-                            </button>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="or" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FGT-HA-WeZ">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" text="or" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FGT-HA-WeZ">
                                 <rect key="frame" x="196" y="705" width="22" height="22"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <stackView opaque="NO" contentMode="scaleToFill" spacing="14" translatesAutoresizingMaskIntoConstraints="NO" id="of1-Up-3IF">
+                                <rect key="frame" x="44" y="422" width="331" height="198"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="JAm-YU-Fln">
+                                        <rect key="frame" x="0.0" y="0.0" width="158.5" height="198"/>
+                                        <state key="normal" image="doctorButton">
+                                            <color key="titleColor" red="0.0" green="1" blue="0.038340258506710523" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="AccountTypePressed:" destination="oPJ-cQ-Ggp" eventType="touchUpInside" id="ae0-2Z-dN7"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wzc-T4-NU8">
+                                        <rect key="frame" x="172.5" y="0.0" width="158.5" height="198"/>
+                                        <state key="normal" image="patientButton">
+                                            <color key="titleColor" red="0.0" green="1" blue="0.038340258510000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="AccountTypePressed:" destination="oPJ-cQ-Ggp" eventType="touchUpInside" id="e3H-QZ-p9l"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                                <color key="backgroundColor" red="0.87699774909999995" green="1" blue="2.2204460490000001e-16" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstItem="JAm-YU-Fln" firstAttribute="width" secondItem="wzc-T4-NU8" secondAttribute="width" id="41j-hX-SxI"/>
+                                    <constraint firstItem="JAm-YU-Fln" firstAttribute="height" secondItem="wzc-T4-NU8" secondAttribute="height" id="Ih5-PL-Y4V"/>
+                                </constraints>
+                            </stackView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="uKG-lJ-cA0"/>
                         <color key="backgroundColor" systemColor="systemIndigoColor"/>
                         <constraints>
+                            <constraint firstItem="FGT-HA-WeZ" firstAttribute="top" secondItem="of1-Up-3IF" secondAttribute="bottom" constant="85" id="6nU-D1-IY3"/>
                             <constraint firstItem="ici-ST-aia" firstAttribute="centerX" secondItem="OwF-mp-jQm" secondAttribute="centerX" id="Awe-Zq-ELE"/>
                             <constraint firstItem="OwF-mp-jQm" firstAttribute="leading" secondItem="VUn-Ux-LhC" secondAttribute="leading" constant="-80" id="ESJ-Rh-xXX"/>
-                            <constraint firstItem="uKG-lJ-cA0" firstAttribute="trailing" secondItem="wzc-T4-NU8" secondAttribute="trailing" constant="20" id="HIg-qF-RLA"/>
                             <constraint firstItem="OwF-mp-jQm" firstAttribute="top" secondItem="ici-ST-aia" secondAttribute="bottom" constant="278" id="I7S-V8-tcJ"/>
                             <constraint firstItem="ici-ST-aia" firstAttribute="leading" secondItem="uKG-lJ-cA0" secondAttribute="leading" constant="104" id="K9L-nr-dHD"/>
-                            <constraint firstItem="wzc-T4-NU8" firstAttribute="leading" secondItem="JAm-YU-Fln" secondAttribute="trailing" constant="8" symbolic="YES" id="L4h-Nx-oCW"/>
-                            <constraint firstItem="OwF-mp-jQm" firstAttribute="top" secondItem="wzc-T4-NU8" secondAttribute="bottom" constant="-346" id="M5z-5o-5li"/>
-                            <constraint firstItem="OwF-mp-jQm" firstAttribute="top" secondItem="JAm-YU-Fln" secondAttribute="bottom" constant="-346" id="NJc-Pq-MLz"/>
                             <constraint firstAttribute="trailing" secondItem="OwF-mp-jQm" secondAttribute="trailing" constant="-80" id="Q21-Lp-WhD"/>
+                            <constraint firstItem="of1-Up-3IF" firstAttribute="top" secondItem="uKG-lJ-cA0" secondAttribute="top" constant="334" id="Viy-CZ-pZd"/>
                             <constraint firstItem="OwF-mp-jQm" firstAttribute="centerX" secondItem="VUn-Ux-LhC" secondAttribute="centerX" id="ZEK-Gb-eDc"/>
                             <constraint firstAttribute="trailing" secondItem="OwF-mp-jQm" secondAttribute="trailing" constant="-78" id="a7I-jp-hmj"/>
-                            <constraint firstItem="wzc-T4-NU8" firstAttribute="leading" secondItem="JAm-YU-Fln" secondAttribute="trailing" constant="-6" id="bLA-ug-mbc"/>
                             <constraint firstItem="OwF-mp-jQm" firstAttribute="centerX" secondItem="VUn-Ux-LhC" secondAttribute="centerX" id="gjR-U1-Nk7"/>
                             <constraint firstAttribute="bottomMargin" secondItem="OwF-mp-jQm" secondAttribute="bottom" constant="-34" id="kxP-LE-NiX"/>
-                            <constraint firstItem="uKG-lJ-cA0" firstAttribute="trailing" secondItem="wzc-T4-NU8" secondAttribute="trailing" constant="9" id="pVG-O4-NeV"/>
-                            <constraint firstItem="OwF-mp-jQm" firstAttribute="leading" secondItem="JAm-YU-Fln" secondAttribute="trailing" constant="-256" id="qKG-S0-ZZg"/>
-                            <constraint firstItem="JAm-YU-Fln" firstAttribute="leading" secondItem="uKG-lJ-cA0" secondAttribute="leading" constant="20" id="why-9g-K1s"/>
+                            <constraint firstItem="of1-Up-3IF" firstAttribute="centerX" secondItem="OwF-mp-jQm" secondAttribute="centerX" id="qEz-XL-PcC"/>
+                            <constraint firstItem="of1-Up-3IF" firstAttribute="leading" secondItem="uKG-lJ-cA0" secondAttribute="leading" constant="44" id="urL-kU-FAQ"/>
+                            <constraint firstItem="uKG-lJ-cA0" firstAttribute="trailing" relation="lessThanOrEqual" secondItem="of1-Up-3IF" secondAttribute="trailing" constant="40" id="x4p-6f-99J"/>
                             <constraint firstItem="OwF-mp-jQm" firstAttribute="leading" secondItem="VUn-Ux-LhC" secondAttribute="leading" constant="-78" id="xta-VP-icv"/>
                         </constraints>
                     </view>
@@ -93,7 +99,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="MQG-sq-wZC" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2049" y="151"/>
+            <point key="canvasLocation" x="2047.826086956522" y="150.66964285714286"/>
         </scene>
         <!--Phone View Controller-->
         <scene sceneID="tne-QT-ifu">
