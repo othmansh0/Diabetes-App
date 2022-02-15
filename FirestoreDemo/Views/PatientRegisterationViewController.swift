@@ -39,7 +39,7 @@ class PatientRegisterationViewController: UIViewController {
             
             
             let newPatient = db.collection("doctors").document(doctorID).collection("patients").document(Auth.auth().currentUser!.uid)
-            newPatient.setData(["Name":Patientname,"Age":pateintAge,"Height":patientHeight,"Weight":patientWeight,"DiabetesType":diabetesType,"ID":newPatient.documentID,"beforeReadings":[],"afterReadings":[]])
+            newPatient.setData(["Name":Patientname,"Age":pateintAge,"Height":patientHeight,"Weight":patientWeight,"DiabetesType":diabetesType,"ID":newPatient.documentID,"beforeReadings":[],"beforeTimes":[],"afterReadings":[],"afterTimes":[]])
             
             
             let storyboard = UIStoryboard(name: "Main", bundle: nil)

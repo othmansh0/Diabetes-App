@@ -591,7 +591,7 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="7" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KEa-qF-6bd">
-                                                    <rect key="frame" x="18" y="29" width="105" height="64"/>
+                                                    <rect key="frame" x="18" y="29.5" width="105" height="63.5"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="105" id="kkl-Q0-bm4"/>
                                                     </constraints>

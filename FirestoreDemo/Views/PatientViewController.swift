@@ -30,7 +30,9 @@ class PatientViewController:UIViewController, UICollectionViewDataSource, UIColl
     @IBOutlet weak var bottomViewLeadingConstraint: NSLayoutConstraint!
     
     var afterReadings = [String]()
+    var afterTimes = [String]()
     var beforeReadings = [String]()
+    var beforeTimes = [String]()
     var readingCard = ReadingCard()
     private var isBottomSheetShown = false
     var blurView = UIVisualEffectView()
@@ -65,11 +67,7 @@ class PatientViewController:UIViewController, UICollectionViewDataSource, UIColl
       
        
     }
-//    override func viewDidAppear(_ animated: Bool) {
-//        super.viewDidAppear(animated)
-//
-//        print("helloooooo\(readArray(tag: 1))")
-//    }
+
     
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
@@ -139,25 +137,45 @@ class PatientViewController:UIViewController, UICollectionViewDataSource, UIColl
             dismissSheet()
             return
         }
+        
+        
+        let now = Date()
+        
+       
+        let formatter = DateFormatter()
+        formatter.dateStyle = .none
+        
+        formatter.timeStyle = .short
+        //use ar for arabic numbers
+        formatter.locale = NSLocale(localeIdentifier: "ar_DZ") as Locale
+        formatter.dateFormat = "EEEE -  hh:mm a"
+        formatter.amSymbol = "صباحا"
+        formatter.pmSymbol = "مساءا"
+        
+        let dateString = formatter.string(from: now)
+       
+        print(dateString)
+        
         if  plusButtonTag == 1{
              afterReadings.insert(reading, at: 0)
-           
-            writeReading(tag: 1, with: reading)
+            afterTimes.insert(dateString, at: 0)
+            writeReading(tag: 1, with: reading,at: dateString)
             
             }else {
                     beforeReadings.insert(reading, at: 0)
-                writeReading(tag: 2, with: reading)
+                    beforeTimes.insert(dateString, at: 0)
+                    writeReading(tag: 2, with: reading,at: dateString)
                     
                  }
         dismissSheet()
         collectionViewOne.reloadData()
         collectionViewTwo.reloadData()
         removeBlur()
-
+        
     }
     
     @IBAction func closeSheet(_ sender: UIButton) {
-dismissSheet()
+        dismissSheet()
         removeBlur()
     
     }
@@ -201,12 +219,15 @@ dismissSheet()
     func fetchReadings(tag: Int) -> [String]{
        //decides which array needs to be fetched from firestore
        var readingsType = ""
+        var timesType = ""
        var readingsArray = [String]()
-        
+       var TimesArray = [String]()
         if tag == 1 {
             readingsType = "afterReadings"
+            timesType = "afterTimes"
             print("tag is\(tag)")
         } else { readingsType = "beforeReadings"
+            timesType = "beforeTimes"
             print("tag is\(tag)")
         }
         
@@ -214,6 +235,7 @@ dismissSheet()
         
         DispatchQueue.main.async {
             let patient = self.db.collection("doctors").document(self.doctorID).collection("patients").document(Auth.auth().currentUser!.uid)
+            
             
             patient.getDocument { document, error in
                 if let document = document,document.exists {
@@ -228,11 +250,16 @@ dismissSheet()
                     print("Document data: \(dataDescription)")
                     print("------------------------------------------------------------------------------------")
                     readingsArray = dataDescription[readingsType] as? [String] ?? ["!"]
+        
+                    TimesArray = dataDescription[timesType] as? [String] ?? ["!"]
+                    
                     if tag == 1 {
                         self.afterReadings = readingsArray
+                        self.afterTimes = TimesArray
                         self.collectionViewOne.reloadData()
                     } else {
                         self.beforeReadings = readingsArray
+                        self.beforeTimes = TimesArray
                         self.collectionViewTwo.reloadData()
                     }
                     
@@ -251,20 +278,23 @@ dismissSheet()
             
         }
         
-       return readingsArray
+        return readingsArray.reversed()
     }
     
-    func writeReading(tag: Int,with reading: String){
+    func writeReading(tag: Int,with reading: String,at time:String){
         //decides which array to update
         var readingsType = ""
+        var readingsTime = ""
          if tag == 1 {
              readingsType = "afterReadings"
+             readingsTime = "afterTimes"
          } else {
              readingsType = "beforeReadings"
+             readingsTime = "beforeTimes"
     }
         let patient = db.collection("doctors").document(doctorID).collection("patients").document(Auth.auth().currentUser!.uid)
         
-        patient.updateData([readingsType:FieldValue.arrayUnion([reading])]) { error in
+        patient.updateData([readingsType:FieldValue.arrayUnion([reading]),readingsTime:FieldValue.arrayUnion([time])]) { error in
             print("error updating data")
         }
 
@@ -366,11 +396,11 @@ extension PatientViewController {
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         if collectionView == collectionViewTwo {
-            let cell2 = readingCard.setupCell(collectionView: collectionView, indexPath: indexPath, readings: beforeReadings,cellName: "Cell2")
+            let cell2 = readingCard.setupCell(collectionView: collectionView, indexPath: indexPath, readings: beforeReadings,readingsTime: beforeTimes,cellName: "Cell2")
             return cell2
         }
         else {
-        let cell = readingCard.setupCell(collectionView: collectionView, indexPath: indexPath, readings: afterReadings,cellName: "Cell")
+        let cell = readingCard.setupCell(collectionView: collectionView, indexPath: indexPath, readings: afterReadings,readingsTime: afterTimes,cellName: "Cell")
         return cell
         }
         

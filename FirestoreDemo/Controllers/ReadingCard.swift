@@ -22,11 +22,6 @@ class ReadingCard {
     
     private var indexOfCellBeforeDragging = 0
     
-    
-    
-    
-    
-    
     public func calculateSectionInset(collectionViewLayout: UICollectionViewFlowLayout) -> CGFloat {
         let deviceIsIpad = UIDevice.current.userInterfaceIdiom == .pad
         let deviceOrientationIsLandscape = UIDevice.current.orientation.isLandscape
@@ -77,29 +72,13 @@ class ReadingCard {
     
     
     
-    func setupCell(collectionView:UICollectionView,indexPath:IndexPath,readings:[String],cellName:String)->CollectionViewCell{
+    func setupCell(collectionView:UICollectionView,indexPath:IndexPath,readings:[String],readingsTime:[String],cellName:String)->CollectionViewCell{
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellName, for: indexPath) as! CollectionViewCell
         cell.readingLabel.text = readings[indexPath.row]
+        cell.readingTime.text = readingsTime[indexPath.row]
         
         cell.layer.cornerRadius = 15
         //Reverse scrolling direction (right to left)
-        
-        let now = Date()
-        
-       
-        let formatter = DateFormatter()
-        formatter.dateStyle = .none
-        
-        formatter.timeStyle = .short
-        //use ar for arabic numbers
-        formatter.locale = NSLocale(localeIdentifier: "ar_DZ") as Locale
-        formatter.dateFormat = "EEEE -  hh:mm a"
-        formatter.amSymbol = "صباحا"
-        formatter.pmSymbol = "مساءا"
-        
-        let dateString = formatter.string(from: now)
-        cell.readingTime.text = dateString
-        print(dateString)
         collectionView.transform = CGAffineTransform(scaleX:-1,y: 1);
         cell.transform = CGAffineTransform(scaleX:-1,y: 1);
         return cell
