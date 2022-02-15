@@ -479,12 +479,11 @@
                         <subviews>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" misplaced="YES" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="Tw7-8f-Seb">
                                 <rect key="frame" x="48" y="551" width="325" height="112"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="Tw7-8f-Seb" secondAttribute="height" multiplier="381:128" id="aiG-YY-CsA"/>
                                     <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="100" id="dy4-Ro-2pD"/>
                                 </constraints>
-                                <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="10" minimumInteritemSpacing="10" sectionInsetReference="safeArea" id="PSs-xj-nR3">
+                                <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="10" minimumInteritemSpacing="10" sectionInsetReference="safeArea" id="PSs-xj-nR3" customClass="SnappingCollectionViewLayout" customModule="FirestoreDemo" customModuleProvider="target">
                                     <size key="itemSize" width="319" height="100"/>
                                     <size key="headerReferenceSize" width="0.0" height="0.0"/>
                                     <size key="footerReferenceSize" width="0.0" height="0.0"/>
@@ -499,9 +498,9 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="7" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="urL-2s-Jnj">
-                                                    <rect key="frame" x="18" y="28.5" width="53" height="63.5"/>
+                                                    <rect key="frame" x="18" y="29.5" width="105" height="63.5"/>
                                                     <constraints>
-                                                        <constraint firstAttribute="width" constant="53" id="WrF-nx-Lcl"/>
+                                                        <constraint firstAttribute="width" constant="105" id="WrF-nx-Lcl"/>
                                                     </constraints>
                                                     <fontDescription key="fontDescription" type="system" pointSize="53"/>
                                                     <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -557,7 +556,7 @@
                                                 <constraint firstAttribute="trailing" secondItem="PMF-PH-eI3" secondAttribute="trailing" constant="23" id="MeI-Ri-l3c"/>
                                                 <constraint firstAttribute="trailing" secondItem="5Sv-v6-ZFD" secondAttribute="trailing" constant="20" id="eDx-IB-AAV"/>
                                                 <constraint firstItem="X2C-dx-sRA" firstAttribute="top" secondItem="0fU-16-cTp" secondAttribute="topMargin" id="uuw-Rd-u5c"/>
-                                                <constraint firstItem="urL-2s-Jnj" firstAttribute="bottom" secondItem="0fU-16-cTp" secondAttribute="bottomMargin" id="ykL-SZ-giO"/>
+                                                <constraint firstItem="urL-2s-Jnj" firstAttribute="bottom" secondItem="0fU-16-cTp" secondAttribute="bottomMargin" constant="1" id="ykL-SZ-giO"/>
                                             </constraints>
                                         </collectionViewCellContentView>
                                         <color key="backgroundColor" red="0.38431376220000002" green="0.47450977560000002" blue="0.50196081400000003" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
@@ -576,9 +575,8 @@
                                 </connections>
                             </collectionView>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" misplaced="YES" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="gaN-qW-mm2" userLabel="Collection View 2">
-                                <rect key="frame" x="48" y="655" width="381" height="128"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="10" minimumInteritemSpacing="10" id="YXg-nd-loJ">
+                                <rect key="frame" x="48" y="655" width="325" height="112"/>
+                                <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="10" minimumInteritemSpacing="10" id="YXg-nd-loJ" customClass="SnappingCollectionViewLayout" customModule="FirestoreDemo" customModuleProvider="target">
                                     <size key="itemSize" width="319" height="100"/>
                                     <size key="headerReferenceSize" width="0.0" height="0.0"/>
                                     <size key="footerReferenceSize" width="0.0" height="0.0"/>
@@ -586,16 +584,16 @@
                                 </collectionViewFlowLayout>
                                 <cells>
                                     <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="Cell2" id="tHX-xn-jZW" userLabel="Cell2" customClass="CollectionViewCell" customModule="FirestoreDemo" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="14" width="321" height="100"/>
+                                        <rect key="frame" x="0.0" y="6" width="321" height="100"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
                                         <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="14K-3D-yHZ">
                                             <rect key="frame" x="0.0" y="0.0" width="321" height="100"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="7" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KEa-qF-6bd">
-                                                    <rect key="frame" x="18" y="28.5" width="56" height="63.5"/>
+                                                    <rect key="frame" x="18" y="29" width="105" height="64"/>
                                                     <constraints>
-                                                        <constraint firstAttribute="width" constant="56" id="kkl-Q0-bm4"/>
+                                                        <constraint firstAttribute="width" constant="105" id="kkl-Q0-bm4"/>
                                                     </constraints>
                                                     <fontDescription key="fontDescription" type="system" pointSize="53"/>
                                                     <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -649,7 +647,7 @@
                                                 <constraint firstItem="KEa-qF-6bd" firstAttribute="leading" secondItem="14K-3D-yHZ" secondAttribute="leading" constant="18" id="Mdf-34-tfd"/>
                                                 <constraint firstAttribute="trailing" secondItem="Mgf-f8-biN" secondAttribute="trailing" constant="20" id="PAC-dh-Pah"/>
                                                 <constraint firstItem="Mgf-f8-biN" firstAttribute="top" secondItem="90a-6n-wua" secondAttribute="bottom" constant="5" id="QFg-LI-pLr"/>
-                                                <constraint firstItem="KEa-qF-6bd" firstAttribute="bottom" secondItem="14K-3D-yHZ" secondAttribute="bottomMargin" id="WIU-Jx-h6a"/>
+                                                <constraint firstItem="KEa-qF-6bd" firstAttribute="bottom" secondItem="14K-3D-yHZ" secondAttribute="bottomMargin" constant="1" id="WIU-Jx-h6a"/>
                                                 <constraint firstItem="90a-6n-wua" firstAttribute="top" secondItem="3pT-Vr-x29" secondAttribute="bottom" constant="8" symbolic="YES" id="fx3-Tm-xhK"/>
                                                 <constraint firstAttribute="trailing" secondItem="90a-6n-wua" secondAttribute="trailing" constant="23" id="nhV-ys-1qA"/>
                                             </constraints>
@@ -832,7 +830,7 @@
                             </view>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="A3a-z5-2Ta"/>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="aLO-kS-5hE" firstAttribute="leading" relation="lessThanOrEqual" secondItem="A3a-z5-2Ta" secondAttribute="leading" priority="750" constant="246" id="4sD-R0-ZWF"/>
                             <constraint firstItem="gaN-qW-mm2" firstAttribute="height" secondItem="Tw7-8f-Seb" secondAttribute="height" id="5zl-XV-cic"/>
@@ -888,7 +886,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="VLv-vY-HQm" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4297" y="861"/>
+            <point key="canvasLocation" x="4295.652173913044" y="860.49107142857144"/>
         </scene>
         <!--Second Patient View Controller-->
         <scene sceneID="q71-65-KNb">
@@ -907,7 +905,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="veE-k5-1Ue" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="5020" y="1507"/>
+            <point key="canvasLocation" x="5029" y="1505"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="96A-5b-eQf">

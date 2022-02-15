@@ -30,7 +30,7 @@ class PatientViewController:UIViewController, UICollectionViewDataSource, UIColl
     @IBOutlet weak var bottomViewLeadingConstraint: NSLayoutConstraint!
     
     var afterReadings = [String]()
-    var beforeReadings = ["1","2","3","4"]
+    var beforeReadings = [String]()
     var readingCard = ReadingCard()
     private var isBottomSheetShown = false
     var blurView = UIVisualEffectView()
@@ -57,14 +57,12 @@ class PatientViewController:UIViewController, UICollectionViewDataSource, UIColl
         //makes UIView clickable
              let tap = UITapGestureRecognizer(target: self, action: #selector(dismissSheet))
              view.addGestureRecognizer(tap)
-//        DispatchQueue.main.async {
-//
-//        }
+
        afterReadings = fetchReadings(tag: 1)
        beforeReadings = fetchReadings(tag: 2)
+
        
-       
- 
+      
        
     }
 //    override func viewDidAppear(_ animated: Bool) {
@@ -133,19 +131,25 @@ class PatientViewController:UIViewController, UICollectionViewDataSource, UIColl
     
     //Bottom sheet button pressed
     @IBAction func addReading(_ sender: UIButton) {
-        guard let reading = readingField.text else {
+        guard let reading = readingField.text,!reading.isEmpty else {
             dismissSheet()
             return }
+        if reading.count > 3 {
+            print("error reading must be a number between 0 and 300")
+            dismissSheet()
+            return
+        }
         if  plusButtonTag == 1{
              afterReadings.insert(reading, at: 0)
-           // readArray(tag: plusButtonTag)
+           
+            writeReading(tag: 1, with: reading)
             
             }else {
                     beforeReadings.insert(reading, at: 0)
+                writeReading(tag: 2, with: reading)
                     
                  }
         dismissSheet()
-        //readingField.text = ""
         collectionViewOne.reloadData()
         collectionViewTwo.reloadData()
         removeBlur()
@@ -178,9 +182,11 @@ dismissSheet()
             print(reading)
             if tag == 1{
                 self.afterReadings.insert(reading, at: 0)
+                //self.writeReading(tag: 1, with: reading)
              
             }else {
                 self.beforeReadings.insert(reading, at: 0)
+               // self.writeReading(tag: 2, with: reading)
             }
             self.collectionViewOne.reloadData()
             self.collectionViewTwo.reloadData()
@@ -206,10 +212,10 @@ dismissSheet()
         
         //get ref of patient
         
-        DispatchQueue.main.async { [weak self] in
-            let patient = self?.db.collection("doctors").document(self?.doctorID ?? "").collection("patients").document(Auth.auth().currentUser!.uid)
+        DispatchQueue.main.async {
+            let patient = self.db.collection("doctors").document(self.doctorID).collection("patients").document(Auth.auth().currentUser!.uid)
             
-            patient?.getDocument { document, error in
+            patient.getDocument { document, error in
                 if let document = document,document.exists {
                     guard let dataDescription = document.data() else {
                         print("------------------------------------------------------------------------------------")
@@ -223,13 +229,15 @@ dismissSheet()
                     print("------------------------------------------------------------------------------------")
                     readingsArray = dataDescription[readingsType] as? [String] ?? ["!"]
                     if tag == 1 {
-                        self?.afterReadings = readingsArray
+                        self.afterReadings = readingsArray
+                        self.collectionViewOne.reloadData()
                     } else {
-                        self?.beforeReadings = readingsArray
+                        self.beforeReadings = readingsArray
+                        self.collectionViewTwo.reloadData()
                     }
                     
-                    self?.collectionViewOne.reloadData()
-                    self?.collectionViewTwo.reloadData()
+                    
+                  
            
                     print("------------------------------------------------------------------------------------")
                     print(readingsArray)
@@ -245,6 +253,23 @@ dismissSheet()
         
        return readingsArray
     }
+    
+    func writeReading(tag: Int,with reading: String){
+        //decides which array to update
+        var readingsType = ""
+         if tag == 1 {
+             readingsType = "afterReadings"
+         } else {
+             readingsType = "beforeReadings"
+    }
+        let patient = db.collection("doctors").document(doctorID).collection("patients").document(Auth.auth().currentUser!.uid)
+        
+        patient.updateData([readingsType:FieldValue.arrayUnion([reading])]) { error in
+            print("error updating data")
+        }
+
+    
+}
     
 }
 
@@ -316,7 +341,7 @@ extension PatientViewController {
         let inset: CGFloat = calculateSectionInset(collectionViewLayout: collectionViewLayout) //inset calculation so the next and the previous cells will peek from the sides
         collectionViewLayout.sectionInset = UIEdgeInsets(top: 0, left: inset, bottom: 0, right: inset)
         
-        collectionViewLayout.itemSize = CGSize(width: collectionViewLayout.collectionView!.frame.size.width - inset * 2, height: collectionViewLayout.collectionView!.frame.size.height)
+        collectionViewLayout.itemSize = CGSize(width: collectionViewLayout.collectionView!.frame.size.width-10 - inset * 2, height: collectionViewLayout.collectionView!.frame.size.height)
     }
     
     private func indexOfMajorCell(collectionViewLayout:UICollectionViewFlowLayout) -> Int {
@@ -352,80 +377,7 @@ extension PatientViewController {
     }
   
 }
-//MARK: Scrolling behaviour
-extension PatientViewController {
-    func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
-        if scrollView.tag == 2 {
-            indexOfCellBeforeDragging = indexOfMajorCell(collectionViewLayout: collectionViewLayout2)
-        } else {
-        indexOfCellBeforeDragging = indexOfMajorCell(collectionViewLayout: collectionViewLayout)
-        }
-    }
-    
-    func scrollViewWillEndDragging(_ scrollView: UIScrollView, withVelocity velocity: CGPoint, targetContentOffset: UnsafeMutablePointer<CGPoint>) {
-        // Stop scrollView sliding:
-        targetContentOffset.pointee = scrollView.contentOffset
-        
-        // calculate where scrollView should snap to:
-        var indexOfMajorCell = self.indexOfMajorCell(collectionViewLayout: collectionViewLayout)
-        if scrollView.tag == 2 {
-             indexOfMajorCell = self.indexOfMajorCell(collectionViewLayout: collectionViewLayout2)
-        }
-        
-        
-        // calculate conditions:
-        let swipeVelocityThreshold: CGFloat = 0.5 // after some trail and error
-        var hasEnoughVelocityToSlideToTheNextCell = indexOfCellBeforeDragging + 1 < afterReadings.count && velocity.x > swipeVelocityThreshold
-        if scrollView.tag == 2 {
-             hasEnoughVelocityToSlideToTheNextCell = indexOfCellBeforeDragging + 1 < beforeReadings.count && velocity.x > swipeVelocityThreshold
-        }
-        
-        let hasEnoughVelocityToSlideToThePreviousCell = indexOfCellBeforeDragging - 1 >= 0 && velocity.x < -swipeVelocityThreshold
-        let majorCellIsTheCellBeforeDragging = indexOfMajorCell == indexOfCellBeforeDragging
-        let didUseSwipeToSkipCell = majorCellIsTheCellBeforeDragging && (hasEnoughVelocityToSlideToTheNextCell || hasEnoughVelocityToSlideToThePreviousCell)
-        
-        if didUseSwipeToSkipCell {
-            
-            let snapToIndex = indexOfCellBeforeDragging + (hasEnoughVelocityToSlideToTheNextCell ? 1 : -1)
-            var toValue = collectionViewLayout.itemSize.width * CGFloat(snapToIndex)
-            if scrollView.tag == 2 {
-                toValue = collectionViewLayout2.itemSize.width * CGFloat(snapToIndex)
-            }
-            
-             
-            
-            // Damping equal 1 => no oscillations => decay animation:
-            UIView.animate(withDuration: 0.3, delay: 0, usingSpringWithDamping: 1, initialSpringVelocity: velocity.x, options: .allowUserInteraction, animations: {
-                scrollView.contentOffset = CGPoint(x: toValue, y: 0)
-                scrollView.layoutIfNeeded()
-            }, completion: nil)
-            
-        } else {
-            // This is a much better way to scroll to a cell:
-            
-            if scrollView.tag == 2 {
-                let indexPath = IndexPath(row: indexOfMajorCell, section: 0)
-                collectionViewLayout2.collectionView!.scrollToItem(at: indexPath, at: .centeredHorizontally, animated: true)
-            }
-            else {
-                let indexPath = IndexPath(row: indexOfMajorCell, section: 0)
-                collectionViewLayout.collectionView!.scrollToItem(at: indexPath, at: .centeredHorizontally, animated: true)
-            }
-           
-        }
-    }
-    
-    func setupView(blurredView:UIView) {
-        // 6. add blur view and send it to back
-        view.addSubview(blurredView)
-        view.sendSubviewToBack(blurredView)
-    }
-    
-    @IBAction func dismissAction(_ sender: Any) {
-        dismiss(animated: true)
-    }
 
-}
 extension UIView {
     func addBorderAndColor(color: UIColor, width: CGFloat, corner_radius: CGFloat = 0, clipsToBounds: Bool = false) {
         self.layer.borderWidth = width
