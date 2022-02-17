@@ -340,7 +340,7 @@ extension PatientViewController {
         readingField.text = ""
         //closes keyboard
         view.endEditing(true)
-        UIView.animate(withDuration: 0.3) {
+        UIView.animate(withDuration: 0.5) {
             self.bottomViewHeightConstraint.constant = 0
             self.removeBlur()
             // update view layout immediately

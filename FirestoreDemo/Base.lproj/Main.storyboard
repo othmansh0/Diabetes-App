@@ -125,21 +125,21 @@
                                         <color key="textColor" red="0.4647450447" green="0.47976690529999999" blue="0.48402631280000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
+                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Eom-XK-cbt">
+                                        <rect key="frame" x="12" y="218" width="394" height="40"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <color key="backgroundColor" red="0.87699774909999995" green="1" blue="2.2204460490000001e-16" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <state key="normal" title="ارسل الرمز"/>
+                                        <connections>
+                                            <action selector="submitPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Ot9-6I-utC"/>
+                                        </connections>
+                                    </button>
                                 </subviews>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="400" id="Cb7-J4-7Yy"/>
                                 </constraints>
                             </view>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Eom-XK-cbt">
-                                <rect key="frame" x="10" y="377" width="394" height="40"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <color key="backgroundColor" red="0.87699774909999995" green="1" blue="2.2204460490000001e-16" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                <state key="normal" title="ارسل الرمز"/>
-                                <connections>
-                                    <action selector="submitPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Ot9-6I-utC"/>
-                                </connections>
-                            </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                         <color key="backgroundColor" red="1" green="0.48588009033542223" blue="0.40042699891567146" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
