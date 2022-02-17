@@ -75,7 +75,15 @@ class ReadingCard {
     func setupCell(collectionView:UICollectionView,indexPath:IndexPath,readings:[String],readingsTime:[String],cellName:String)->CollectionViewCell{
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellName, for: indexPath) as! CollectionViewCell
         cell.readingLabel.text = readings[indexPath.row]
-        cell.readingTime.text = readingsTime[indexPath.row]
+        
+        
+    
+        //gets time and date from firebase without seconds
+        let readingTime = readingsTime[indexPath.row]
+        let time1 = readingTime.substring(to: readingsTime[indexPath.row].lastIndex(of: ":")!)
+        let time2 = readingTime.substring(from:readingTime.index(readingTime.lastIndex(of: ":")!, offsetBy: 3) )
+        cell.readingTime.text = time1 + time2
+        
         
         cell.layer.cornerRadius = 15
         //Reverse scrolling direction (right to left)

@@ -10,6 +10,7 @@
 		121ABB2C27B6A06F008247EF /* SecondPatientViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 121ABB2B27B6A06F008247EF /* SecondPatientViewController.swift */; };
 		121ABB2E27BAE575008247EF /* SnapCenterLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 121ABB2D27BAE575008247EF /* SnapCenterLayout.swift */; };
 		121ABB3027BAE71D008247EF /* option2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 121ABB2F27BAE71D008247EF /* option2.swift */; };
+		121ABB3427BE3FB0008247EF /* baseVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 121ABB3327BE3FB0008247EF /* baseVC.swift */; };
 		121FD1AA273868E50034B476 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 121FD1A9273868E50034B476 /* HomeViewController.swift */; };
 		1228641A27B11EEA00B449B1 /* MarkaziText-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 1228641C27B11EEA00B449B1 /* MarkaziText-Bold.ttf */; };
 		1228641E27B11EF700B449B1 /* MarkaziText-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 1228642027B11EF700B449B1 /* MarkaziText-Medium.ttf */; };
@@ -37,6 +38,7 @@
 		121ABB2B27B6A06F008247EF /* SecondPatientViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecondPatientViewController.swift; sourceTree = "<group>"; };
 		121ABB2D27BAE575008247EF /* SnapCenterLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SnapCenterLayout.swift; sourceTree = "<group>"; };
 		121ABB2F27BAE71D008247EF /* option2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = option2.swift; sourceTree = "<group>"; };
+		121ABB3327BE3FB0008247EF /* baseVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = baseVC.swift; sourceTree = "<group>"; };
 		121FD1A9273868E50034B476 /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 		1228641B27B11EEA00B449B1 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file; name = Base; path = "Base.lproj/MarkaziText-Bold.ttf"; sourceTree = "<group>"; };
 		1228641D27B11EED00B449B1 /* en */ = {isa = PBXFileReference; lastKnownFileType = file; name = en; path = "en.lproj/MarkaziText-Bold.ttf"; sourceTree = "<group>"; };
@@ -143,6 +145,7 @@
 				12742FE527AEC19C00360551 /* ReadingCard.swift */,
 				121ABB2D27BAE575008247EF /* SnapCenterLayout.swift */,
 				121ABB2F27BAE71D008247EF /* option2.swift */,
+				121ABB3327BE3FB0008247EF /* baseVC.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -294,6 +297,7 @@
 				121ABB2C27B6A06F008247EF /* SecondPatientViewController.swift in Sources */,
 				121FD1AA273868E50034B476 /* HomeViewController.swift in Sources */,
 				12742FE227AD94D100360551 /* PatientRegisterationViewController.swift in Sources */,
+				121ABB3427BE3FB0008247EF /* baseVC.swift in Sources */,
 				121ABB2E27BAE575008247EF /* SnapCenterLayout.swift in Sources */,
 				125C1D3A2727347E0053377B /* SceneDelegate.swift in Sources */,
 				128F2EBE2780FF5A009248EB /* CodeTextFieldViewController.swift in Sources */,

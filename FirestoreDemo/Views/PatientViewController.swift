@@ -7,7 +7,7 @@
 import Firebase
 import UIKit
 
-class PatientViewController:UIViewController, UICollectionViewDataSource, UICollectionViewDelegate {
+class PatientViewController:BaseVC, UICollectionViewDataSource, UICollectionViewDelegate {
     
     @IBOutlet weak var collectionViewTwo: UICollectionView!
     @IBOutlet weak var collectionViewOne: UICollectionView!
@@ -140,21 +140,8 @@ class PatientViewController:UIViewController, UICollectionViewDataSource, UIColl
         
         
         let now = Date()
-        
-       
-        let formatter = DateFormatter()
-        formatter.dateStyle = .none
-        
-        formatter.timeStyle = .short
-        //use ar for arabic numbers
-        formatter.locale = NSLocale(localeIdentifier: "ar_DZ") as Locale
-        formatter.dateFormat = "EEEE -  hh:mm a"
-        formatter.amSymbol = "صباحا"
-        formatter.pmSymbol = "مساءا"
-        
-        let dateString = formatter.string(from: now)
-       
-        print(dateString)
+
+        let dateString = getArabicTime(time: now, withSeconds: true)
         
         if  plusButtonTag == 1{
              afterReadings.insert(reading, at: 0)
@@ -254,12 +241,12 @@ class PatientViewController:UIViewController, UICollectionViewDataSource, UIColl
                     TimesArray = dataDescription[timesType] as? [String] ?? ["!"]
                     
                     if tag == 1 {
-                        self.afterReadings = readingsArray
-                        self.afterTimes = TimesArray
+                        self.afterReadings = readingsArray.reversed()
+                        self.afterTimes = TimesArray.reversed()
                         self.collectionViewOne.reloadData()
                     } else {
-                        self.beforeReadings = readingsArray
-                        self.beforeTimes = TimesArray
+                        self.beforeReadings = readingsArray.reversed()
+                        self.beforeTimes = TimesArray.reversed()
                         self.collectionViewTwo.reloadData()
                     }
                     
@@ -278,7 +265,7 @@ class PatientViewController:UIViewController, UICollectionViewDataSource, UIColl
             
         }
         
-        return readingsArray.reversed()
+        return readingsArray
     }
     
     func writeReading(tag: Int,with reading: String,at time:String){
@@ -294,9 +281,26 @@ class PatientViewController:UIViewController, UICollectionViewDataSource, UIColl
     }
         let patient = db.collection("doctors").document(doctorID).collection("patients").document(Auth.auth().currentUser!.uid)
         
-        patient.updateData([readingsType:FieldValue.arrayUnion([reading]),readingsTime:FieldValue.arrayUnion([time])]) { error in
+        patient.updateData([readingsTime:FieldValue.arrayUnion([time])]) { error in
             print("error updating data")
         }
+        if tag == 1 {
+            patient.setData([readingsType:afterReadings], merge: true)
+        }
+        else {
+            patient.setData([readingsType:beforeReadings], merge: true)
+        }
+        
+//        if tag == 1 {re
+//            patient.setData([readingsType:afterReadings], mergeFields: ["Age","DiabetesType","Height","ID","Name","Weight","beforeReadings","beforeTimes"])
+//            
+//        } else {
+//            patient.setData([readingsType:afterReadings],mergeFields: ["Age","DiabetesType","Height","ID","Name","Weight","afterReadings","afterTimes"])
+//            patient.setData([readingsType:beforeReadings], mergeFields: ["beforeReadings","beforeTimes"]) { error in
+//                print("shit")
+//            }
+//   }
+//        
 
     
 }
@@ -415,7 +419,10 @@ extension UIView {
         self.layer.cornerRadius = corner_radius
         self.clipsToBounds = clipsToBounds
     }
+   
+    
 }
+
 
 
 
