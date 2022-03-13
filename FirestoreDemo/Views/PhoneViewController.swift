@@ -28,7 +28,7 @@ class PhoneViewController: UIViewController, UITextFieldDelegate {
     
         //MARK: Phonefield design
         var bottomLine = CALayer()
-        bottomLine.frame = CGRect(x: 0.0, y: phoneField.frame.height - 2, width: phoneField.frame.width, height: 1.0)
+        bottomLine.frame = CGRect(x: 0.0, y: phoneField.frame.height-2, width: phoneField.frame.width, height: 1)
         bottomLine.backgroundColor = UIColor.black.cgColor
         phoneField.borderStyle = UITextField.BorderStyle.none
         phoneField.layer.addSublayer(bottomLine)

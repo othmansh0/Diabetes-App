@@ -7,7 +7,7 @@
 import Firebase
 import UIKit
 
-class PatientViewController:BaseVC, UICollectionViewDataSource, UICollectionViewDelegate {
+class PatientViewController:UIViewController, UICollectionViewDataSource, UICollectionViewDelegate,UITabBarDelegate, UITabBarControllerDelegate {
     
     @IBOutlet weak var collectionViewTwo: UICollectionView!
     @IBOutlet weak var collectionViewOne: UICollectionView!
@@ -60,20 +60,35 @@ class PatientViewController:BaseVC, UICollectionViewDataSource, UICollectionView
              let tap = UITapGestureRecognizer(target: self, action: #selector(dismissSheet))
              view.addGestureRecognizer(tap)
 
-       afterReadings = fetchReadings(tag: 1)
-       beforeReadings = fetchReadings(tag: 2)
-
-       
-      
-       
+        Patient.sharedInstance.afterReadings = fetchReadings(tag: 1)
+        Patient.sharedInstance.beforeReadings = fetchReadings(tag: 2)
+        
     }
-
+    
+//    override func viewDidDisappear(_ animated: Bool) {
+//
+//        if let vc = storyboard?.instantiateViewController(withIdentifier: "Chart") as? ChartViewController{
+//
+//            vc.beforeReadings = beforeReadings
+//            vc.beforeTimes = beforeTimes
+//            vc.num = 1
+//            tabBarController?.navigationController?.pushViewController(vc, animated: true)
+//        }
+//    }
+    
+   
+ 
+    
     
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
        configureCollectionViewLayoutItemSize(collectionViewLayout: collectionViewLayout)
         configureCollectionViewLayoutItemSize(collectionViewLayout: collectionViewLayout2)
     }
+    
+    
+  
+    
     
     
     @IBAction func plusButtonPressed(_ sender: UIButton) {
@@ -146,11 +161,15 @@ class PatientViewController:BaseVC, UICollectionViewDataSource, UICollectionView
         if  plusButtonTag == 1{
              afterReadings.insert(reading, at: 0)
             afterTimes.insert(dateString, at: 0)
+            Patient.sharedInstance.afterReadings.insert(reading, at: 0)
+            Patient.sharedInstance.afterTimes.insert(dateString, at: 0)
             writeReading(tag: 1, with: reading,at: dateString)
             
             }else {
-                    beforeReadings.insert(reading, at: 0)
-                    beforeTimes.insert(dateString, at: 0)
+//                    beforeReadings.insert(reading, at: 0)
+//                    beforeTimes.insert(dateString, at: 0)
+                    Patient.sharedInstance.beforeReadings.insert(reading, at: 0)
+                    Patient.sharedInstance.beforeTimes.insert(dateString, at: 0)
                     writeReading(tag: 2, with: reading,at: dateString)
                     
                  }
@@ -186,11 +205,12 @@ class PatientViewController:BaseVC, UICollectionViewDataSource, UICollectionView
             guard let reading = alert.textFields?[0].text else {return}
             print(reading)
             if tag == 1{
-                self.afterReadings.insert(reading, at: 0)
+                Patient.sharedInstance.afterReadings.insert(reading, at: 0)
+                
                 //self.writeReading(tag: 1, with: reading)
              
             }else {
-                self.beforeReadings.insert(reading, at: 0)
+               Patient.sharedInstance.beforeReadings.insert(reading, at: 0)
                // self.writeReading(tag: 2, with: reading)
             }
             self.collectionViewOne.reloadData()
@@ -241,12 +261,13 @@ class PatientViewController:BaseVC, UICollectionViewDataSource, UICollectionView
                     TimesArray = dataDescription[timesType] as? [String] ?? ["!"]
                     
                     if tag == 1 {
-                        self.afterReadings = readingsArray.reversed()
-                        self.afterTimes = TimesArray.reversed()
+                        Patient.sharedInstance.afterReadings = readingsArray.reversed()
+                        
+                        Patient.sharedInstance.afterTimes = TimesArray.reversed()
                         self.collectionViewOne.reloadData()
                     } else {
-                        self.beforeReadings = readingsArray.reversed()
-                        self.beforeTimes = TimesArray.reversed()
+                        Patient.sharedInstance.beforeReadings = readingsArray.reversed()
+                        Patient.sharedInstance.beforeTimes = TimesArray.reversed()
                         self.collectionViewTwo.reloadData()
                     }
                     
@@ -285,10 +306,10 @@ class PatientViewController:BaseVC, UICollectionViewDataSource, UICollectionView
             print("error updating data")
         }
         if tag == 1 {
-            patient.setData([readingsType:afterReadings], merge: true)
+            patient.setData([readingsType:Patient.sharedInstance.afterReadings], merge: true)
         }
         else {
-            patient.setData([readingsType:beforeReadings], merge: true)
+            patient.setData([readingsType:Patient.sharedInstance.beforeReadings], merge: true)
         }
         
 //        if tag == 1 {re
@@ -392,24 +413,44 @@ extension PatientViewController {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         
         if collectionView == collectionViewTwo {
-            return beforeReadings.count
+            return Patient.sharedInstance.beforeReadings.count
         }
         
-        return afterReadings.count
+        return Patient.sharedInstance.afterReadings.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         if collectionView == collectionViewTwo {
-            let cell2 = readingCard.setupCell(collectionView: collectionView, indexPath: indexPath, readings: beforeReadings,readingsTime: beforeTimes,cellName: "Cell2")
+            let cell2 = readingCard.setupCell(collectionView: collectionView, indexPath: indexPath, readings: Patient.sharedInstance.beforeReadings,readingsTime: Patient.sharedInstance.beforeTimes,cellName: "Cell2")
             return cell2
         }
         else {
-        let cell = readingCard.setupCell(collectionView: collectionView, indexPath: indexPath, readings: afterReadings,readingsTime: afterTimes,cellName: "Cell")
+            let cell = readingCard.setupCell(collectionView: collectionView, indexPath: indexPath, readings: Patient.sharedInstance.afterReadings,readingsTime: Patient.sharedInstance.afterTimes,cellName: "Cell")
         return cell
         }
         
     }
   
+    public func getArabicTime(time:Date,withSeconds:Bool)->String{
+
+        let formatter = DateFormatter()
+        formatter.dateStyle = .none
+
+        formatter.timeStyle = .short
+        //use ar for arabic numbers
+        formatter.locale = NSLocale(localeIdentifier: "ar_DZ") as Locale
+        formatter.dateFormat = "EEEE - hh:mm:ss a"
+        if withSeconds == false {
+            formatter.dateFormat = "EEEE -  hh:mm a"
+        }
+        formatter.amSymbol = "صباحا"
+        formatter.pmSymbol = "مساءا"
+
+        let dateString = formatter.string(from: time)
+        return dateString
+    }
+    
+    
 }
 
 extension UIView {
@@ -419,9 +460,11 @@ extension UIView {
         self.layer.cornerRadius = corner_radius
         self.clipsToBounds = clipsToBounds
     }
+    
    
     
 }
+
 
 
 
