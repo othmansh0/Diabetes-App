@@ -11,6 +11,7 @@ class PhoneViewController: UIViewController, UITextFieldDelegate {
     var accountType:Int!
     private var isBottomSheetShown = false
 
+    @IBOutlet weak var submitButton: UIButton!
     @IBOutlet var bottomView: UIView!
     
     @IBOutlet weak var bottomViewBottomConstraint: NSLayoutConstraint!
@@ -18,6 +19,8 @@ class PhoneViewController: UIViewController, UITextFieldDelegate {
     @IBOutlet weak var bottomViewTrailingConstraint: NSLayoutConstraint!
     @IBOutlet weak var bottomViewLeadingConstraint: NSLayoutConstraint!
    
+    @IBOutlet weak var bottomBtnConstraint: NSLayoutConstraint!
+    
     @IBOutlet var phoneField: UITextField!
     
     override func viewDidLoad() {
@@ -44,7 +47,20 @@ class PhoneViewController: UIViewController, UITextFieldDelegate {
         let tap = UITapGestureRecognizer(target: self, action: #selector(dismissBottomSheet))
         view.addGestureRecognizer(tap)
         
+//        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow(notification:)), name: UIResponder.keyboardWillShowNotification, object: nil)
+//
+//        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)
+    
+    
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShowNotification), name:UIResponder.keyboardWillShowNotification , object: nil)
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHideNotification), name:UIResponder.keyboardWillHideNotification , object: nil)
+    
     }
+    
+    
+    
     
 
     @IBAction func submitPressed(_ sender: UIButton) {
@@ -95,12 +111,15 @@ class PhoneViewController: UIViewController, UITextFieldDelegate {
             }
         }
         
+        
+        
+        
     }
     
     
     public func stretchBottomSheet(){
         UIView.animate(withDuration: 0.3) {
-            self.bottomViewHeightConstraint.constant = 620
+            self.bottomViewHeightConstraint.constant = 670
             // update view layout immediately
             self.view.layoutIfNeeded()
         } completion: { status in
@@ -108,7 +127,7 @@ class PhoneViewController: UIViewController, UITextFieldDelegate {
             
             //bouncing animation when card is shown
             UIView.animate(withDuration: 0.3) {
-                self.bottomViewHeightConstraint.constant = 600
+                self.bottomViewHeightConstraint.constant = 650
                 
                 self.view.layoutIfNeeded()
             } completion: { status in
@@ -123,7 +142,37 @@ class PhoneViewController: UIViewController, UITextFieldDelegate {
         showBottomSheet()
         //removes focus of phoneField
         phoneField.resignFirstResponder()
+        
     }
+    
+    //takes dynamic height of keyboard
+    //and makes button just above keyboard with animation
+    @objc func keyboardWillShowNotification(notification:Notification) {
+        if let frame = notification.userInfo![UIResponder.keyboardFrameEndUserInfoKey] as? NSValue {
+            let height = frame.cgRectValue.height
+           
+            
+            
+            UIView.animate(withDuration: 0.3, animations: {
+                self.bottomBtnConstraint.constant = height + 10
+                self.view.layoutIfNeeded()
+            })
+            
+        }
+        
+    
+        
+    }
+    @objc func keyboardWillHideNotification(notification : Notification) {
+        UIView.animate(withDuration: 0.7, animations: {
+            self.bottomBtnConstraint.constant = 82
+            self.view.layoutIfNeeded()
+        })
+    }
+
+    
+    
+    
     
 }
 
