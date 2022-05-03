@@ -418,22 +418,14 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="2mb-Vp-CRh">
                                 <rect key="frame" x="0.0" y="134.5" width="414" height="761.5"/>
                                 <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="الاسم" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qJT-UI-KIc">
-                                        <rect key="frame" x="335" y="67" width="37" height="21"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="الاسم" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qJT-UI-KIc">
+                                        <rect key="frame" x="336" y="78" width="37" height="21"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="احمد سامر" textAlignment="right" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="BfZ-v5-63e">
-                                        <rect key="frame" x="165" y="96" width="207" height="34"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                        <textInputTraits key="textInputTraits"/>
-                                    </textField>
-                                    <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="ABC123" textAlignment="right" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="TyQ-aB-xe9">
-                                        <rect key="frame" x="167" y="345" width="207" height="34"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="احمد سامر" textAlignment="right" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="BfZ-v5-63e">
+                                        <rect key="frame" x="20" y="107" width="355" height="34"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <textInputTraits key="textInputTraits"/>
                                     </textField>
@@ -448,81 +440,91 @@
                                             <action selector="submitPressed:" destination="umI-TX-0C9" eventType="touchUpInside" id="cgd-2R-wpX"/>
                                         </connections>
                                     </button>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="رقم تعريف الدكتور" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jqu-RF-jpu">
-                                        <rect key="frame" x="253" y="310" width="121" height="21"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                        <nil key="textColor"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="نوع السكري" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KsB-DT-OGo">
-                                        <rect key="frame" x="296" y="229" width="78" height="21"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                        <nil key="textColor"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
-                                    <segmentedControl opaque="NO" tag="3" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="QEF-sY-Do1">
-                                        <rect key="frame" x="149" y="258" width="230" height="32"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <segments>
-                                            <segment title="ثالث"/>
-                                            <segment title="ثاني"/>
-                                            <segment title="أول"/>
-                                        </segments>
-                                    </segmentedControl>
-                                    <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="م" textAlignment="right" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="TKR-oH-umn">
-                                        <rect key="frame" x="283" y="512" width="97" height="34"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                    <textField opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="م" textAlignment="right" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="TKR-oH-umn">
+                                        <rect key="frame" x="276" y="483" width="97" height="34"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <textInputTraits key="textInputTraits"/>
                                     </textField>
                                     <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="كغ" textAlignment="right" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="pGU-6D-n6v">
-                                        <rect key="frame" x="61" y="512" width="97" height="34"/>
+                                        <rect key="frame" x="53" y="483" width="97" height="34"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <textInputTraits key="textInputTraits"/>
                                     </textField>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="الطول" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZJ6-WD-eY1">
-                                        <rect key="frame" x="313" y="483" width="40" height="21"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                        <nil key="textColor"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
-                                    <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="xxxxxxxx" textAlignment="right" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="H4z-Z9-ZLK">
-                                        <rect key="frame" x="165" y="179" width="207" height="34"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="xxxxxxxx" textAlignment="right" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="H4z-Z9-ZLK">
+                                        <rect key="frame" x="20" y="209" width="353" height="34"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="353" id="644-3y-zLz"/>
+                                        </constraints>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <textInputTraits key="textInputTraits"/>
                                     </textField>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="الرقم الوطني" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4Xv-jd-EJU">
-                                        <rect key="frame" x="289" y="147" width="83" height="21"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="الرقم الوطني" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4Xv-jd-EJU">
+                                        <rect key="frame" x="290" y="177" width="83" height="21"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="الوزن" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yZc-16-V2v">
-                                        <rect key="frame" x="92" y="483" width="34" height="21"/>
+                                        <rect key="frame" x="116" y="454" width="34" height="21"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <datePicker contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="date" style="compact" translatesAutoresizingMaskIntoConstraints="NO" id="Zg6-Sf-rxg">
-                                        <rect key="frame" x="270" y="434" width="104" height="42"/>
-                                        <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
-                                    </datePicker>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="تاريخ الميلاد" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gdE-Gp-baa">
-                                        <rect key="frame" x="299" y="405" width="80" height="21"/>
+                                    <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="ABC123" textAlignment="right" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="TyQ-aB-xe9">
+                                        <rect key="frame" x="167" y="608" width="207" height="34"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <textInputTraits key="textInputTraits"/>
+                                    </textField>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="رقم تعريف الدكتور" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jqu-RF-jpu">
+                                        <rect key="frame" x="253" y="573" width="121" height="21"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="نوع السكري" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KsB-DT-OGo">
+                                        <rect key="frame" x="295" y="275" width="78" height="21"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="تاريخ الميلاد" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8OK-4D-Czr">
+                                        <rect key="frame" x="293" y="366" width="80" height="21"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="الطول" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZJ6-WD-eY1">
+                                        <rect key="frame" x="333" y="453" width="40" height="21"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstItem="qJT-UI-KIc" firstAttribute="top" secondItem="2mb-Vp-CRh" secondAttribute="top" constant="78" id="0Yz-mw-iSe"/>
+                                    <constraint firstItem="KsB-DT-OGo" firstAttribute="trailing" secondItem="H4z-Z9-ZLK" secondAttribute="trailing" id="4ME-Qx-25u"/>
+                                    <constraint firstItem="ZJ6-WD-eY1" firstAttribute="trailing" secondItem="TKR-oH-umn" secondAttribute="trailing" id="4gb-Qn-tuZ"/>
+                                    <constraint firstItem="TKR-oH-umn" firstAttribute="top" secondItem="ZJ6-WD-eY1" secondAttribute="bottom" constant="9" id="6Mh-te-tI7"/>
+                                    <constraint firstItem="H4z-Z9-ZLK" firstAttribute="top" secondItem="4Xv-jd-EJU" secondAttribute="bottom" constant="11" id="BN2-gg-mqD"/>
+                                    <constraint firstItem="KsB-DT-OGo" firstAttribute="trailing" secondItem="qJT-UI-KIc" secondAttribute="trailing" id="E4s-K7-GfV"/>
+                                    <constraint firstItem="H4z-Z9-ZLK" firstAttribute="leading" secondItem="2mb-Vp-CRh" secondAttribute="leading" constant="20" symbolic="YES" id="MAa-48-h8Z"/>
+                                    <constraint firstItem="ZJ6-WD-eY1" firstAttribute="trailing" secondItem="KsB-DT-OGo" secondAttribute="trailing" id="SwE-Bo-JNq"/>
+                                    <constraint firstItem="H4z-Z9-ZLK" firstAttribute="trailing" secondItem="4Xv-jd-EJU" secondAttribute="trailing" id="TgV-v8-scD"/>
+                                    <constraint firstItem="H4z-Z9-ZLK" firstAttribute="trailing" secondItem="BfZ-v5-63e" secondAttribute="trailing" constant="-2" id="Uap-Mm-QBy"/>
+                                    <constraint firstItem="H4z-Z9-ZLK" firstAttribute="trailing" secondItem="qJT-UI-KIc" secondAttribute="trailing" id="a7C-0l-Oho"/>
+                                    <constraint firstItem="BfZ-v5-63e" firstAttribute="top" secondItem="qJT-UI-KIc" secondAttribute="bottom" constant="8" symbolic="YES" id="cVZ-4Q-4XG"/>
+                                    <constraint firstItem="8OK-4D-Czr" firstAttribute="top" secondItem="KsB-DT-OGo" secondAttribute="bottom" constant="70" id="dIE-AB-RDI"/>
+                                    <constraint firstItem="4Xv-jd-EJU" firstAttribute="top" secondItem="BfZ-v5-63e" secondAttribute="bottom" constant="36" id="jgH-zP-aXR"/>
+                                    <constraint firstAttribute="bottom" secondItem="ZJ6-WD-eY1" secondAttribute="bottom" constant="287.5" id="nwY-Am-mAq"/>
+                                    <constraint firstItem="BfZ-v5-63e" firstAttribute="leading" secondItem="H4z-Z9-ZLK" secondAttribute="leading" id="s55-Bu-hll"/>
+                                    <constraint firstItem="KsB-DT-OGo" firstAttribute="top" secondItem="H4z-Z9-ZLK" secondAttribute="bottom" constant="32" id="vaS-Bg-bNa"/>
+                                    <constraint firstItem="8OK-4D-Czr" firstAttribute="trailing" secondItem="KsB-DT-OGo" secondAttribute="trailing" id="xxo-eo-Rrw"/>
+                                </constraints>
                             </view>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Patient Registeration" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QMg-cQ-kKd">
                                 <rect key="frame" x="20" y="35" width="369" height="68"/>
@@ -542,7 +544,8 @@
                         </constraints>
                     </view>
                     <connections>
-                        <outlet property="diabetesType" destination="QEF-sY-Do1" id="LpY-n1-RQM"/>
+                        <outlet property="birthdateLabel" destination="8OK-4D-Czr" id="3ey-7J-tJS"/>
+                        <outlet property="diabetesLabel" destination="KsB-DT-OGo" id="ztQ-Vr-12s"/>
                         <outlet property="doctorID" destination="TyQ-aB-xe9" id="DcI-g3-91C"/>
                         <outlet property="nameField" destination="BfZ-v5-63e" id="Ndl-ok-Ek7"/>
                         <outlet property="nationalIDField" destination="H4z-Z9-ZLK" id="UJv-ie-T9g"/>
