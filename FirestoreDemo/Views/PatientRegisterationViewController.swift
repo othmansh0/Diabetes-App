@@ -10,25 +10,29 @@ import UIKit
 
 class PatientRegisterationViewController: UIViewController {
     @IBOutlet var nameField: UITextField!
-    @IBOutlet var ageField: UITextField!
+    @IBOutlet var nationalIDField: UITextField!
     @IBOutlet var doctorID: UITextField!
     @IBOutlet weak var diabetesType: UISegmentedControl!
     @IBOutlet weak var patientHeight: UITextField!
     @IBOutlet weak var patientWeight: UITextField!
-    @IBOutlet weak var fastedReading: UITextField!
-    @IBOutlet weak var unfastedReading: UITextField!
+
     
     let db = Firestore.firestore()
 
     override func viewDidLoad() {
         super.viewDidLoad()
         self.setBackgroundImage("greenBG", contentMode: .scaleAspectFit)
-
+        nameField.useUnderline()
+        nationalIDField.useUnderline()
+        doctorID.useUnderline()
+        patientHeight.useUnderline()
+        patientWeight.useUnderline()
+        
     }
 
     @IBAction func submitPressed(_ sender: UIButton) {
         
-        if let Patientname = nameField.text,let pateintAge = ageField.text, let doctorID  = doctorID.text, let patientHeight = patientHeight.text, let patientWeight = patientWeight.text,let diabetesType = diabetesType.titleForSegment(at: diabetesType.selectedSegmentIndex), let fastedReading = fastedReading.text, let unfastedReading = unfastedReading.text{
+        if let Patientname = nameField.text,let pateintAge = nationalIDField.text, let doctorID  = doctorID.text, let patientHeight = patientHeight.text, let patientWeight = patientWeight.text,let diabetesType = diabetesType.titleForSegment(at: diabetesType.selectedSegmentIndex){
             print(diabetesType)
             
             
@@ -60,4 +64,18 @@ class PatientRegisterationViewController: UIViewController {
         
     }
     
+}
+
+extension UITextField {
+    func useUnderline() {
+        //create bottom line
+        let bottomLine = CALayer()
+        bottomLine.frame = CGRect(x: 0, y: self.frame.height-2, width: self.frame.width, height: 2)
+        bottomLine.backgroundColor = UIColor(red: 117/255, green: 121/255, blue: 122/255, alpha: 0.26).cgColor
+        //remove borders
+        self.borderStyle = .none
+        //add bottom border only
+        self.layer.addSublayer(bottomLine)
+        
+    }
 }

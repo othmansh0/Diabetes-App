@@ -9,8 +9,10 @@ import UIKit
 
 class SMSViewController: UIViewController, UISearchTextFieldDelegate {
     var accountType:Int!
+    var phoneNumber:String!
     private var isBottomSheetShown = false
     
+    @IBOutlet weak var phoneLabel: UILabel!
     @IBOutlet weak var codeTextField: CodeTextFieldViewController!
     @IBOutlet weak var bottomView: UIView!
     
@@ -31,7 +33,8 @@ class SMSViewController: UIViewController, UISearchTextFieldDelegate {
             //succeeded
         }
         codeTextField.delegate = self
-        
+        //phoneNumber.removeFirst()
+        phoneLabel.text? = "\(phoneNumber!)"
         print(accountType)
         
         let defaults = UserDefaults.standard

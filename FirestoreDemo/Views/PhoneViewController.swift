@@ -20,9 +20,12 @@ class PhoneViewController: UIViewController, UITextFieldDelegate {
     @IBOutlet weak var bottomViewLeadingConstraint: NSLayoutConstraint!
    
     @IBOutlet weak var bottomBtnConstraint: NSLayoutConstraint!
+    @IBOutlet weak var topBtnConstraint: NSLayoutConstraint!
     
     @IBOutlet var phoneField: UITextField!
     
+    @IBOutlet weak var phoneFieldBtmConstraint: NSLayoutConstraint!
+    @IBOutlet weak var phoneLabelBtmConstraint: NSLayoutConstraint!
     override func viewDidLoad() {
         super.viewDidLoad()
         phoneField.delegate = self
@@ -73,6 +76,7 @@ class PhoneViewController: UIViewController, UITextFieldDelegate {
             
                     if let vc = self?.storyboard?.instantiateViewController(identifier: "SMS") as? SMSViewController {
                         vc.accountType = self?.accountType
+                        vc.phoneNumber = number
                         self?.navigationController?.pushViewController(vc, animated: true)
                     }
               
@@ -98,12 +102,12 @@ class PhoneViewController: UIViewController, UITextFieldDelegate {
     
   
     
-    //MARK: Bottom Sheet Animation (NEDINE)
+    //MARK: Bottom Sheet Animation
     public func showBottomSheet(){
         if (isBottomSheetShown) {
             //default Bottom sheet
             UIView.animate(withDuration: 0.3) {
-                self.bottomViewHeightConstraint.constant = 400
+                self.bottomViewHeightConstraint.constant = 448
                 // update view layout immediately
                 self.view.layoutIfNeeded()
             } completion: { status in
@@ -165,6 +169,8 @@ class PhoneViewController: UIViewController, UITextFieldDelegate {
     }
     @objc func keyboardWillHideNotification(notification : Notification) {
         UIView.animate(withDuration: 0.7, animations: {
+            
+            
             self.bottomBtnConstraint.constant = 82
             self.view.layoutIfNeeded()
         })
