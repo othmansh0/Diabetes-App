@@ -44,6 +44,8 @@ class PatientViewController:UIViewController, UICollectionViewDataSource, UIColl
         super.viewDidLoad()
         doctorID = defaults.string(forKey: "doctorID")
         
+        
+        
        
         tabBarController?.tabBar.layer.cornerRadius = 15
         collectionViewLayout.minimumLineSpacing = 5

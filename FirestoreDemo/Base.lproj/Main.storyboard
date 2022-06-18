@@ -65,7 +65,6 @@
                                         </connections>
                                     </button>
                                 </subviews>
-                                <color key="backgroundColor" red="0.87699774909999995" green="1" blue="2.2204460490000001e-16" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstItem="JAm-YU-Fln" firstAttribute="width" secondItem="wzc-T4-NU8" secondAttribute="width" id="41j-hX-SxI"/>
                                     <constraint firstItem="JAm-YU-Fln" firstAttribute="height" secondItem="wzc-T4-NU8" secondAttribute="height" id="Ih5-PL-Y4V"/>
@@ -416,135 +415,143 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="2mb-Vp-CRh">
-                                <rect key="frame" x="0.0" y="134.5" width="414" height="761.5"/>
+                                <rect key="frame" x="0.0" y="109" width="414" height="787"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="الاسم" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qJT-UI-KIc">
-                                        <rect key="frame" x="336" y="78" width="37" height="21"/>
+                                        <rect key="frame" x="335" y="62" width="38" height="21"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="38" id="Pl8-nT-90K"/>
+                                        </constraints>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="احمد سامر" textAlignment="right" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="BfZ-v5-63e">
-                                        <rect key="frame" x="20" y="107" width="355" height="34"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                        <textInputTraits key="textInputTraits"/>
-                                    </textField>
-                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fP8-QJ-5zb">
-                                        <rect key="frame" x="150" y="573" width="119" height="59"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="39"/>
-                                        <state key="normal" title="Submit">
-                                            <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                        </state>
-                                        <connections>
-                                            <action selector="submitPressed:" destination="umI-TX-0C9" eventType="touchUpInside" id="cgd-2R-wpX"/>
-                                        </connections>
-                                    </button>
-                                    <textField opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="م" textAlignment="right" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="TKR-oH-umn">
-                                        <rect key="frame" x="276" y="483" width="97" height="34"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                        <textInputTraits key="textInputTraits"/>
-                                    </textField>
-                                    <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="كغ" textAlignment="right" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="pGU-6D-n6v">
-                                        <rect key="frame" x="53" y="483" width="97" height="34"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                        <textInputTraits key="textInputTraits"/>
-                                    </textField>
-                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="xxxxxxxx" textAlignment="right" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="H4z-Z9-ZLK">
-                                        <rect key="frame" x="20" y="209" width="353" height="34"/>
+                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="م" textAlignment="right" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="TKR-oH-umn">
+                                        <rect key="frame" x="228" y="398" width="145" height="34"/>
                                         <constraints>
-                                            <constraint firstAttribute="width" constant="353" id="644-3y-zLz"/>
+                                            <constraint firstAttribute="width" constant="145" id="tS2-Vb-5ah"/>
                                         </constraints>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <textInputTraits key="textInputTraits"/>
                                     </textField>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="الرقم الوطني" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4Xv-jd-EJU">
-                                        <rect key="frame" x="290" y="177" width="83" height="21"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                        <nil key="textColor"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="الوزن" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yZc-16-V2v">
-                                        <rect key="frame" x="116" y="454" width="34" height="21"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                        <nil key="textColor"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
-                                    <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="ABC123" textAlignment="right" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="TyQ-aB-xe9">
-                                        <rect key="frame" x="167" y="608" width="207" height="34"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="xxxxxxxx" textAlignment="right" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="H4z-Z9-ZLK">
+                                        <rect key="frame" x="17" y="193" width="356" height="34"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <textInputTraits key="textInputTraits"/>
                                     </textField>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="رقم تعريف الدكتور" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jqu-RF-jpu">
-                                        <rect key="frame" x="253" y="573" width="121" height="21"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="الرقم الوطني" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4Xv-jd-EJU">
+                                        <rect key="frame" x="290" y="161" width="83" height="21"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="83" id="6wq-g0-4ge"/>
+                                        </constraints>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="نوع السكري" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KsB-DT-OGo">
-                                        <rect key="frame" x="295" y="275" width="78" height="21"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="نوع السكري" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KsB-DT-OGo">
+                                        <rect key="frame" x="295" y="259" width="78" height="21"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="تاريخ الميلاد" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8OK-4D-Czr">
-                                        <rect key="frame" x="293" y="366" width="80" height="21"/>
+                                        <rect key="frame" x="293" y="469" width="80" height="21"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="الطول" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZJ6-WD-eY1">
-                                        <rect key="frame" x="333" y="453" width="40" height="21"/>
+                                        <rect key="frame" x="333" y="362" width="40" height="21"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
+                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="ABC123" textAlignment="right" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="TyQ-aB-xe9">
+                                        <rect key="frame" x="166" y="640.5" width="207" height="34"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="207" id="tMQ-BL-G7i"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <textInputTraits key="textInputTraits"/>
+                                    </textField>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="رقم تعريف الدكتور" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jqu-RF-jpu">
+                                        <rect key="frame" x="252" y="605.5" width="121" height="21"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="احمد سامر" textAlignment="right" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="BfZ-v5-63e">
+                                        <rect key="frame" x="17" y="91" width="356" height="34"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <textInputTraits key="textInputTraits"/>
+                                    </textField>
+                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="كغ" textAlignment="right" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="pGU-6D-n6v">
+                                        <rect key="frame" x="17" y="398" width="145" height="34"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <textInputTraits key="textInputTraits"/>
+                                    </textField>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="الوزن" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yZc-16-V2v">
+                                        <rect key="frame" x="128" y="362" width="34" height="21"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fP8-QJ-5zb">
+                                        <rect key="frame" x="53" y="710" width="308" height="35"/>
+                                        <state key="normal" image="next button">
+                                            <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="submitPressed:" destination="umI-TX-0C9" eventType="touchUpInside" id="cgd-2R-wpX"/>
+                                        </connections>
+                                    </button>
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
-                                    <constraint firstItem="qJT-UI-KIc" firstAttribute="top" secondItem="2mb-Vp-CRh" secondAttribute="top" constant="78" id="0Yz-mw-iSe"/>
-                                    <constraint firstItem="KsB-DT-OGo" firstAttribute="trailing" secondItem="H4z-Z9-ZLK" secondAttribute="trailing" id="4ME-Qx-25u"/>
-                                    <constraint firstItem="ZJ6-WD-eY1" firstAttribute="trailing" secondItem="TKR-oH-umn" secondAttribute="trailing" id="4gb-Qn-tuZ"/>
-                                    <constraint firstItem="TKR-oH-umn" firstAttribute="top" secondItem="ZJ6-WD-eY1" secondAttribute="bottom" constant="9" id="6Mh-te-tI7"/>
-                                    <constraint firstItem="H4z-Z9-ZLK" firstAttribute="top" secondItem="4Xv-jd-EJU" secondAttribute="bottom" constant="11" id="BN2-gg-mqD"/>
-                                    <constraint firstItem="KsB-DT-OGo" firstAttribute="trailing" secondItem="qJT-UI-KIc" secondAttribute="trailing" id="E4s-K7-GfV"/>
-                                    <constraint firstItem="H4z-Z9-ZLK" firstAttribute="leading" secondItem="2mb-Vp-CRh" secondAttribute="leading" constant="20" symbolic="YES" id="MAa-48-h8Z"/>
-                                    <constraint firstItem="ZJ6-WD-eY1" firstAttribute="trailing" secondItem="KsB-DT-OGo" secondAttribute="trailing" id="SwE-Bo-JNq"/>
-                                    <constraint firstItem="H4z-Z9-ZLK" firstAttribute="trailing" secondItem="4Xv-jd-EJU" secondAttribute="trailing" id="TgV-v8-scD"/>
-                                    <constraint firstItem="H4z-Z9-ZLK" firstAttribute="trailing" secondItem="BfZ-v5-63e" secondAttribute="trailing" constant="-2" id="Uap-Mm-QBy"/>
-                                    <constraint firstItem="H4z-Z9-ZLK" firstAttribute="trailing" secondItem="qJT-UI-KIc" secondAttribute="trailing" id="a7C-0l-Oho"/>
-                                    <constraint firstItem="BfZ-v5-63e" firstAttribute="top" secondItem="qJT-UI-KIc" secondAttribute="bottom" constant="8" symbolic="YES" id="cVZ-4Q-4XG"/>
-                                    <constraint firstItem="8OK-4D-Czr" firstAttribute="top" secondItem="KsB-DT-OGo" secondAttribute="bottom" constant="70" id="dIE-AB-RDI"/>
-                                    <constraint firstItem="4Xv-jd-EJU" firstAttribute="top" secondItem="BfZ-v5-63e" secondAttribute="bottom" constant="36" id="jgH-zP-aXR"/>
-                                    <constraint firstAttribute="bottom" secondItem="ZJ6-WD-eY1" secondAttribute="bottom" constant="287.5" id="nwY-Am-mAq"/>
-                                    <constraint firstItem="BfZ-v5-63e" firstAttribute="leading" secondItem="H4z-Z9-ZLK" secondAttribute="leading" id="s55-Bu-hll"/>
-                                    <constraint firstItem="KsB-DT-OGo" firstAttribute="top" secondItem="H4z-Z9-ZLK" secondAttribute="bottom" constant="32" id="vaS-Bg-bNa"/>
-                                    <constraint firstItem="8OK-4D-Czr" firstAttribute="trailing" secondItem="KsB-DT-OGo" secondAttribute="trailing" id="xxo-eo-Rrw"/>
+                                    <constraint firstItem="BfZ-v5-63e" firstAttribute="leading" secondItem="H4z-Z9-ZLK" secondAttribute="leading" id="30E-Px-fPA"/>
+                                    <constraint firstItem="qJT-UI-KIc" firstAttribute="top" secondItem="2mb-Vp-CRh" secondAttribute="top" constant="62" id="6Qx-sD-Taw"/>
+                                    <constraint firstItem="BfZ-v5-63e" firstAttribute="top" secondItem="qJT-UI-KIc" secondAttribute="bottom" constant="8" id="9Xa-rO-7mJ"/>
+                                    <constraint firstItem="jqu-RF-jpu" firstAttribute="trailing" secondItem="8OK-4D-Czr" secondAttribute="trailing" id="9ym-bS-K0n"/>
+                                    <constraint firstItem="pGU-6D-n6v" firstAttribute="leading" secondItem="H4z-Z9-ZLK" secondAttribute="leading" id="AZs-ST-QL3"/>
+                                    <constraint firstItem="BfZ-v5-63e" firstAttribute="leading" secondItem="2mb-Vp-CRh" secondAttribute="leading" constant="17" id="AbY-KA-86S"/>
+                                    <constraint firstItem="H4z-Z9-ZLK" firstAttribute="top" secondItem="4Xv-jd-EJU" secondAttribute="bottom" constant="11" id="DTw-Ri-5jY"/>
+                                    <constraint firstItem="ZJ6-WD-eY1" firstAttribute="trailing" secondItem="TKR-oH-umn" secondAttribute="trailing" id="M0K-js-p9M"/>
+                                    <constraint firstItem="TKR-oH-umn" firstAttribute="leading" secondItem="pGU-6D-n6v" secondAttribute="trailing" constant="66" id="MSS-2F-AvM"/>
+                                    <constraint firstItem="pGU-6D-n6v" firstAttribute="top" secondItem="TKR-oH-umn" secondAttribute="top" id="NZA-44-Hfp"/>
+                                    <constraint firstItem="jqu-RF-jpu" firstAttribute="trailing" secondItem="TyQ-aB-xe9" secondAttribute="trailing" id="OVZ-2d-Qch"/>
+                                    <constraint firstItem="ZJ6-WD-eY1" firstAttribute="top" secondItem="KsB-DT-OGo" secondAttribute="bottom" constant="82" id="PaQ-do-mkX"/>
+                                    <constraint firstAttribute="trailing" secondItem="BfZ-v5-63e" secondAttribute="trailing" constant="41" id="QJ0-W3-TDU"/>
+                                    <constraint firstAttribute="bottom" secondItem="TyQ-aB-xe9" secondAttribute="bottom" constant="112.5" id="T4E-1P-3yd"/>
+                                    <constraint firstItem="TyQ-aB-xe9" firstAttribute="top" secondItem="jqu-RF-jpu" secondAttribute="bottom" constant="14" id="WtP-pZ-njG"/>
+                                    <constraint firstItem="4Xv-jd-EJU" firstAttribute="trailing" secondItem="H4z-Z9-ZLK" secondAttribute="trailing" id="Yla-8r-GiH"/>
+                                    <constraint firstItem="fP8-QJ-5zb" firstAttribute="centerX" secondItem="2mb-Vp-CRh" secondAttribute="centerX" id="ZK4-MW-0ue"/>
+                                    <constraint firstItem="fP8-QJ-5zb" firstAttribute="bottom" secondItem="2mb-Vp-CRh" secondAttribute="bottomMargin" id="axk-E9-lmS"/>
+                                    <constraint firstItem="8OK-4D-Czr" firstAttribute="top" secondItem="TKR-oH-umn" secondAttribute="bottom" constant="37" id="cTr-oo-gmM"/>
+                                    <constraint firstItem="pGU-6D-n6v" firstAttribute="top" secondItem="yZc-16-V2v" secondAttribute="bottom" constant="15" id="gPJ-27-p1u"/>
+                                    <constraint firstItem="yZc-16-V2v" firstAttribute="trailing" secondItem="pGU-6D-n6v" secondAttribute="trailing" id="hGi-Zh-UNO"/>
+                                    <constraint firstAttribute="trailing" secondItem="qJT-UI-KIc" secondAttribute="trailing" constant="41" id="iEN-2N-Esd"/>
+                                    <constraint firstItem="yZc-16-V2v" firstAttribute="baseline" secondItem="ZJ6-WD-eY1" secondAttribute="baseline" id="lXd-g4-NHx"/>
+                                    <constraint firstItem="4Xv-jd-EJU" firstAttribute="top" secondItem="BfZ-v5-63e" secondAttribute="bottom" constant="36" id="t3A-eL-VoC"/>
+                                    <constraint firstItem="KsB-DT-OGo" firstAttribute="top" secondItem="H4z-Z9-ZLK" secondAttribute="bottom" constant="32" id="uO4-E1-y26"/>
+                                    <constraint firstItem="BfZ-v5-63e" firstAttribute="trailing" secondItem="ZJ6-WD-eY1" secondAttribute="trailing" id="xSg-5Y-DvR"/>
+                                    <constraint firstItem="8OK-4D-Czr" firstAttribute="trailing" secondItem="ZJ6-WD-eY1" secondAttribute="trailing" id="xxc-fJ-AtZ"/>
+                                    <constraint firstItem="qJT-UI-KIc" firstAttribute="trailing" secondItem="4Xv-jd-EJU" secondAttribute="trailing" id="zM4-qy-lQv"/>
+                                    <constraint firstItem="H4z-Z9-ZLK" firstAttribute="trailing" secondItem="KsB-DT-OGo" secondAttribute="trailing" id="zVT-SJ-TeP"/>
                                 </constraints>
                             </view>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Patient Registeration" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QMg-cQ-kKd">
-                                <rect key="frame" x="20" y="35" width="369" height="68"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="42"/>
-                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <nil key="highlightedColor"/>
-                            </label>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="g0B-jd-tnF"/>
                         <color key="backgroundColor" red="0.72941178080000002" green="0.8156862855" blue="0.78823530669999997" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                         <constraints>
-                            <constraint firstItem="2mb-Vp-CRh" firstAttribute="leading" secondItem="g0B-jd-tnF" secondAttribute="leading" id="7f5-pa-2ez"/>
-                            <constraint firstAttribute="trailing" secondItem="2mb-Vp-CRh" secondAttribute="trailing" id="LQc-qm-Zw2"/>
-                            <constraint firstAttribute="bottom" secondItem="2mb-Vp-CRh" secondAttribute="bottom" id="PoG-MD-bce"/>
-                            <constraint firstItem="2mb-Vp-CRh" firstAttribute="height" secondItem="mAg-VC-ayF" secondAttribute="height" multiplier="0.85" id="tHa-UK-xS3"/>
+                            <constraint firstAttribute="bottomMargin" secondItem="2mb-Vp-CRh" secondAttribute="bottom" constant="-34" id="HfO-Of-p9U"/>
+                            <constraint firstItem="2mb-Vp-CRh" firstAttribute="centerX" secondItem="mAg-VC-ayF" secondAttribute="centerX" id="g6T-f1-tdy"/>
+                            <constraint firstItem="2mb-Vp-CRh" firstAttribute="top" secondItem="g0B-jd-tnF" secondAttribute="top" constant="65" id="iOh-U6-9PE"/>
+                            <constraint firstItem="2mb-Vp-CRh" firstAttribute="leading" secondItem="g0B-jd-tnF" secondAttribute="leading" id="kig-bp-VQx"/>
                         </constraints>
                     </view>
                     <connections>
                         <outlet property="birthdateLabel" destination="8OK-4D-Czr" id="3ey-7J-tJS"/>
+                        <outlet property="cardView" destination="2mb-Vp-CRh" id="6rw-6w-B5K"/>
                         <outlet property="diabetesLabel" destination="KsB-DT-OGo" id="ztQ-Vr-12s"/>
                         <outlet property="doctorID" destination="TyQ-aB-xe9" id="DcI-g3-91C"/>
                         <outlet property="nameField" destination="BfZ-v5-63e" id="Ndl-ok-Ek7"/>
@@ -1063,6 +1070,7 @@
         <image name="doctorButton" width="158" height="198"/>
         <image name="homeIcon" width="30" height="30"/>
         <image name="multiply" width="9" height="9"/>
+        <image name="next button" width="308" height="35"/>
         <image name="patientButton" width="158" height="198"/>
         <image name="person.circle" catalog="system" width="128" height="121"/>
         <image name="plus" catalog="system" width="128" height="113"/>
