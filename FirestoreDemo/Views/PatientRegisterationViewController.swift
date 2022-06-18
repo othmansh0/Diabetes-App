@@ -8,16 +8,15 @@
 import Firebase
 import UIKit
 
-class PatientRegisterationViewController: UIViewController {
+class PatientRegisterationViewController: UIViewController,UITextFieldDelegate {
     @IBOutlet var nameField: UITextField!
     @IBOutlet var nationalIDField: UITextField!
     @IBOutlet var doctorID: UITextField!
-    @IBOutlet weak var diabetesType: UISegmentedControl!
     @IBOutlet weak var patientHeight: UITextField!
     @IBOutlet weak var patientWeight: UITextField!
     @IBOutlet var cardView: UIView!
     
-    @IBOutlet var scrollView: UIScrollView!
+   @IBOutlet var scrollView: UIScrollView!
     @IBOutlet var diabetesLabel: UILabel!
     @IBOutlet var birthdateLabel: UILabel!
     @IBOutlet var hideBox: UIView!
@@ -77,8 +76,8 @@ class PatientRegisterationViewController: UIViewController {
         //diabetes button Constraints
         diabetesBtnMenu.topAnchor.constraint(equalTo: diabetesLabel.bottomAnchor, constant: 10).isActive = true
         diabetesBtnMenu.leadingAnchor.constraint(equalTo: nationalIDField.leadingAnchor).isActive = true
-       // diabetesBtnMenu.widthAnchor.constraint(equalToConstant: nameField.frame.width-23).isActive = true
-        diabetesBtnMenu.widthAnchor.constraint(equalTo: nameField.widthAnchor).isActive = true
+        diabetesBtnMenu.widthAnchor.constraint(equalToConstant: nameField.frame.width-23).isActive = true
+       // diabetesBtnMenu.widthAnchor.constraint(equalTo: nameField.widthAnchor).isActive = true
         
         diabetesBtnMenu.heightAnchor.constraint(equalToConstant: 40).isActive = true
         //tag to differeniate buttons and set size correctly
@@ -211,6 +210,18 @@ class PatientRegisterationViewController: UIViewController {
         //2.observer for keyboard on appear
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardDisappear), name: UIResponder.keyboardWillHideNotification, object: nil)
         
+        
+        nameField.delegate = self
+        nationalIDField.delegate = self
+        doctorID.delegate = self
+        patientHeight.delegate = self
+        patientWeight.delegate = self
+        patientWeight.delegate = self
+        
+        let tap = UITapGestureRecognizer(target: self, action: #selector(dismissMyKeyboard))
+        view.addGestureRecognizer(tap)
+        
+        
     }
     
     var isExpoand:Bool = false
@@ -218,7 +229,7 @@ class PatientRegisterationViewController: UIViewController {
         
         if !isExpoand {
             print("execute mf")
-            self.scrollView.contentSize = CGSize(width: self.view.frame.width, height: self.scrollView.frame.height + 300)
+           // self.scrollView.contentSize = CGSize(width: self.view.frame.width, height: self.scrollView.frame.height + 200)
             isExpoand = true
         }
         
@@ -227,20 +238,32 @@ class PatientRegisterationViewController: UIViewController {
     
     @objc func keyboardDisappear(){
         
-        self.scrollView.contentSize = CGSize(width: self.view.frame.width, height: self.scrollView.frame.height - 300)
+        self.scrollView.contentSize = CGSize(width: self.view.frame.width, height: self.scrollView.frame.height - 200)
         isExpoand = false
+    }
+    
+    @objc func dismissMyKeyboard(){
+        //removes focus of phoneField
+        //phoneField.resignFirstResponder()
+        nameField.resignFirstResponder()
+        nationalIDField.resignFirstResponder()
+        doctorID.resignFirstResponder()
+        patientHeight.resignFirstResponder()
+        patientWeight.resignFirstResponder()
+        patientWeight.resignFirstResponder()
+        diabetesBtnMenu.dismissDropDown()
     }
 
     @IBAction func submitPressed(_ sender: UIButton) {
         
-        if let Patientname = nameField.text,let pateintAge = nationalIDField.text, let doctorID  = doctorID.text, let patientHeight = patientHeight.text, let patientWeight = patientWeight.text,let diabetesType = diabetesType.titleForSegment(at: diabetesType.selectedSegmentIndex){
-            print(diabetesType)
+        if let Patientname = nameField.text,let pateintAge = nationalIDField.text, let doctorID  = doctorID.text, let patientHeight = patientHeight.text, let patientWeight = patientWeight.text{
+ 
             
             let defualts = UserDefaults.standard
             defualts.set(doctorID, forKey: "doctorID")
             
             let newPatient = db.collection("doctors").document(doctorID).collection("patients").document(Auth.auth().currentUser!.uid)
-            newPatient.setData(["Name":Patientname,"Age":pateintAge,"Height":patientHeight,"Weight":patientWeight,"DiabetesType":diabetesType,"ID":newPatient.documentID,"beforeReadings":[],"beforeTimes":[],"afterReadings":[],"afterTimes":[]])
+            newPatient.setData(["Name":Patientname,"Age":pateintAge,"Height":patientHeight,"Weight":patientWeight,"DiabetesType":diabetesBtnMenu.currentTitle,"ID":newPatient.documentID,"beforeReadings":[],"beforeTimes":[],"afterReadings":[],"afterTimes":[]])
             
             
             let storyboard = UIStoryboard(name: "Main", bundle: nil)
