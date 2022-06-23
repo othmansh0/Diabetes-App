@@ -12,3 +12,5 @@ class CollectionViewCell: UICollectionViewCell {
     @IBOutlet weak var readingStatus: UILabel!
     @IBOutlet weak var readingTime: UILabel!
 }
+
+

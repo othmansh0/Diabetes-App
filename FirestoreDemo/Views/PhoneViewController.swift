@@ -31,7 +31,9 @@ class PhoneViewController: UIViewController, UITextFieldDelegate {
         phoneField.delegate = self
         
         self.setBackgroundImage("greenBG", contentMode: .scaleAspectFit)
-    
+        //remove back word from navigation button item
+        navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
+
         //MARK: Phonefield design
         var bottomLine = CALayer()
         bottomLine.frame = CGRect(x: 0.0, y: phoneField.frame.height-2, width: phoneField.frame.width, height: 1)

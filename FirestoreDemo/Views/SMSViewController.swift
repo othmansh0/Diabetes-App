@@ -25,7 +25,7 @@ class SMSViewController: UIViewController, UISearchTextFieldDelegate {
         super.viewDidLoad()
         
         self.setBackgroundImage("greenBG", contentMode: .scaleAspectFit)
-        
+
         codeTextField.configure()
         codeTextField.didEnterLastDigit = { [weak self] code in
             print("code is\(code)")

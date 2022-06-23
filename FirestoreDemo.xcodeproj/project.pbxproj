@@ -17,6 +17,8 @@
 		1228642627B11F0400B449B1 /* MarkaziText-SemiBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 1228642827B11F0400B449B1 /* MarkaziText-SemiBold.ttf */; };
 		1245197827C81ADC00818174 /* ChartViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1245197727C81ADC00818174 /* ChartViewController.swift */; };
 		124E9388273878B40091F395 /* PatientViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 124E9387273878B40091F395 /* PatientViewController.swift */; };
+		1250E3A728632B07004A7158 /* CustomSegmentedControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1250E3A628632B06004A7158 /* CustomSegmentedControl.swift */; };
+		1250E3A92864F431004A7158 /* LabCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1250E3A82864F431004A7158 /* LabCell.swift */; };
 		125C1D382727347E0053377B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 125C1D372727347E0053377B /* AppDelegate.swift */; };
 		125C1D3A2727347E0053377B /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 125C1D392727347E0053377B /* SceneDelegate.swift */; };
 		125C1D3C2727347E0053377B /* PhoneViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 125C1D3B2727347E0053377B /* PhoneViewController.swift */; };
@@ -53,6 +55,8 @@
 		1228642A27B3BB0200B449B1 /* FirestoreDemo.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = FirestoreDemo.entitlements; sourceTree = "<group>"; };
 		1245197727C81ADC00818174 /* ChartViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChartViewController.swift; sourceTree = "<group>"; };
 		124E9387273878B40091F395 /* PatientViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PatientViewController.swift; sourceTree = "<group>"; };
+		1250E3A628632B06004A7158 /* CustomSegmentedControl.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomSegmentedControl.swift; sourceTree = "<group>"; };
+		1250E3A82864F431004A7158 /* LabCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LabCell.swift; sourceTree = "<group>"; };
 		125C1D342727347E0053377B /* FirestoreDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FirestoreDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		125C1D372727347E0053377B /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		125C1D392727347E0053377B /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -145,10 +149,12 @@
 		128F2EBC2780FF11009248EB /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				1250E3A628632B06004A7158 /* CustomSegmentedControl.swift */,
 				1293F42427C80C8F009D0440 /* Chart */,
 				12CD913427273A7C00F3C5C8 /* AuthManager.swift */,
 				128F2EBD2780FF5A009248EB /* CodeTextFieldViewController.swift */,
 				12742FE327AE99B400360551 /* CollectionViewCell.swift */,
+				1250E3A82864F431004A7158 /* LabCell.swift */,
 				12742FE527AEC19C00360551 /* ReadingCard.swift */,
 				121ABB2D27BAE575008247EF /* SnapCenterLayout.swift */,
 				121ABB2F27BAE71D008247EF /* option2.swift */,
@@ -306,10 +312,12 @@
 				125C1D3C2727347E0053377B /* PhoneViewController.swift in Sources */,
 				1293F42A27C80CC8009D0440 /* CustomValueFormatter.swift in Sources */,
 				12CD913527273A7C00F3C5C8 /* AuthManager.swift in Sources */,
+				1250E3A728632B07004A7158 /* CustomSegmentedControl.swift in Sources */,
 				1293F42827C80CC1009D0440 /* CustomChartFormatter.swift in Sources */,
 				124E9388273878B40091F395 /* PatientViewController.swift in Sources */,
 				1245197827C81ADC00818174 /* ChartViewController.swift in Sources */,
 				121ABB3027BAE71D008247EF /* option2.swift in Sources */,
+				1250E3A92864F431004A7158 /* LabCell.swift in Sources */,
 				12CD913F272745DB00F3C5C8 /* DoctorViewController.swift in Sources */,
 				1293F42627C80CB7009D0440 /* XAxisWeekRenderer.swift in Sources */,
 				12742FE627AEC19C00360551 /* ReadingCard.swift in Sources */,
@@ -514,7 +522,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 3797M245X7;
 				INFOPLIST_FILE = FirestoreDemo/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -538,7 +546,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 3797M245X7;
 				INFOPLIST_FILE = FirestoreDemo/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

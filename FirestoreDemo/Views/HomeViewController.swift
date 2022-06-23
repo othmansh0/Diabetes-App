@@ -25,6 +25,12 @@ class HomeViewController: UIViewController {
         
         self.setBackgroundImage("greenBG", contentMode: .scaleAspectFit)
 
+        //remove back word from navigation button item
+        navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
+
+
+        
+        
 //        view.insertSubview(imageView, at: 0)
 //        NSLayoutConstraint.activate([
 //            imageView.topAnchor.constraint(equalTo: view.topAnchor),

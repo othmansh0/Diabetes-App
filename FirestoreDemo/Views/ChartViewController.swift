@@ -7,12 +7,45 @@
 
 import UIKit
 import Charts
-class ChartViewController: UIViewController {
+class ChartViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource {
+    @IBOutlet var labsCollectionView: UICollectionView!
+    @IBOutlet weak var chart: LineChartView!
+    
+    @IBOutlet var buttonFrame: UIView!
+   
+    
+    
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return 1
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "labReading", for: indexPath)
+        
+        cell.layer.cornerRadius = 15
+        return cell
+    }
+    
+  
+    
 
     
-    @IBOutlet weak var chart: LineChartView!
+   
     override func viewDidLoad() {
         super.viewDidLoad()
+        labsCollectionView.delegate = self
+        labsCollectionView.dataSource = self
+
+        //Button frame design
+        buttonFrame.layer.cornerRadius = 15
+        buttonFrame.layer.borderWidth = 2
+        buttonFrame.layer.borderColor = UIColor(red: 218/255, green: 228/255, blue: 229/255, alpha: 1).cgColor
+        
+        //Making button frame clickable
+        
+        let tap = UITapGestureRecognizer(target: self, action: #selector(addLabReading))
+        buttonFrame.addGestureRecognizer(tap)
+        
 
         }
     
@@ -68,14 +101,14 @@ class ChartViewController: UIViewController {
         
         
         //string to date
-        let now = forX[0]
-        print(now)
+//        let now = forX[0]
+        //print(now)
         let formatter = DateFormatter()
 //        let arabDate = formattedDateFromString(dateString: now, withFormat: "eeee-hh:mm:ss a")
 //      print(arabDate)
 //        formatter.timeStyle = .short
 //        formatter.dateStyle = .short
-        formatter.dateFormat = "dd/M/y hh:mm:ss a"
+  //      formatter.dateFormat = "dd/M/y hh:mm:ss a"
 //        let date3 = formatter.string(from: now)
         
         
@@ -143,6 +176,20 @@ class ChartViewController: UIViewController {
 
         return nil
     }
+    
+    
+    @IBAction func addLabPressed(_ sender: UIButton) {
+        
+        addLabReading()
+    }
+    
+    
+    
+    
+    @objc func addLabReading(){
+        print("hey")
+    }
+    
 }
 
 
