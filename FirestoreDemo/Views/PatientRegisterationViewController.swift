@@ -22,6 +22,11 @@ class PatientRegisterationViewController: UIViewController,UITextFieldDelegate {
    
     let diabetesOptions = ["سكري ٣","سكري ٢","سكري ١"]
   
+    //lab counter stored in user defaults to count number of labs user imported
+    var labsCounter = 0
+    let defaults = UserDefaults.standard
+    
+    
     
     @IBOutlet var segmentedDiabets: CustomSegmentedControl!{
         didSet{
@@ -52,6 +57,7 @@ class PatientRegisterationViewController: UIViewController,UITextFieldDelegate {
         super.viewDidLoad()
         self.setBackgroundImage("greenBG", contentMode: .scaleAspectFit)
         
+        defaults.set(labsCounter, forKey: "labsCounter")
         
       // scrollView.touch
        // self.myScrollview.panGestureRecognizer.delaysTouchesBegan = true

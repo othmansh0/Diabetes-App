@@ -12,6 +12,9 @@ pod 'Firebase/Analytics'
 	pod 'Firebase/Firestore'
 	pod 'FirebaseFirestoreSwift'
          pod 'LayoutHelper'
+         pod 'Firebase/Storage'
+
+
 	pod 'Charts'
 pod 'TinyConstraints'
 

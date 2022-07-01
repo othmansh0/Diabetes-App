@@ -59,8 +59,8 @@ class PatientViewController:UIViewController, UICollectionViewDataSource, UIColl
         bottomSheet.clipsToBounds = true
         
         //makes UIView clickable
-             let tap = UITapGestureRecognizer(target: self, action: #selector(dismissSheet))
-             view.addGestureRecognizer(tap)
+        let tap = UITapGestureRecognizer(target: self, action: #selector(dismissSheet))
+        view.addGestureRecognizer(tap)
 
         Patient.sharedInstance.afterReadings = fetchReadings(tag: 1)
         Patient.sharedInstance.beforeReadings = fetchReadings(tag: 2)

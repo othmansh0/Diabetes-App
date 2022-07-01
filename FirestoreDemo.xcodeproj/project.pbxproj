@@ -25,7 +25,8 @@
 		125C1D3F2727347E0053377B /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 125C1D3D2727347E0053377B /* Main.storyboard */; };
 		125C1D41272734810053377B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 125C1D40272734810053377B /* Assets.xcassets */; };
 		125C1D44272734810053377B /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 125C1D42272734810053377B /* LaunchScreen.storyboard */; };
-		125C1D4D2727355E0053377B /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 125C1D4C2727355E0053377B /* GoogleService-Info.plist */; };
+		12610D94286E15960076816C /* PDFViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12610D93286E15960076816C /* PDFViewController.swift */; };
+		12671A85286B09380067E5C2 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 12671A84286B09380067E5C2 /* GoogleService-Info.plist */; };
 		12742FE227AD94D100360551 /* PatientRegisterationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12742FE127AD94D100360551 /* PatientRegisterationViewController.swift */; };
 		12742FE427AE99B400360551 /* CollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12742FE327AE99B400360551 /* CollectionViewCell.swift */; };
 		12742FE627AEC19C00360551 /* ReadingCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12742FE527AEC19C00360551 /* ReadingCard.swift */; };
@@ -33,6 +34,7 @@
 		1293F42627C80CB7009D0440 /* XAxisWeekRenderer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1293F42527C80CB7009D0440 /* XAxisWeekRenderer.swift */; };
 		1293F42827C80CC1009D0440 /* CustomChartFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1293F42727C80CC1009D0440 /* CustomChartFormatter.swift */; };
 		1293F42A27C80CC8009D0440 /* CustomValueFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1293F42927C80CC7009D0440 /* CustomValueFormatter.swift */; };
+		12C80860286B8CAE0076316A /* CenterViewFlowLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12C8085F286B8CAE0076316A /* CenterViewFlowLayout.swift */; };
 		12CD913527273A7C00F3C5C8 /* AuthManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12CD913427273A7C00F3C5C8 /* AuthManager.swift */; };
 		12CD91382727420400F3C5C8 /* SMSViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12CD91372727420400F3C5C8 /* SMSViewController.swift */; };
 		12CD913F272745DB00F3C5C8 /* DoctorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12CD913E272745DB00F3C5C8 /* DoctorViewController.swift */; };
@@ -65,7 +67,8 @@
 		125C1D40272734810053377B /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		125C1D43272734810053377B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		125C1D45272734810053377B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		125C1D4C2727355E0053377B /* GoogleService-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "GoogleService-Info.plist"; sourceTree = SOURCE_ROOT; };
+		12610D93286E15960076816C /* PDFViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PDFViewController.swift; sourceTree = "<group>"; };
+		12671A84286B09380067E5C2 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		12742FE127AD94D100360551 /* PatientRegisterationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PatientRegisterationViewController.swift; sourceTree = "<group>"; };
 		12742FE327AE99B400360551 /* CollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CollectionViewCell.swift; sourceTree = "<group>"; };
 		12742FE527AEC19C00360551 /* ReadingCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReadingCard.swift; sourceTree = "<group>"; };
@@ -73,6 +76,7 @@
 		1293F42527C80CB7009D0440 /* XAxisWeekRenderer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = XAxisWeekRenderer.swift; sourceTree = "<group>"; };
 		1293F42727C80CC1009D0440 /* CustomChartFormatter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomChartFormatter.swift; sourceTree = "<group>"; };
 		1293F42927C80CC7009D0440 /* CustomValueFormatter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomValueFormatter.swift; sourceTree = "<group>"; };
+		12C8085F286B8CAE0076316A /* CenterViewFlowLayout.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CenterViewFlowLayout.swift; path = "../../../../../../Downloads/UICollectionViewHorizontalPaging-master/UICollectionViewHorizontalPaging/CenterViewFlowLayout.swift"; sourceTree = "<group>"; };
 		12CD913427273A7C00F3C5C8 /* AuthManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthManager.swift; sourceTree = "<group>"; };
 		12CD91372727420400F3C5C8 /* SMSViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SMSViewController.swift; sourceTree = "<group>"; };
 		12CD913E272745DB00F3C5C8 /* DoctorViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DoctorViewController.swift; sourceTree = "<group>"; };
@@ -103,6 +107,7 @@
 				124E9387273878B40091F395 /* PatientViewController.swift */,
 				1245197727C81ADC00818174 /* ChartViewController.swift */,
 				12CD913E272745DB00F3C5C8 /* DoctorViewController.swift */,
+				12610D93286E15960076816C /* PDFViewController.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -138,10 +143,10 @@
 				128F2EBC2780FF11009248EB /* Controllers */,
 				124B52052780572900902CA8 /* Views */,
 				125C1D3D2727347E0053377B /* Main.storyboard */,
-				125C1D4C2727355E0053377B /* GoogleService-Info.plist */,
 				125C1D40272734810053377B /* Assets.xcassets */,
 				125C1D42272734810053377B /* LaunchScreen.storyboard */,
 				125C1D45272734810053377B /* Info.plist */,
+				12671A84286B09380067E5C2 /* GoogleService-Info.plist */,
 			);
 			path = FirestoreDemo;
 			sourceTree = "<group>";
@@ -157,6 +162,7 @@
 				1250E3A82864F431004A7158 /* LabCell.swift */,
 				12742FE527AEC19C00360551 /* ReadingCard.swift */,
 				121ABB2D27BAE575008247EF /* SnapCenterLayout.swift */,
+				12C8085F286B8CAE0076316A /* CenterViewFlowLayout.swift */,
 				121ABB2F27BAE71D008247EF /* option2.swift */,
 				121ABB3327BE3FB0008247EF /* baseVC.swift */,
 			);
@@ -250,7 +256,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				125C1D44272734810053377B /* LaunchScreen.storyboard in Resources */,
-				125C1D4D2727355E0053377B /* GoogleService-Info.plist in Resources */,
+				12671A85286B09380067E5C2 /* GoogleService-Info.plist in Resources */,
 				125C1D41272734810053377B /* Assets.xcassets in Resources */,
 				1228641A27B11EEA00B449B1 /* MarkaziText-Bold.ttf in Resources */,
 				1228641E27B11EF700B449B1 /* MarkaziText-Medium.ttf in Resources */,
@@ -309,6 +315,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				12610D94286E15960076816C /* PDFViewController.swift in Sources */,
 				125C1D3C2727347E0053377B /* PhoneViewController.swift in Sources */,
 				1293F42A27C80CC8009D0440 /* CustomValueFormatter.swift in Sources */,
 				12CD913527273A7C00F3C5C8 /* AuthManager.swift in Sources */,
@@ -330,6 +337,7 @@
 				125C1D3A2727347E0053377B /* SceneDelegate.swift in Sources */,
 				128F2EBE2780FF5A009248EB /* CodeTextFieldViewController.swift in Sources */,
 				12742FE427AE99B400360551 /* CollectionViewCell.swift in Sources */,
+				12C80860286B8CAE0076316A /* CenterViewFlowLayout.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -522,7 +530,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 3797M245X7;
 				INFOPLIST_FILE = FirestoreDemo/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.2;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -546,7 +554,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 3797M245X7;
 				INFOPLIST_FILE = FirestoreDemo/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.2;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

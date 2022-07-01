@@ -22,10 +22,14 @@ class AuthManager {
     //Completion a call back whether or not the start auth flow has succeeded
     public func startAuth(phoneNumber: String, completion: @escaping (Bool) -> Void) {
         
+        //need to remove this later on line
+        Auth.auth().settings?.isAppVerificationDisabledForTesting = true
+
         PhoneAuthProvider.provider().verifyPhoneNumber(phoneNumber, uiDelegate: nil) { [weak self] (verificationID, error) in
             //completion to be called the verification flow is finished.
             if let error = error {
                    print(error.localizedDescription)
+                print("we are here 2022")
                    return
                  }
             //1.Make sure we have a verficationID and error is nil
@@ -51,6 +55,7 @@ class AuthManager {
         auth.signIn(with: credintial) { (result,error) in
             guard result != nil, error == nil else {
                 print(error)
+                
                 completion(false)
                 return
             }

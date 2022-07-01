@@ -53,17 +53,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
             window.rootViewController = loginNavController
         }
 
-
-
-
         self.window?.makeKeyAndVisible()
-        
-        
-        
-        
-        
-
-    
         
         
     }
