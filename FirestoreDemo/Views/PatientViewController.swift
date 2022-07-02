@@ -150,29 +150,105 @@ class PatientViewController:UIViewController, UICollectionViewDataSource, UIColl
             dismissSheet()
             return }
         if reading.count > 3 {
-            print("error reading must be a number between 0 and 300")
+            //print("error reading must be a number between 0 and 300")
             dismissSheet()
             return
         }
         
         
         let now = Date()
+        
+        //formatter
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateStyle = .none
+        dateFormatter.locale = Locale(identifier: "en_US_POSIX")
+        dateFormatter.timeStyle = .short
+        dateFormatter.dateFormat = "EEEE - hh:mm:ss a"
+        dateFormatter.timeZone = TimeZone(identifier: "UTC")
+        
+        let englishDateString: String = getEnglishTime(time: now)
+        let englishDate: Date = dateFormatter.date(from: englishDateString)!
+        
+       
+        
+        dateFormatter.dateFormat = "EEEE"
+        let day = dateFormatter.string(from: englishDate)
+        print("day is \(day)")
+        print("time interval is \(englishDate.timeIntervalSince1970)")
+        
+        let cal = Calendar.current
+        let startOfday = cal.startOfDay(for: englishDate)
+        let secondsVal = (englishDate.timeIntervalSince1970 - startOfday.timeIntervalSince1970)/86000
+        print("time of day in chart is\(secondsVal)")
 
-        let dateString = getArabicTime(time: now, withSeconds: true)
+    
+        var plot:Double!
+        if day == "Sunday"{
+            print("in Sunday")
+             plot = 0.0 + secondsVal
+            print("plot \(plot!)")
+            
+        }
+        else if day == "Monday"{
+            print("in Monday")
+             plot = 1.0 + secondsVal
+            print("plot \(plot!)")
+            
+        }
+        else if day == "Tuesday"{
+            print("in Tuesday")
+             plot = 2.0 + secondsVal
+            print("plot \(plot!)")
+            
+        }
+        else if day == "Wednesday"{
+            print("in Wednesday")
+            plot = 3.0 + secondsVal
+            print("plot \(plot!)")
+            
+        }
+        else if day == "Thursday"{
+            print("in Thursday")
+            plot = 4.0 + secondsVal
+            print("plot \(plot!)")
+            
+        }
+        else if day == "Friday"{
+            print("in Friday")
+            plot = 5.0 + secondsVal
+            print("plot \(plot!)")
+            
+        }
+        else if day == "Saturday"{
+            print("in Saturday")
+            plot = 6.0 + secondsVal
+            print("plot \(plot!)")
+            
+        }
+        else {
+            fatalError("error trying to calculate plot in patientviewcontroller")
+        }
+        
+        
+        
+        
+        
         
         if  plusButtonTag == 1{
-             afterReadings.insert(reading, at: 0)
-            afterTimes.insert(dateString, at: 0)
+             //afterReadings.insert(reading, at: 0)
+            //afterTimes.insert(englishDateString, at: 0)
             Patient.sharedInstance.afterReadings.insert(reading, at: 0)
-            Patient.sharedInstance.afterTimes.insert(dateString, at: 0)
-            writeReading(tag: 1, with: reading,at: dateString)
+            Patient.sharedInstance.afterTimes.insert(englishDateString, at: 0)
+            Patient.sharedInstance.deltaAfterTimes.insert(String(plot), at: 0)
+            writeReading(tag: 1, with: reading,at: englishDateString)
             
             }else {
 //                    beforeReadings.insert(reading, at: 0)
 //                    beforeTimes.insert(dateString, at: 0)
                     Patient.sharedInstance.beforeReadings.insert(reading, at: 0)
-                    Patient.sharedInstance.beforeTimes.insert(dateString, at: 0)
-                    writeReading(tag: 2, with: reading,at: dateString)
+                    Patient.sharedInstance.beforeTimes.insert(englishDateString, at: 0)
+                Patient.sharedInstance.deltaBeforeTimes.insert(String(plot), at: 0)
+                    writeReading(tag: 2, with: reading,at: englishDateString)
                     
                  }
         dismissSheet()
@@ -205,7 +281,7 @@ class PatientViewController:UIViewController, UICollectionViewDataSource, UIColl
         alert.addTextField()
         let action = UIAlertAction(title: "enter please", style: .default) { action in
             guard let reading = alert.textFields?[0].text else {return}
-            print(reading)
+            //print(reading)
             if tag == 1{
                 Patient.sharedInstance.afterReadings.insert(reading, at: 0)
                 
@@ -229,15 +305,19 @@ class PatientViewController:UIViewController, UICollectionViewDataSource, UIColl
        //decides which array needs to be fetched from firestore
        var readingsType = ""
         var timesType = ""
+        var deltaReadingsType = ""
        var readingsArray = [String]()
        var TimesArray = [String]()
+        var deltaTimesArray = [String]()
         if tag == 1 {
             readingsType = "afterReadings"
             timesType = "afterTimes"
-            print("tag is\(tag)")
+            deltaReadingsType = "deltaAfterTimes"
+           // print("tag is\(tag)")
         } else { readingsType = "beforeReadings"
             timesType = "beforeTimes"
-            print("tag is\(tag)")
+            deltaReadingsType = "deltaBeforeTimes"
+            //print("tag is\(tag)")
         }
         
         //get ref of patient
@@ -255,22 +335,30 @@ class PatientViewController:UIViewController, UICollectionViewDataSource, UIColl
                         return
                         
                     }
-                    print("------------------------------------------------------------------------------------")
-                    print("Document data: \(dataDescription)")
-                    print("------------------------------------------------------------------------------------")
-                    readingsArray = dataDescription[readingsType] as? [String] ?? ["!"]
-        
-                    TimesArray = dataDescription[timesType] as? [String] ?? ["!"]
+                    //print("------------------------------------------------------------------------------------")
+                   // print("Document data: \(dataDescription)")
+                    //print("------------------------------------------------------------------------------------")
                     
+                    //fetch arrays from firebase
+                    readingsArray = dataDescription[readingsType] as? [String] ?? ["error fetching array from firebase"]
+        
+                    TimesArray = dataDescription[timesType] as? [String] ?? ["error fetching array from firebase"]
+                    
+                   
                     if tag == 1 {
                         Patient.sharedInstance.afterReadings = readingsArray.reversed()
                         
                         Patient.sharedInstance.afterTimes = TimesArray.reversed()
+                        deltaTimesArray = dataDescription[deltaReadingsType] as? [String] ?? ["error fetching array from firebase"]
+                        
                         self.collectionViewOne.reloadData()
+                        Patient.sharedInstance.deltaAfterTimes = deltaTimesArray.reversed()
                     } else {
                         Patient.sharedInstance.beforeReadings = readingsArray.reversed()
                         Patient.sharedInstance.beforeTimes = TimesArray.reversed()
+                        deltaTimesArray = dataDescription[deltaReadingsType] as? [String] ?? ["error fetching array from firebase"]
                         self.collectionViewTwo.reloadData()
+                        Patient.sharedInstance.deltaBeforeTimes = deltaTimesArray.reversed()
                     }
                     
                     
@@ -295,12 +383,15 @@ class PatientViewController:UIViewController, UICollectionViewDataSource, UIColl
         //decides which array to update
         var readingsType = ""
         var readingsTime = ""
+        var deltaReadingsType = ""
          if tag == 1 {
              readingsType = "afterReadings"
              readingsTime = "afterTimes"
+             deltaReadingsType = "deltaAfterTimes"
          } else {
              readingsType = "beforeReadings"
              readingsTime = "beforeTimes"
+             deltaReadingsType = "deltaBeforeTimes"
     }
         let patient = db.collection("doctors").document(doctorID).collection("patients").document(Auth.auth().currentUser!.uid)
         
@@ -308,25 +399,21 @@ class PatientViewController:UIViewController, UICollectionViewDataSource, UIColl
             print("error updating data")
         }
         if tag == 1 {
-            patient.setData([readingsType:Patient.sharedInstance.afterReadings], merge: true)
+            patient.setData([readingsType:Patient.sharedInstance.afterReadings,deltaReadingsType:Patient.sharedInstance.deltaAfterTimes], merge: true)
+            
         }
         else {
-            patient.setData([readingsType:Patient.sharedInstance.beforeReadings], merge: true)
+            patient.setData([readingsType:Patient.sharedInstance.beforeReadings,deltaReadingsType:Patient.sharedInstance.deltaBeforeTimes], merge: true)
         }
         
-//        if tag == 1 {re
-//            patient.setData([readingsType:afterReadings], mergeFields: ["Age","DiabetesType","Height","ID","Name","Weight","beforeReadings","beforeTimes"])
-//            
-//        } else {
-//            patient.setData([readingsType:afterReadings],mergeFields: ["Age","DiabetesType","Height","ID","Name","Weight","afterReadings","afterTimes"])
-//            patient.setData([readingsType:beforeReadings], mergeFields: ["beforeReadings","beforeTimes"]) { error in
-//                print("shit")
-//            }
-//   }
-//        
+  
 
     
 }
+    
+    
+    
+    
     
 }
 
@@ -433,22 +520,15 @@ extension PatientViewController {
         
     }
   
-    public func getArabicTime(time:Date,withSeconds:Bool)->String{
+    public func getEnglishTime(time:Date)->String{
 
         let formatter = DateFormatter()
         formatter.dateStyle = .none
-
+        formatter.locale = Locale(identifier: "en_US_POSIX")
         formatter.timeStyle = .short
-        //use ar for arabic numbers
-        formatter.locale = NSLocale(localeIdentifier: "ar_DZ") as Locale
         formatter.dateFormat = "EEEE - hh:mm:ss a"
-        if withSeconds == false {
-            formatter.dateFormat = "EEEE -  hh:mm a"
-        }
-        formatter.amSymbol = "صباحا"
-        formatter.pmSymbol = "مساءا"
-
-        let dateString = formatter.string(from: time)
+        
+        let dateString: String = formatter.string(from: time)
         return dateString
     }
     
@@ -472,7 +552,15 @@ extension UIView {
 
 
 
+extension Date {
+    func get(_ components: Calendar.Component..., calendar: Calendar = Calendar.current) -> DateComponents {
+        return calendar.dateComponents(Set(components), from: self)
+    }
 
+    func get(_ component: Calendar.Component, calendar: Calendar = Calendar.current) -> Int {
+        return calendar.component(component, from: self)
+    }
+}
     
     
     

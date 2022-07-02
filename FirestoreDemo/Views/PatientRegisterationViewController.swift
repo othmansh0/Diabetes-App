@@ -308,14 +308,14 @@ class PatientRegisterationViewController: UIViewController,UITextFieldDelegate {
         
         //formatter
         let formatter = DateFormatter()
-        formatter.dateStyle = .short
-        formatter.timeStyle = .none
+        formatter.dateFormat = "dd/MM/yyyy"
         birthDateField.font = UIFont(name: "System", size: 0.3*birthDateField.frame.width)
         
         
         let dateWithSpace = formatter.string(from: datePicker.date) + "  "
         
         birthDateField.text = dateWithSpace
+        print("fucko \(dateWithSpace)")
         birthDateField.resignFirstResponder()
             }
     

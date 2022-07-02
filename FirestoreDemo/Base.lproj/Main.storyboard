@@ -1107,11 +1107,19 @@
                                     </collectionViewCell>
                                 </cells>
                             </collectionView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="المختبرات" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yg3-ua-VyZ">
+                                <rect key="frame" x="297" y="585" width="97" height="30"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="25"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="BfG-8D-fep"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
                             <constraint firstItem="J9e-ne-g55" firstAttribute="leading" secondItem="BfG-8D-fep" secondAttribute="leading" id="2JD-pY-fRd"/>
+                            <constraint firstItem="yg3-ua-VyZ" firstAttribute="trailing" secondItem="RVm-Te-6sp" secondAttribute="trailingMargin" id="9CQ-Ho-hkS"/>
+                            <constraint firstItem="39f-J5-73f" firstAttribute="top" secondItem="yg3-ua-VyZ" secondAttribute="bottom" constant="29" id="CBF-lG-D0i"/>
                             <constraint firstItem="BfG-8D-fep" firstAttribute="trailing" secondItem="39f-J5-73f" secondAttribute="trailing" constant="11" id="IRY-WQ-Hlh"/>
                             <constraint firstItem="39f-J5-73f" firstAttribute="bottom" secondItem="uNX-gW-lIl" secondAttribute="bottom" id="SHq-8H-Jpw"/>
                             <constraint firstItem="J9e-ne-g55" firstAttribute="top" secondItem="BfG-8D-fep" secondAttribute="top" constant="35" id="X7d-Bb-Vk3"/>

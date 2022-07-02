@@ -12,7 +12,7 @@ import Charts
 class XAxisWeekRenderer: XAxisRenderer {
 
     override func computeAxis(min: Double, max: Double, inverted: Bool) {
-        axis?.entries = [0, 1, 2, 3, 4, 5, 6]
+        axis?.entries = [0.0, 1.0, 2.0, 3.0, 4.0, 5.0, 6.0]
     }
 
 }

@@ -12,7 +12,7 @@ import UIKit
 
 public class CustomChartFormatter: NSObject, IAxisValueFormatter {
 
-    var days  = ["SUN", "MON", "TUES", "WED", "THU", "FRI", "SAt"]
+    var days  = ["SUN", "MON", "TUES", "WED", "THU", "FRI", "SAT"]
 
     public func stringForValue(_ value: Double, axis: AxisBase?) -> String {
         return days[Int(value)]

@@ -51,9 +51,18 @@ class ChartViewController: UIViewController, UICollectionViewDelegate, UICollect
                 labsCells.append(lab)
             }
         }
-        print(labsCells)
+       
 
         }
+    
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        if !labsCells.isEmpty{
+        let indexPath = IndexPath(item: labsCells.last!-1, section: 0)
+            labsCollectionView.scrollToItem(at: indexPath, at: .left, animated: true)
+            
+        }
+    }
     
      
     override func viewDidAppear(_ animated: Bool) {
@@ -61,7 +70,8 @@ class ChartViewController: UIViewController, UICollectionViewDelegate, UICollect
         setupChart()
         setupChartData()
         
-        print("hey")
+   
+    
      }
     
     private func setupChart() {
@@ -77,7 +87,7 @@ class ChartViewController: UIViewController, UICollectionViewDelegate, UICollect
         let xAxis = chart.xAxis
         xAxis.valueFormatter = DateValueFormatter()
         xAxis.axisMinimum = 0
-        xAxis.axisMaximum = 13
+        xAxis.axisMaximum = 7
         xAxis.labelPosition = .bottom
         xAxis.granularity = 1
         xAxis.drawGridLinesEnabled = false
@@ -86,64 +96,38 @@ class ChartViewController: UIViewController, UICollectionViewDelegate, UICollect
         xAxis.setLabelCount(7, force: true)
         chart.xAxis.forceLabelsEnabled = true
         chart.xAxis.granularityEnabled = true
+        
+        
         xAxis.valueFormatter = CustomChartFormatter()
         
-        chart.setVisibleXRange(minXRange: 0.0, maxXRange: 6.0)
-        
+        chart.setVisibleXRange(minXRange: 0.0, maxXRange: 7)
+        chart.data?.setDrawValues(true)
         
     }
     
     private func setupChartData() {
         var dataEntries: [ChartDataEntry] = []
         
-        let forY: [Double] = [50,60,70,80]
-        let forX: [String] = Patient.sharedInstance.beforeTimes
-
-     
-        //string to date
-//        let now = forX[0]
-        //print(now)
-        let formatter = DateFormatter()
-//        let arabDate = formattedDateFromString(dateString: now, withFormat: "eeee-hh:mm:ss a")
-//      print(arabDate)
-//        formatter.timeStyle = .short
-//        formatter.dateStyle = .short
-  //      formatter.dateFormat = "dd/M/y hh:mm:ss a"
-//        let date3 = formatter.string(from: now)
-        
-        
-        let date44 = Date()
-        
-        let newFormatter = DateFormatter()
-        newFormatter.dateStyle = .short
-
-        newFormatter.timeStyle = .short
-        //use ar for arabic numbers
-        newFormatter.locale = NSLocale(localeIdentifier: "ar_DZ") as Locale
-       
-        //newFormatter.dateFormat = "eeee - hh:mm:ss a dd/M/y"
-        newFormatter.dateFormat = "eeee - hh:mm:ss a dd/M/y"
-        newFormatter.amSymbol = "صباحا"
-        newFormatter.pmSymbol = "مساءا"
-        print(newFormatter.string(from: date44))
+       // let forY: [String] = Patient.sharedInstance.beforeReadings
+        //let forX: [String] = Patient.sharedInstance.deltaBeforeTimes
+        let forY  = [100,15,25,35,45,55,65]
+        let forX = [0,1,2,3,4,5,6]
       
-        //print(date3)
         
-        //string to date
-        let string = "30 October 2019"
-        let formatter4 = DateFormatter()
-        formatter4.dateFormat = "d MMM y"
-        //print(formatter4.date(from: string) ?? "Unknown date")
         
-        //date to seconds
-        let date = NSDate()
-        let unixtime = date.timeIntervalSince1970
+     
+    
+        
+        
+        print("count of y \(forY.count)")
+        print("count of x \(forX.count)")
+        
 //
         
-        print("hereee from chart \(Patient.sharedInstance.beforeReadings)")
+        //print("hereee from chart \(Patient.sharedInstance.beforeReadings)")
         for i in 0..<forY.count {
             if Double(forY[i]) != 0 {
-                let dataEntry = ChartDataEntry(x: Double(i+1), y: forY[i])
+                let dataEntry = ChartDataEntry(x: Double(forX[i]), y: Double(forY[i]))
                 dataEntries.append(dataEntry)
             }
             
@@ -153,21 +137,7 @@ class ChartViewController: UIViewController, UICollectionViewDelegate, UICollect
         chart.data = data
     }
     
-    func formattedDateFromString(dateString: String, withFormat format: String) -> String? {
-
-        let inputFormatter = DateFormatter()
-        inputFormatter.dateFormat = "dd/MM/yyyy"
-
-        if let date = inputFormatter.date(from: dateString) {
-
-            let outputFormatter = DateFormatter()
-          outputFormatter.dateFormat = format
-
-            return outputFormatter.string(from: date)
-        }
-
-        return nil
-    }
+    
     
     
     
@@ -211,6 +181,7 @@ class ChartViewController: UIViewController, UICollectionViewDelegate, UICollect
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         if collectionView.tag == 2 {
             addLabReading()
+            
            
         }
         else {//labs collection view clicked
@@ -231,30 +202,12 @@ class ChartViewController: UIViewController, UICollectionViewDelegate, UICollect
                   
                   //self.presentActivityViewController(withUrl: url!) (can be used to show activityController ie sharing a file)
                   
-                  
-                  //let vc =  PDFViewController ()
-                  //vc.pdfURL = url
-                 //self.navigationController?.pushViewController(vc, animated: true)
-                                      
-//
+                  //Shows pdf in a detailView so it can get navBar
                   if let vc = self.storyboard?.instantiateViewController(identifier: "detailViewController") as? PDFViewController {
                       vc.pdfURL = url
-                                    
-                                          self.navigationController?.pushViewController(vc, animated: true)
+                       self.navigationController?.pushViewController(vc, animated: true)
                                       }
-                  
-                  
-//                  let vc : PDFViewController = PDFViewController()
-//                  vc.pdfURL = url
-//
-//                  //let nv = UINavigationController(rootViewController: vc)
-//                  //nv.modalPresentationStyle = .automatic
-//                  vc.modalPresentationStyle = .fullScreen
-//                  self.present(vc, animated: true)
-                  
-              
-                 
-                  
+                
               }
             }
         
@@ -270,29 +223,12 @@ class ChartViewController: UIViewController, UICollectionViewDelegate, UICollect
     
     
     
-    
-    @IBAction func addLabPressed(_ sender: UIButton) {
-       
-        
-        addLabReading()
-    }
+  
     
     
     
     
     @objc func addLabReading(){
-        print("hey")
-        
-        
-        
-       // 1.get access on filesec
-        
-        
-        
-        //2.find what func gets called when a file is picked
-        //3.
-        
-        
         // let documentPicker = UIDocumentPickerViewController(documentTypes: [UTTypePlainText as String], in: .import)
          
          let supportedTypes: [UTType] = [UTType.pdf]
@@ -300,95 +236,11 @@ class ChartViewController: UIViewController, UICollectionViewDelegate, UICollect
          documentPicker.delegate = self
          documentPicker.allowsMultipleSelection = false
          present(documentPicker, animated: true, completion: nil)
-        labsCounter += 1
-        labsCells.append(labsCounter)
-        UserDefaults.standard.set(labsCounter, forKey: "labsCounter")
-        labsCollectionView.reloadData()
-         
-        
-        
-        
-        
-        
-        
-        
+       
     }
     
     
-    @IBAction func writeTest(_ sender: UIButton) {
-        
-        
-//        //for testing purpose write a test file
-//
-//        let file = "\(UUID().uuidString).text"
-//        let contents = "Some random tet"
-//
-//        let dir = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!
-//        let fileURL = dir.appendingPathComponent(file)
-//
-//        do {
-//            try contents.write(to: fileURL, atomically: false, encoding: .utf8)
-//            print("i got ran")
-//            }
-//        catch {
-//            print("error saving testing file ")
-//        }
-//
-//    }
-        //To give each patient separated folder in storage using their uid
-        let currentUser = Auth.auth().currentUser!.uid
-        // Create a reference to the file you want to download
-        let fileRef = storageRef.child("\(currentUser)/labs/lab6.pdf")
-        
-        
-       
-
-        // Create local filesystem URL
-       // let localURL = URL(string: "Labs/lab\(labsCounter)")!
-        
-        let tmporaryDirectoryURL = FileManager.default.temporaryDirectory
-        let localURL = tmporaryDirectoryURL.appendingPathComponent("lab\(labsCounter).pdf")
-
-        // Download to the local filesystem
-        let downloadTask = fileRef.write(toFile: localURL) { url, error in
-          if let error = error {
-            // Uh-oh, an error occurred!
-          } else {
-            // Local file URL for "images/island.jpg" is returned
-              
-              //self.presentActivityViewController(withUrl: url!) (can be used to show activityController ie sharing a file)
-              
-            
-
-
-                 
-//              
-//              
-//             
-//              self.pdfView.translatesAutoresizingMaskIntoConstraints = false
-//              
-//              
-//              self.view.addSubview(self.pdfView)
-//              
-//              self.pdfView.leadingAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.leadingAnchor).isActive = true
-//              self.pdfView.trailingAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.trailingAnchor).isActive = true
-//              self.pdfView.topAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.topAnchor).isActive = true
-//              self.pdfView.bottomAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.bottomAnchor).isActive = true
-//                  
-//
-//                  if let document = PDFDocument(url:url!) {
-//                      self.pdfView.document = document
-//                      self.pdfView.autoScales = true
-//                      self.pdfView.maxScaleFactor = 4.0
-//                      self.pdfView.minScaleFactor = self.pdfView.scaleFactorForSizeToFit
-//                  }
-              
-          }
-        }
     
-    
-    
-}
     
     
     
@@ -419,7 +271,14 @@ extension ChartViewController {
         }
         
         print("upload to firebase")
-        
+        //placed here so if a user doesnt add a file an empty lab cell wont be added
+        labsCounter += 1
+        labsCells.append(labsCounter)
+        UserDefaults.standard.set(labsCounter, forKey: "labsCounter")
+        //scroll to last cell that was added
+        let indexPath = IndexPath(item: labsCells.last!-1, section: 0)
+        labsCollectionView.scrollToItem(at: indexPath, at: .left, animated: true)
+        labsCollectionView.reloadData()
 
         //labsCounter += 1
         //labsCells.append(labsCounter)

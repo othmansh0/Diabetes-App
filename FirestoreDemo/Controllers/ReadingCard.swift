@@ -76,13 +76,22 @@ class ReadingCard {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellName, for: indexPath) as! CollectionViewCell
         cell.readingLabel.text = readings[indexPath.row]
         
-        
-    
         //gets time and date from firebase without seconds
         let readingTime = readingsTime[indexPath.row]
         let time1 = readingTime.substring(to: readingsTime[indexPath.row].lastIndex(of: ":")!)
         let time2 = readingTime.substring(from:readingTime.index(readingTime.lastIndex(of: ":")!, offsetBy: 3) )
-        cell.readingTime.text = time1 + time2
+        let time3 = time1+time2
+       
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateStyle = .none
+        dateFormatter.locale = Locale(identifier: "en_US_POSIX")
+        dateFormatter.timeStyle = .short
+        dateFormatter.dateFormat = "EEEE - hh:mm a"
+        dateFormatter.timeZone = TimeZone(identifier: "UTC")
+               
+              
+        let englishDate: Date = dateFormatter.date(from: time3)!
+        cell.readingTime.text = getArabicTime(time: englishDate, withSeconds: false)
         
         
         cell.layer.cornerRadius = 15
@@ -93,5 +102,23 @@ class ReadingCard {
     }
     
     
+    public func getArabicTime(time:Date,withSeconds:Bool)->String{
+
+           let formatter = DateFormatter()
+           formatter.dateStyle = .none
+           formatter.timeZone = TimeZone(identifier: "UTC")
+           formatter.timeStyle = .short
+           //use ar for arabic numbers
+           formatter.locale = NSLocale(localeIdentifier: "ar_DZ") as Locale
+           formatter.dateFormat = "EEEE - hh:mm:ss a"
+           if withSeconds == false {
+               formatter.dateFormat = "EEEE -  hh:mm a"
+           }
+           formatter.amSymbol = "صباحا"
+           formatter.pmSymbol = "مساءا"
+
+           let dateString = formatter.string(from: time)
+           return dateString
+       }
     
 }
