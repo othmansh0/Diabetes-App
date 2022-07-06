@@ -1023,7 +1023,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="J9e-ne-g55" customClass="LineChartView" customModule="Charts">
-                                <rect key="frame" x="0.0" y="123" width="414" height="265"/>
+                                <rect key="frame" x="0.0" y="64" width="414" height="374"/>
                                 <color key="backgroundColor" systemColor="systemBrownColor"/>
                             </view>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" pagingEnabled="YES" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="uNX-gW-lIl">
@@ -1117,15 +1117,15 @@
                         <viewLayoutGuide key="safeArea" id="BfG-8D-fep"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
-                            <constraint firstItem="J9e-ne-g55" firstAttribute="leading" secondItem="BfG-8D-fep" secondAttribute="leading" id="2JD-pY-fRd"/>
+                            <constraint firstItem="J9e-ne-g55" firstAttribute="leading" secondItem="BfG-8D-fep" secondAttribute="leading" id="4IY-eh-83R"/>
                             <constraint firstItem="yg3-ua-VyZ" firstAttribute="trailing" secondItem="RVm-Te-6sp" secondAttribute="trailingMargin" id="9CQ-Ho-hkS"/>
+                            <constraint firstAttribute="bottom" secondItem="J9e-ne-g55" secondAttribute="bottom" constant="458" id="BKc-FI-Ndn"/>
                             <constraint firstItem="39f-J5-73f" firstAttribute="top" secondItem="yg3-ua-VyZ" secondAttribute="bottom" constant="29" id="CBF-lG-D0i"/>
                             <constraint firstItem="BfG-8D-fep" firstAttribute="trailing" secondItem="39f-J5-73f" secondAttribute="trailing" constant="11" id="IRY-WQ-Hlh"/>
                             <constraint firstItem="39f-J5-73f" firstAttribute="bottom" secondItem="uNX-gW-lIl" secondAttribute="bottom" id="SHq-8H-Jpw"/>
-                            <constraint firstItem="J9e-ne-g55" firstAttribute="top" secondItem="BfG-8D-fep" secondAttribute="top" constant="35" id="X7d-Bb-Vk3"/>
                             <constraint firstItem="uNX-gW-lIl" firstAttribute="leading" secondItem="BfG-8D-fep" secondAttribute="leading" constant="5" id="YTB-6y-Irg"/>
-                            <constraint firstItem="BfG-8D-fep" firstAttribute="bottom" secondItem="J9e-ne-g55" secondAttribute="bottom" constant="425" id="lRU-Xm-0oW"/>
-                            <constraint firstItem="J9e-ne-g55" firstAttribute="centerX" secondItem="RVm-Te-6sp" secondAttribute="centerX" id="pCJ-be-Z3R"/>
+                            <constraint firstItem="J9e-ne-g55" firstAttribute="top" secondItem="RVm-Te-6sp" secondAttribute="topMargin" constant="-24" id="ZTR-0O-z0y"/>
+                            <constraint firstItem="J9e-ne-g55" firstAttribute="centerX" secondItem="RVm-Te-6sp" secondAttribute="centerX" id="oWk-pu-zk4"/>
                             <constraint firstItem="39f-J5-73f" firstAttribute="top" secondItem="uNX-gW-lIl" secondAttribute="top" id="urJ-zn-j0l"/>
                             <constraint firstItem="BfG-8D-fep" firstAttribute="bottom" secondItem="uNX-gW-lIl" secondAttribute="bottom" constant="17" id="yaZ-Jz-rDK"/>
                             <constraint firstItem="39f-J5-73f" firstAttribute="leading" secondItem="uNX-gW-lIl" secondAttribute="trailing" constant="8" id="ygk-dY-IW9"/>

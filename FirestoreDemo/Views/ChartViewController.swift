@@ -14,7 +14,7 @@ import FirebaseFirestore
 import FirebaseAuth
 import FirebaseStorage
 import PDFKit
-class ChartViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, UIDocumentPickerDelegate {
+class ChartViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, UIDocumentPickerDelegate{
     
     @IBOutlet var labsCollectionView: UICollectionView!
     @IBOutlet var buttonCollectionView: UICollectionView!
@@ -52,7 +52,7 @@ class ChartViewController: UIViewController, UICollectionViewDelegate, UICollect
             }
         }
        
-
+        
         }
     
     override func viewDidLayoutSubviews() {
@@ -100,20 +100,33 @@ class ChartViewController: UIViewController, UICollectionViewDelegate, UICollect
         
         xAxis.valueFormatter = CustomChartFormatter()
         
+        
+        
         chart.setVisibleXRange(minXRange: 0.0, maxXRange: 7)
         chart.data?.setDrawValues(true)
-        
+        chart.legend.xOffset = (chart.window?.frame.width)! * 0.45
+        chart.legend.form = .circle
+        chart.extraTopOffset = 2
+       
+        chart.legend.verticalAlignment = .top
+        chart.extraBottomOffset = 50
     }
     
+    
     private func setupChartData() {
-        var dataEntries: [ChartDataEntry] = []
+        var lineChartEntry1: [ChartDataEntry] = []//before eatting
+        var lineChartEntry2: [ChartDataEntry] = [] //after eatting
         
-       // let forY: [String] = Patient.sharedInstance.beforeReadings
-        //let forX: [String] = Patient.sharedInstance.deltaBeforeTimes
-        let forY  = [100,15,25,35,45,55,65]
-        let forX = [0,1,2,3,4,5,6]
+        let forY: [String] = Patient.sharedInstance.beforeReadings
+        let forX: [String] = Patient.sharedInstance.deltaBeforeTimes
+        
+        let forY2 = [100,100,25,15,12,55,65]
+        let forX2 = [0.5,0.7,2,3,4,5,6]
+        
+       // let forY  = [100,100,25,15,12,55,65]
+        //let forX = [0.5,0.7,2,3,4,5,6]
       
-        
+        let data = LineChartData()
         
      
     
@@ -125,16 +138,47 @@ class ChartViewController: UIViewController, UICollectionViewDelegate, UICollect
 //
         
         //print("hereee from chart \(Patient.sharedInstance.beforeReadings)")
-        for i in 0..<forY.count {
+        
+        for i in 0..<forY.count { //before eatting
             if Double(forY[i]) != 0 {
-                let dataEntry = ChartDataEntry(x: Double(forX[i]), y: Double(forY[i]))
-                dataEntries.append(dataEntry)
+                let dataEntry = ChartDataEntry(x: Double(forX[i])!, y: Double(forY[i])!)
+                lineChartEntry1.append(dataEntry)
             }
             
         }
-        let dataSet = LineChartDataSet(entries: dataEntries, label: "")
-        let data = LineChartData(dataSet: dataSet)
+        
+        for i in 0..<forY2.count {//after eatting
+            if Double(forY2[i]) != 0 {
+                let dataEntry = ChartDataEntry(x: forX2[i], y: Double(forY2[i]))
+                lineChartEntry2.append(dataEntry)
+            }
+            
+        }
+        
+        let dataSet = LineChartDataSet(entries: lineChartEntry1, label: "قبل الأكل")
+        
+        let dataSet2 = LineChartDataSet(entries: lineChartEntry2, label: "بعد الأكل")
+        
+        data.addDataSet(dataSet)
+        data.addDataSet(dataSet2)
+        //before eating line design
+        dataSet.setColor(UIColor(red: 187/255, green: 214/255, blue: 197/255, alpha: 1))
+        dataSet.fillColor = .white
+        dataSet.circleColors = [UIColor(red: 187/255, green: 214/255, blue: 197/255, alpha: 1)]
+        dataSet.circleRadius = 6
+        dataSet.lineWidth = 3
+        
+        
+        dataSet2.setColor(UIColor(red: 52/255, green: 91/255, blue: 99/255, alpha: 1))
+        dataSet2.fillColor = .white
+        dataSet2.circleColors = [UIColor(red: 52/255, green: 91/255, blue: 99/255, alpha: 1)]
+        dataSet2.circleRadius = 6
+        dataSet2.lineWidth = 3
+        
+        
         chart.data = data
+        
+        //chart.legend.horizontalAlignment = .center
     }
     
     
