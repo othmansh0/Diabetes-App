@@ -20,6 +20,15 @@ class PatientViewController:UIViewController, UICollectionViewDataSource, UIColl
     let db = Firestore.firestore()
     let defaults = UserDefaults.standard
     var doctorID:String!
+    
+    
+    
+    
+    
+    var weeksCount = UserDefaults.standard.integer(forKey: "weeksCount")
+    var timer: Timer?
+    var runCount = 0
+    
     //Bottom Sheet
     @IBOutlet weak var bottomSheet: UIView!
     @IBOutlet weak var readingField: UITextField!
@@ -43,7 +52,7 @@ class PatientViewController:UIViewController, UICollectionViewDataSource, UIColl
     override func viewDidLoad() {
         super.viewDidLoad()
         doctorID = defaults.string(forKey: "doctorID")
-        
+        //weeksCount = defaults.integer(forKey: "weeksCount")
         
         
        
@@ -229,8 +238,9 @@ class PatientViewController:UIViewController, UICollectionViewDataSource, UIColl
             fatalError("error trying to calculate plot in patientviewcontroller")
         }
         
-        
-        
+        if(runCount == 0) {//to avoid starting a timer on every press
+        timer = Timer.scheduledTimer(timeInterval: 1.0, target: self, selector: #selector(fireTimer), userInfo: nil, repeats: true)
+        }
         
         
         
@@ -323,8 +333,8 @@ class PatientViewController:UIViewController, UICollectionViewDataSource, UIColl
         //get ref of patient
         
         DispatchQueue.main.async {
-            let patient = self.db.collection("doctors").document(self.doctorID).collection("patients").document(Auth.auth().currentUser!.uid)
             
+            let patient = self.db.collection("doctors").document(self.doctorID).collection("patients").document(Auth.auth().currentUser!.uid).collection("weeks").document("week\(self.weeksCount)")
             
             patient.getDocument { document, error in
                 if let document = document,document.exists {
@@ -393,7 +403,8 @@ class PatientViewController:UIViewController, UICollectionViewDataSource, UIColl
              readingsTime = "beforeTimes"
              deltaReadingsType = "deltaBeforeTimes"
     }
-        let patient = db.collection("doctors").document(doctorID).collection("patients").document(Auth.auth().currentUser!.uid)
+        print("weeks count is\(weeksCount)")
+        let patient = db.collection("doctors").document(doctorID).collection("patients").document(Auth.auth().currentUser!.uid).collection("weeks").document("week\(weeksCount)")
         
         patient.updateData([readingsTime:FieldValue.arrayUnion([time])]) { error in
             print("error updating data")
@@ -413,7 +424,26 @@ class PatientViewController:UIViewController, UICollectionViewDataSource, UIColl
     
     
     
-    
+    @objc func fireTimer() {
+        let startTime = Date()
+        let formatter = DateFormatter()
+        formatter.dateFormat = "dd/MM/yyyy"
+        let startDate = formatter.string(from: startTime)
+        
+        runCount += 1
+        if runCount == 1 {//push start date to firebase
+            print("Timer fired!\(startDate)")
+        }
+        if runCount == 604801  {//push end date to firebase  after a week finishes
+            timer?.invalidate()
+            let endTime = Date()
+            let endDate = formatter.string(from: endTime)
+            print("Timer ended!\(endDate)")
+            weeksCount += 1
+            UserDefaults.standard.set(weeksCount, forKey: "weeksCount")
+            runCount = 0
+        }
+    }
     
 }
 

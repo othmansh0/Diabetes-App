@@ -104,10 +104,11 @@ class ChartViewController: UIViewController, UICollectionViewDelegate, UICollect
         
         chart.setVisibleXRange(minXRange: 0.0, maxXRange: 7)
         chart.data?.setDrawValues(true)
-        chart.legend.xOffset = (chart.window?.frame.width)! * 0.45
+        //chart.legend.xOffset = (chart.window?.frame.width)! * 0.42
         chart.legend.form = .circle
-        chart.extraTopOffset = 2
+        chart.extraTopOffset = 20
        
+        chart.legend.horizontalAlignment = .center
         chart.legend.verticalAlignment = .top
         chart.extraBottomOffset = 50
     }

@@ -24,6 +24,7 @@ class PatientRegisterationViewController: UIViewController,UITextFieldDelegate {
   
     //lab counter stored in user defaults to count number of labs user imported
     var labsCounter = 0
+    var weeksCount = 1
     let defaults = UserDefaults.standard
     
     
@@ -58,7 +59,7 @@ class PatientRegisterationViewController: UIViewController,UITextFieldDelegate {
         self.setBackgroundImage("greenBG", contentMode: .scaleAspectFit)
         
         defaults.set(labsCounter, forKey: "labsCounter")
-        
+        defaults.set(weeksCount, forKey: "weeksCount")
       // scrollView.touch
        // self.myScrollview.panGestureRecognizer.delaysTouchesBegan = true
 
