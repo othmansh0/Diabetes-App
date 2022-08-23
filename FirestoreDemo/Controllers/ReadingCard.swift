@@ -91,6 +91,7 @@ class ReadingCard {
                
               
         let englishDate: Date = dateFormatter.date(from: time3)!
+        print("english date in collection view is \(englishDate)")
         cell.readingTime.text = getArabicTime(time: englishDate, withSeconds: false)
         
         

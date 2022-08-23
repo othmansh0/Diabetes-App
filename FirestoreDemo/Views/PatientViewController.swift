@@ -20,7 +20,7 @@ class PatientViewController:UIViewController, UICollectionViewDataSource, UIColl
     let db = Firestore.firestore()
     let defaults = UserDefaults.standard
     var doctorID:String!
-    
+    var openedDate:String!
     
     
     
@@ -53,8 +53,6 @@ class PatientViewController:UIViewController, UICollectionViewDataSource, UIColl
         super.viewDidLoad()
         doctorID = defaults.string(forKey: "doctorID")
         //weeksCount = defaults.integer(forKey: "weeksCount")
-        
-        
        
         tabBarController?.tabBar.layer.cornerRadius = 15
         collectionViewLayout.minimumLineSpacing = 5
@@ -73,6 +71,45 @@ class PatientViewController:UIViewController, UICollectionViewDataSource, UIColl
 
         Patient.sharedInstance.afterReadings = fetchReadings(tag: 1)
         Patient.sharedInstance.beforeReadings = fetchReadings(tag: 2)
+        
+        
+        
+        
+        //gets last opened date from user defaults
+        openedDate = defaults.string(forKey: "openedDate")
+        
+        //compare last opened with current date if number of weeks is greater than 1 then set number of weeks
+        
+        
+        //convert last opened date & current to seconds then to weeks by dividing over 608400
+        
+        //
+        
+        
+        
+        let now = Date()
+        let formatter = DateFormatter()
+        formatter.dateFormat = "dd/MM/yyyy hh:mm:ss"
+        formatter.locale = Locale(identifier: "en_US_POSIX")
+        formatter.timeZone = TimeZone(identifier: "UTC")
+        let opendDateAsDate = formatter.date(from: openedDate)
+        print("opened date as a date \(opendDateAsDate)")
+        
+        let delta = (opendDateAsDate!.timeIntervalSince1970 - now.timeIntervalSince1970)/608400
+        //check number of weeks
+        if delta >= 1 {
+            weeksCount += Int(ceil(delta))
+        }
+        
+        
+        
+        let nowString = formatter.string(from: now)
+        
+        //set opened date to current date
+        defaults.set(nowString, forKey: "openedDate")
+        print("opened date is \(nowString)")
+        
+        
         
     }
     
@@ -233,14 +270,20 @@ class PatientViewController:UIViewController, UICollectionViewDataSource, UIColl
             plot = 6.0 + secondsVal
             print("plot \(plot!)")
             
+            
         }
         else {
             fatalError("error trying to calculate plot in patientviewcontroller")
         }
         
-        if(runCount == 0) {//to avoid starting a timer on every press
-        timer = Timer.scheduledTimer(timeInterval: 1.0, target: self, selector: #selector(fireTimer), userInfo: nil, repeats: true)
-        }
+//        if(runCount == 0) {//to avoid starting a timer on every press
+//        timer = Timer.scheduledTimer(timeInterval: 1.0, target: self, selector: #selector(fireTimer), userInfo: nil, repeats: true)
+//        }
+        
+        
+        
+        
+        
         
         
         
@@ -250,9 +293,11 @@ class PatientViewController:UIViewController, UICollectionViewDataSource, UIColl
             Patient.sharedInstance.afterReadings.insert(reading, at: 0)
             Patient.sharedInstance.afterTimes.insert(englishDateString, at: 0)
             Patient.sharedInstance.deltaAfterTimes.insert(String(plot), at: 0)
+            print("english date before writing to firestore \(englishDateString)")
+
             writeReading(tag: 1, with: reading,at: englishDateString)
             
-            }else {
+            } else {
 //                    beforeReadings.insert(reading, at: 0)
 //                    beforeTimes.insert(dateString, at: 0)
                     Patient.sharedInstance.beforeReadings.insert(reading, at: 0)
@@ -335,6 +380,7 @@ class PatientViewController:UIViewController, UICollectionViewDataSource, UIColl
         DispatchQueue.main.async {
             
             let patient = self.db.collection("doctors").document(self.doctorID).collection("patients").document(Auth.auth().currentUser!.uid).collection("weeks").document("week\(self.weeksCount)")
+            print(patient)
             
             patient.getDocument { document, error in
                 if let document = document,document.exists {
@@ -405,7 +451,7 @@ class PatientViewController:UIViewController, UICollectionViewDataSource, UIColl
     }
         print("weeks count is\(weeksCount)")
         let patient = db.collection("doctors").document(doctorID).collection("patients").document(Auth.auth().currentUser!.uid).collection("weeks").document("week\(weeksCount)")
-        
+        print("readings time is fuck \(readingsTime)")
         patient.updateData([readingsTime:FieldValue.arrayUnion([time])]) { error in
             print("error updating data")
         }
@@ -424,26 +470,26 @@ class PatientViewController:UIViewController, UICollectionViewDataSource, UIColl
     
     
     
-    @objc func fireTimer() {
-        let startTime = Date()
-        let formatter = DateFormatter()
-        formatter.dateFormat = "dd/MM/yyyy"
-        let startDate = formatter.string(from: startTime)
-        
-        runCount += 1
-        if runCount == 1 {//push start date to firebase
-            print("Timer fired!\(startDate)")
-        }
-        if runCount == 604801  {//push end date to firebase  after a week finishes
-            timer?.invalidate()
-            let endTime = Date()
-            let endDate = formatter.string(from: endTime)
-            print("Timer ended!\(endDate)")
-            weeksCount += 1
-            UserDefaults.standard.set(weeksCount, forKey: "weeksCount")
-            runCount = 0
-        }
-    }
+//    @objc func fireTimer() {
+//        let startTime = Date()
+//        let formatter = DateFormatter()
+//        formatter.dateFormat = "dd/MM/yyyy"
+//        let startDate = formatter.string(from: startTime)
+//
+//        runCount += 1
+//        if runCount == 1 {//push start date to firebase
+//            print("Timer fired!\(startDate)")
+//        }
+//        if runCount == 604801  {//push end date to firebase  after a week finishes
+//            timer?.invalidate()
+//            let endTime = Date()
+//            let endDate = formatter.string(from: endTime)
+//            print("Timer ended!\(endDate)")
+//            weeksCount += 1
+//            UserDefaults.standard.set(weeksCount, forKey: "weeksCount")
+//            runCount = 0
+//        }
+//    }
     
 }
 

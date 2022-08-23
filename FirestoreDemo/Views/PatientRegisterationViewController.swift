@@ -25,6 +25,8 @@ class PatientRegisterationViewController: UIViewController,UITextFieldDelegate {
     //lab counter stored in user defaults to count number of labs user imported
     var labsCounter = 0
     var weeksCount = 1
+    var openedDate = ""
+    
     let defaults = UserDefaults.standard
     
     
@@ -63,6 +65,17 @@ class PatientRegisterationViewController: UIViewController,UITextFieldDelegate {
       // scrollView.touch
        // self.myScrollview.panGestureRecognizer.delaysTouchesBegan = true
 
+        
+        
+        
+        let now = Date()
+        let formatter = DateFormatter()
+        formatter.dateFormat = "dd/MM/yyyy hh:mm:ss"
+        formatter.locale = Locale(identifier: "en_US_POSIX")
+        formatter.timeZone = TimeZone(identifier: "UTC")
+        openedDate = formatter.string(from: now)
+        defaults.set(openedDate, forKey: "openedDate")
+        print("opened date is \(openedDate)")
         
         
         //Showing bottomBorder only of textFields
@@ -360,9 +373,14 @@ class PatientRegisterationViewController: UIViewController,UITextFieldDelegate {
             defualts.set(doctorID, forKey: "doctorID")
             
             let newPatient = db.collection("doctors").document(doctorID).collection("patients").document(Auth.auth().currentUser!.uid)
-            newPatient.setData(["Name":Patientname,"birthDate":birthDate,"Height":patientHeight,"Weight":patientWeight,"DiabetesType":diabetesOptions[segmentedDiabets.selectedIndex],"ID":newPatient.documentID,"doctorID":doctorID,"beforeReadings":[],"beforeTimes":[],"afterReadings":[],"afterTimes":[]])
             
             
+            newPatient.setData(["Name":Patientname,"birthDate":birthDate,"Height":patientHeight,"Weight":patientWeight,"DiabetesType":diabetesOptions[segmentedDiabets.selectedIndex],"ID":newPatient.documentID,"doctorID":doctorID])
+            
+            
+            
+            
+            newPatient.collection("weeks").document("week\(1)").setData(["afterReadings":[],"afterTimes":[],"deltaAfterTimes":[],"beforeReadings":[],"beforeTimes":[],"deltaBeforeTimes":[]])
             let storyboard = UIStoryboard(name: "Main", bundle: nil)
             let mainTabBarController = storyboard.instantiateViewController(identifier: "MainTabBarController")
                 
