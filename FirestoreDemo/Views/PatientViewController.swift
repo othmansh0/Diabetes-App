@@ -7,7 +7,7 @@
 import Firebase
 import UIKit
 
-class PatientViewController:UIViewController, UICollectionViewDataSource, UICollectionViewDelegate,UITabBarDelegate, UITabBarControllerDelegate {
+class PatientViewController:UIViewController, UICollectionViewDataSource, UICollectionViewDelegate,UITabBarDelegate, UITabBarControllerDelegate,HamburgerViewControllerDelegate {
     
     @IBOutlet weak var collectionViewTwo: UICollectionView!
     @IBOutlet weak var collectionViewOne: UICollectionView!
@@ -23,7 +23,12 @@ class PatientViewController:UIViewController, UICollectionViewDataSource, UIColl
     var openedDate:String!
     
     
+    @IBOutlet weak var hamburgerView: UIView!
+    @IBOutlet weak var leadingConstraintForHamburgerView: NSLayoutConstraint!
     
+    @IBOutlet weak var backViewForHamburger: UIView!
+    
+ 
     
     var weeksCount = UserDefaults.standard.integer(forKey: "weeksCount")
     var timer: Timer?
@@ -48,12 +53,18 @@ class PatientViewController:UIViewController, UICollectionViewDataSource, UIColl
     var blurEffect = UIBlurEffect()
 
     private var indexOfCellBeforeDragging = 0
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
+        //self.hamburgerViewController?.delegate = self
+        self.backViewForHamburger.isHidden = true
+       // self.mainBackView.layer.cornerRadius = 40
+        //self.mainBackView.clipsToBounds = true
         doctorID = defaults.string(forKey: "doctorID")
+        Patient.sharedInstance.doctorID = doctorID
+        Patient.sharedInstance.weeksCount = weeksCount
         //weeksCount = defaults.integer(forKey: "weeksCount")
-       
+       print("weeks count in vc is \(weeksCount)")
         tabBarController?.tabBar.layer.cornerRadius = 15
         collectionViewLayout.minimumLineSpacing = 5
         collectionViewLayout2.minimumLineSpacing = 5
@@ -78,38 +89,62 @@ class PatientViewController:UIViewController, UICollectionViewDataSource, UIColl
         //gets last opened date from user defaults
         openedDate = defaults.string(forKey: "openedDate")
         
-        //compare last opened with current date if number of weeks is greater than 1 then set number of weeks
-        
-        
-        //convert last opened date & current to seconds then to weeks by dividing over 608400
-        
-        //
         
         
         
-        let now = Date()
+        
+        
+        
+        
+        let now = Date.getCurrentDate()
         let formatter = DateFormatter()
         formatter.dateFormat = "dd/MM/yyyy hh:mm:ss"
         formatter.locale = Locale(identifier: "en_US_POSIX")
         formatter.timeZone = TimeZone(identifier: "UTC")
+        
+        //let tempDate = "10/08/2022 03:53:33"
+        //let tempDateAsDate = formatter.date(from: tempDate)
         let opendDateAsDate = formatter.date(from: openedDate)
         print("opened date as a date \(opendDateAsDate)")
+        //print("temp date as a date \(tempDateAsDate)")
         
-        let delta = (opendDateAsDate!.timeIntervalSince1970 - now.timeIntervalSince1970)/608400
+        //compare last opened with current date if number of weeks is greater than 1 then set number of weeks
+        //convert last opened date & current to seconds then to weeks by dividing over 608400
+        let now2 = formatter.date(from: now)!
+        print("opened date as seconds is \(opendDateAsDate!.timeIntervalSince1970)")
+        print("current date as seconds is \(now2.timeIntervalSince1970)")
+       let delta = (now2.timeIntervalSince1970/608400 - opendDateAsDate!.timeIntervalSince1970/608400)
+       //let delta = (now2.timeIntervalSince1970/608400 - tempDateAsDate!.timeIntervalSince1970/608400)
         //check number of weeks
+        print("delta is \(delta)")
         if delta >= 1 {
+            
             weeksCount += Int(ceil(delta))
+            UserDefaults.standard.set(weeksCount, forKey: "weeksCount")
+            Patient.sharedInstance.weeksCount = weeksCount
+            let patient = db.collection("doctors").document(doctorID).collection("patients").document(Auth.auth().currentUser!.uid).collection("weeks").document("week\(weeksCount)")
+            
+            patient.setData(["afterReadings":[],"afterTimes":[],"deltaAfterTimes":[],"beforeReadings":[],"beforeTimes":[],"deltaBeforeTimes":[]])
         }
         
         
-        
-        let nowString = formatter.string(from: now)
-        
+       
+        let nowString = formatter.string(from: now2)
         //set opened date to current date
         defaults.set(nowString, forKey: "openedDate")
-        print("opened date is \(nowString)")
+        print("opened date as current date is \(nowString)")
         
+        //MARK: Side Menu
+//        let vc = ContainerViewController()
+//        //vc.navVC?.view.backgroundColor = .blue
+//        addChild(vc)
+//        view.addSubview(vc.view)
+//        vc.didMove(toParent: self)
         
+        //new solution
+//        self.backViewForHamburger.isHidden = true
+//        self.mainBackView.layer.cornerRadius = 40
+//        self.mainBackView.clipsToBounds = true
         
     }
     
@@ -124,7 +159,159 @@ class PatientViewController:UIViewController, UICollectionViewDataSource, UIColl
 //        }
 //    }
     
+    @IBAction func tappedOnHamburgerbackView(_ sender: UITapGestureRecognizer) {
+        
+        self.hideHamburgerView()
+    }
+    
+    func hideHamburgerMenu() {
+        self.hideHamburgerView()
+    }
+    
+    private func hideHamburgerView()
+    {
+        UIView.animate(withDuration: 0.1) {
+            self.leadingConstraintForHamburgerView.constant = 0
+            self.view.layoutIfNeeded()
+        } completion: { (status) in
+            self.backViewForHamburger.alpha = 0.0
+            UIView.animate(withDuration: 0.1) {
+                self.leadingConstraintForHamburgerView.constant = 280
+                self.view.layoutIfNeeded()
+            } completion: { (status) in
+                self.backViewForHamburger.isHidden = true
+                self.isHamburgerMenuShown = false
+            }
+        }
+    }
+    @IBAction func showHamburgerMenu(_ sender: Any) {
+        
+//        if let vc = storyboard?.instantiateViewController(withIdentifier: "mo") as? HamburgerViewController {
+//            print("fuckydo")
+//            tabBarController?.navigationController?.pushViewController(vc, animated: true)
+//
+//            let transition = CATransition()
+//            transition.duration = 0.5
+//            transition.type = CATransitionType.push
+//            transition.subtype = CATransitionSubtype.fromRight
+//            transition.timingFunction = CAMediaTimingFunction(name:CAMediaTimingFunctionName.easeInEaseOut)
+//            view.window!.layer.add(transition, forKey: kCATransition)
+//            present(vc, animated: false, completion: nil)
+//
+//            //present(vc, animated: true, completion: nil)
+//           }
+        
+        
+
+        UIView.animate(withDuration: 0.1) {
+            self.leadingConstraintForHamburgerView.constant = 10
+            self.view.layoutIfNeeded()
+        } completion: { (status) in
+            self.backViewForHamburger.alpha = 0.75
+            self.backViewForHamburger.isHidden = false
+            UIView.animate(withDuration: 0.1) {
+                self.leadingConstraintForHamburgerView.constant = -280
+                self.view.layoutIfNeeded()
+            } completion: { (status) in
+                self.isHamburgerMenuShown = true
+            }
+
+        }
+
+        self.backViewForHamburger.isHidden = false
+        
+    }
+    
+    var hamburgerViewController : HamburgerViewController?
    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if (segue.identifier == "hamburgerSegue")
+        {
+            print("omg")
+            if let controller = segue.destination as? HamburgerViewController
+            {
+                print("omg2")
+                self.hamburgerViewController = controller
+                self.hamburgerViewController?.delegate = self
+            }
+        }
+    }
+    
+  
+    private var isHamburgerMenuShown:Bool = false
+    private var beginPoint:CGFloat = 0.0
+    private var difference:CGFloat = 0.0
+  
+    
+    
+    
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        if (isHamburgerMenuShown)
+        {
+             if let touch = touches.first
+            {
+                let location = touch.location(in: backViewForHamburger)
+                beginPoint = location.x
+            }
+        }
+    }
+    
+    override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
+        if (isHamburgerMenuShown)
+        {
+            if let touch = touches.first
+            {
+                let location = touch.location(in: backViewForHamburger)
+                
+                let differenceFromBeginPoint = beginPoint - location.x
+                
+                if (differenceFromBeginPoint>0 || differenceFromBeginPoint<280)
+                {
+                    difference = differenceFromBeginPoint
+                    self.leadingConstraintForHamburgerView.constant = differenceFromBeginPoint
+                    self.backViewForHamburger.alpha = 0.75+(0.75*differenceFromBeginPoint/280)
+                }
+            }
+        }
+    }
+    
+    override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
+        if (isHamburgerMenuShown)
+        {
+            if (difference>140)
+            {
+                UIView.animate(withDuration: 0.1) {
+                    self.leadingConstraintForHamburgerView.constant = -280
+                } completion: { (status) in
+                    self.backViewForHamburger.alpha = 0.0
+                    self.isHamburgerMenuShown = false
+                    self.backViewForHamburger.isHidden = true
+                }
+            }
+            else{
+                print("fml")
+                UIView.animate(withDuration: 0.1) {
+                    self.leadingConstraintForHamburgerView.constant = 0
+                } completion: { (status) in
+                    self.backViewForHamburger.alpha = 0
+                    self.isHamburgerMenuShown = true
+                    self.backViewForHamburger.isHidden = false
+                }
+            }
+        }
+    }
+
+
+
+    
+    
+    
+    
+    
+   
+    
+
+    
  
     
     
@@ -491,6 +678,10 @@ class PatientViewController:UIViewController, UICollectionViewDataSource, UIColl
 //        }
 //    }
     
+
+  
+    
+
 }
 
 
@@ -537,7 +728,30 @@ extension PatientViewController {
     }
     
     
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
 
+    
+    
     
 }
 
@@ -629,15 +843,19 @@ extension UIView {
 
 
 extension Date {
-    func get(_ components: Calendar.Component..., calendar: Calendar = Calendar.current) -> DateComponents {
-        return calendar.dateComponents(Set(components), from: self)
-    }
 
-    func get(_ component: Calendar.Component, calendar: Calendar = Calendar.current) -> Int {
-        return calendar.component(component, from: self)
+ static func getCurrentDate() -> String {
+
+        let dateFormatter = DateFormatter()
+
+        dateFormatter.dateFormat = "dd/MM/yyyy HH:mm:ss"
+     dateFormatter.dateFormat = "dd/MM/yyyy hh:mm:ss"
+     dateFormatter.locale = Locale(identifier: "en_US_POSIX")
+     dateFormatter.timeZone = TimeZone(identifier: "UTC")
+        return dateFormatter.string(from: Date())
+
     }
 }
-    
     
     
  

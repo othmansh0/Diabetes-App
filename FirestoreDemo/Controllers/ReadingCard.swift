@@ -78,6 +78,7 @@ class ReadingCard {
         
         //gets time and date from firebase without seconds
         let readingTime = readingsTime[indexPath.row]
+        print("reading time is \(readingTime)")
         let time1 = readingTime.substring(to: readingsTime[indexPath.row].lastIndex(of: ":")!)
         let time2 = readingTime.substring(from:readingTime.index(readingTime.lastIndex(of: ":")!, offsetBy: 3) )
         let time3 = time1+time2

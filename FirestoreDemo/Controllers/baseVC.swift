@@ -6,6 +6,8 @@
 //
 class Patient {
     static let sharedInstance = Patient()
+    var doctorID: String!
+    var weeksCount:Int!
     var beforeReadings = [String]()
     var beforeTimes = [String]()
     var deltaBeforeTimes = [String]() //stores timeInterval of each reading to be plotted on chart

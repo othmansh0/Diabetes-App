@@ -11,11 +11,11 @@ pod 'Firebase/Analytics'
 	pod 'Firebase/Core'
 	pod 'Firebase/Firestore'
 	pod 'FirebaseFirestoreSwift'
-         pod 'LayoutHelper'
+  
          pod 'Firebase/Storage'
 
 
-	pod 'Charts'
-pod 'TinyConstraints'
+pod 'Charts','~> 3.4'
+
 
 end

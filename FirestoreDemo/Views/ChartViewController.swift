@@ -23,7 +23,8 @@ class ChartViewController: UIViewController, UICollectionViewDelegate, UICollect
     
     @IBOutlet weak var chart: LineChartView!
     
-   
+    @IBOutlet weak var weeksLabel: UILabel!
+    
    
     var labsCounter =  UserDefaults.standard.integer(forKey: "labsCounter")
     var labsCells = [Int]()
@@ -34,8 +35,14 @@ class ChartViewController: UIViewController, UICollectionViewDelegate, UICollect
     //let storage = Storage.storage()
     // Create a storage reference from our storage service
     let storageRef = Storage.storage().reference()
-  
-
+    
+    
+    let db = Firestore.firestore()
+    var docs: [QueryDocumentSnapshot]!
+    var numberOfweeks: Int!
+    var weekIndex = 0 //latest week
+    //let weeksRef = db.collection("cities")
+    var weeksIDS = [String]()
   
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -52,7 +59,32 @@ class ChartViewController: UIViewController, UICollectionViewDelegate, UICollect
             }
         }
        
+        print("my docID IS\(Patient.sharedInstance.doctorID!)")
+        let weeksRef = db.collection("doctors").document(Patient.sharedInstance.doctorID!).collection("patients").document(Auth.auth().currentUser!.uid).collection("weeks")
+
+
+        weeksRef.getDocuments { [self] snap, erorr in
+            self.docs = snap?.documents
+            //reversing documents to view weeks from newest to oldest
+            self.docs?.reverse()
+            self.numberOfweeks = self.docs?.count
+            
+            //remove week from weeks id
+            for doc in self.docs!{
+                var docID = doc.documentID
+                if let range = docID.range(of: "week") {
+                   docID.removeSubrange(range)
+                }
+                //save week ids in array to update weeks label under chart
+                //self.weeksIDS.append(docID)
+                print("doc id is \(docID)")
+                weeksIDS.append(docID)
+            }
+           // print(docs?[0].data()["afterTimes"] as? [String])
+        }
+
         
+        weeksLabel.text = "أسبوع \(Patient.sharedInstance.weeksCount!)"
         }
     
     override func viewDidLayoutSubviews() {
@@ -68,10 +100,8 @@ class ChartViewController: UIViewController, UICollectionViewDelegate, UICollect
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         setupChart()
-        setupChartData()
+        setupChartData(beforeReadings: Patient.sharedInstance.beforeReadings, deltaBeforeTimes: Patient.sharedInstance.deltaBeforeTimes, afterReadings: Patient.sharedInstance.afterReadings, deltaAfterTimes: Patient.sharedInstance.deltaAfterTimes)
         
-   
-    
      }
     
     private func setupChart() {
@@ -114,15 +144,19 @@ class ChartViewController: UIViewController, UICollectionViewDelegate, UICollect
     }
     
     
-    private func setupChartData() {
+    private func setupChartData(beforeReadings:[String],deltaBeforeTimes:[String],afterReadings:[String],deltaAfterTimes:[String]) {
         var lineChartEntry1: [ChartDataEntry] = []//before eatting
         var lineChartEntry2: [ChartDataEntry] = [] //after eatting
         
-        let forY: [String] = Patient.sharedInstance.beforeReadings
-        let forX: [String] = Patient.sharedInstance.deltaBeforeTimes
+        let forY: [String] = beforeReadings
+        let forX: [String] = deltaBeforeTimes
         
-        let forY2 = [100,100,25,15,12,55,65]
-        let forX2 = [0.5,0.7,2,3,4,5,6]
+//        let forY2 = [100,100,25,15,12,55,65]
+//        let forX2 = [0.5,0.7,2,3,4,5,6]
+//
+        let forY2 = afterReadings
+        let forX2 = deltaAfterTimes
+        
         
        // let forY  = [100,100,25,15,12,55,65]
         //let forX = [0.5,0.7,2,3,4,5,6]
@@ -150,7 +184,7 @@ class ChartViewController: UIViewController, UICollectionViewDelegate, UICollect
         
         for i in 0..<forY2.count {//after eatting
             if Double(forY2[i]) != 0 {
-                let dataEntry = ChartDataEntry(x: forX2[i], y: Double(forY2[i]))
+                let dataEntry = ChartDataEntry(x: Double(forX2[i])!, y: Double(forY2[i])!)
                 lineChartEntry2.append(dataEntry)
             }
             
@@ -288,6 +322,41 @@ class ChartViewController: UIViewController, UICollectionViewDelegate, UICollect
     
     
     
+    @IBAction func navigateChartPressed(_ sender: UIButton) {
+  
+        //next then weekIndex--
+        //back then weekIndex++
+        
+        if sender.tag == 1 && weekIndex-1 >= 0 {//next button clicked
+            weekIndex -= 1
+            weeksLabel.text = "أسبوع \(weeksIDS[weekIndex])"
+        }
+        else if sender.tag == 2 && weekIndex+1 < numberOfweeks {//back button pressed
+            weekIndex += 1
+            weeksLabel.text = "أسبوع \(weeksIDS[weekIndex])"
+            
+        }
+        else {//do nothing
+            return
+        }
+        
+        
+        
+        var afterTimes = docs?[weekIndex].data()["afterTimes"] as? [String]
+        //fetch arrays from firebase
+        var afterReadings = docs?[weekIndex].data()["afterReadings"] as? [String] ?? ["error fetching array from firebase"]
+
+        var deltaAfterTimes = docs?[weekIndex].data()["deltaAfterTimes"] as? [String] ?? ["error fetching array from firebase"]
+        
+        var beforeTimes = docs?[weekIndex].data()["beforeTimes"] as? [String]
+        //fetch arrays from firebase
+        var beforeReadings = docs?[weekIndex].data()["beforeReadings"] as? [String] ?? ["error fetching array from firebase"]
+
+        var deltaBeforeTimes = docs?[weekIndex].data()["deltaBeforeTimes"] as? [String] ?? ["error fetching array from firebase"]
+        
+            setupChartData(beforeReadings: beforeReadings, deltaBeforeTimes: deltaBeforeTimes, afterReadings: afterReadings, deltaAfterTimes: deltaAfterTimes)
+          
+    }
     
     
     

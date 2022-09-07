@@ -30,6 +30,8 @@
 		12742FE227AD94D100360551 /* PatientRegisterationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12742FE127AD94D100360551 /* PatientRegisterationViewController.swift */; };
 		12742FE427AE99B400360551 /* CollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12742FE327AE99B400360551 /* CollectionViewCell.swift */; };
 		12742FE627AEC19C00360551 /* ReadingCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12742FE527AEC19C00360551 /* ReadingCard.swift */; };
+		128C297928C3B9D70022BDAC /* HamburgerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 128C297828C3B9D70022BDAC /* HamburgerViewController.swift */; };
+		128C297B28C3BA000022BDAC /* MenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 128C297A28C3BA000022BDAC /* MenuViewController.swift */; };
 		128F2EBE2780FF5A009248EB /* CodeTextFieldViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 128F2EBD2780FF5A009248EB /* CodeTextFieldViewController.swift */; };
 		1293F42627C80CB7009D0440 /* XAxisWeekRenderer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1293F42527C80CB7009D0440 /* XAxisWeekRenderer.swift */; };
 		1293F42827C80CC1009D0440 /* CustomChartFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1293F42727C80CC1009D0440 /* CustomChartFormatter.swift */; };
@@ -38,7 +40,7 @@
 		12CD913527273A7C00F3C5C8 /* AuthManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12CD913427273A7C00F3C5C8 /* AuthManager.swift */; };
 		12CD91382727420400F3C5C8 /* SMSViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12CD91372727420400F3C5C8 /* SMSViewController.swift */; };
 		12CD913F272745DB00F3C5C8 /* DoctorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12CD913E272745DB00F3C5C8 /* DoctorViewController.swift */; };
-		8CC42FF961B3F7B9F7F5B783 /* Pods_FirestoreDemo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6721BD2B62C25BEE0D994A65 /* Pods_FirestoreDemo.framework */; };
+		6C24AA6E4A93FCBC9B98C16B /* Pods_FirestoreDemo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F5A741D9FE3E3E4A98089042 /* Pods_FirestoreDemo.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -72,6 +74,8 @@
 		12742FE127AD94D100360551 /* PatientRegisterationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PatientRegisterationViewController.swift; sourceTree = "<group>"; };
 		12742FE327AE99B400360551 /* CollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CollectionViewCell.swift; sourceTree = "<group>"; };
 		12742FE527AEC19C00360551 /* ReadingCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReadingCard.swift; sourceTree = "<group>"; };
+		128C297828C3B9D70022BDAC /* HamburgerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HamburgerViewController.swift; sourceTree = "<group>"; };
+		128C297A28C3BA000022BDAC /* MenuViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuViewController.swift; sourceTree = "<group>"; };
 		128F2EBD2780FF5A009248EB /* CodeTextFieldViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CodeTextFieldViewController.swift; sourceTree = "<group>"; };
 		1293F42527C80CB7009D0440 /* XAxisWeekRenderer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = XAxisWeekRenderer.swift; sourceTree = "<group>"; };
 		1293F42727C80CC1009D0440 /* CustomChartFormatter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomChartFormatter.swift; sourceTree = "<group>"; };
@@ -80,9 +84,9 @@
 		12CD913427273A7C00F3C5C8 /* AuthManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthManager.swift; sourceTree = "<group>"; };
 		12CD91372727420400F3C5C8 /* SMSViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SMSViewController.swift; sourceTree = "<group>"; };
 		12CD913E272745DB00F3C5C8 /* DoctorViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DoctorViewController.swift; sourceTree = "<group>"; };
-		21CB5D798C2E6742933DBE03 /* Pods-FirestoreDemo.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FirestoreDemo.release.xcconfig"; path = "Target Support Files/Pods-FirestoreDemo/Pods-FirestoreDemo.release.xcconfig"; sourceTree = "<group>"; };
-		6721BD2B62C25BEE0D994A65 /* Pods_FirestoreDemo.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_FirestoreDemo.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		B8F2ECD3D14CE3E2433C8C9E /* Pods-FirestoreDemo.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FirestoreDemo.debug.xcconfig"; path = "Target Support Files/Pods-FirestoreDemo/Pods-FirestoreDemo.debug.xcconfig"; sourceTree = "<group>"; };
+		22F582D5C026814817EBBDDF /* Pods-FirestoreDemo.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FirestoreDemo.release.xcconfig"; path = "Target Support Files/Pods-FirestoreDemo/Pods-FirestoreDemo.release.xcconfig"; sourceTree = "<group>"; };
+		DB3A368296B06DDC77C24767 /* Pods-FirestoreDemo.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FirestoreDemo.debug.xcconfig"; path = "Target Support Files/Pods-FirestoreDemo/Pods-FirestoreDemo.debug.xcconfig"; sourceTree = "<group>"; };
+		F5A741D9FE3E3E4A98089042 /* Pods_FirestoreDemo.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_FirestoreDemo.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -90,7 +94,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				8CC42FF961B3F7B9F7F5B783 /* Pods_FirestoreDemo.framework in Frameworks */,
+				6C24AA6E4A93FCBC9B98C16B /* Pods_FirestoreDemo.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -100,6 +104,7 @@
 		124B52052780572900902CA8 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				128C297728C3B9BD0022BDAC /* Menu views */,
 				121FD1A9273868E50034B476 /* HomeViewController.swift */,
 				125C1D3B2727347E0053377B /* PhoneViewController.swift */,
 				12CD91372727420400F3C5C8 /* SMSViewController.swift */,
@@ -122,7 +127,7 @@
 				125C1D362727347E0053377B /* FirestoreDemo */,
 				125C1D352727347E0053377B /* Products */,
 				813E513080CCFD5438A09023 /* Pods */,
-				30E8B59C7AA7D88F57CFDD49 /* Frameworks */,
+				F52D45A7CE1CDE4CFF3E72AA /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -149,6 +154,15 @@
 				12671A84286B09380067E5C2 /* GoogleService-Info.plist */,
 			);
 			path = FirestoreDemo;
+			sourceTree = "<group>";
+		};
+		128C297728C3B9BD0022BDAC /* Menu views */ = {
+			isa = PBXGroup;
+			children = (
+				128C297828C3B9D70022BDAC /* HamburgerViewController.swift */,
+				128C297A28C3BA000022BDAC /* MenuViewController.swift */,
+			);
+			path = "Menu views";
 			sourceTree = "<group>";
 		};
 		128F2EBC2780FF11009248EB /* Controllers */ = {
@@ -179,21 +193,21 @@
 			path = Chart;
 			sourceTree = "<group>";
 		};
-		30E8B59C7AA7D88F57CFDD49 /* Frameworks */ = {
-			isa = PBXGroup;
-			children = (
-				6721BD2B62C25BEE0D994A65 /* Pods_FirestoreDemo.framework */,
-			);
-			name = Frameworks;
-			sourceTree = "<group>";
-		};
 		813E513080CCFD5438A09023 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
-				B8F2ECD3D14CE3E2433C8C9E /* Pods-FirestoreDemo.debug.xcconfig */,
-				21CB5D798C2E6742933DBE03 /* Pods-FirestoreDemo.release.xcconfig */,
+				DB3A368296B06DDC77C24767 /* Pods-FirestoreDemo.debug.xcconfig */,
+				22F582D5C026814817EBBDDF /* Pods-FirestoreDemo.release.xcconfig */,
 			);
 			path = Pods;
+			sourceTree = "<group>";
+		};
+		F52D45A7CE1CDE4CFF3E72AA /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				F5A741D9FE3E3E4A98089042 /* Pods_FirestoreDemo.framework */,
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -203,11 +217,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 125C1D48272734810053377B /* Build configuration list for PBXNativeTarget "FirestoreDemo" */;
 			buildPhases = (
-				C2F8C3160D43332A356F3DA2 /* [CP] Check Pods Manifest.lock */,
+				BDA81399E9DF874B44C7C96C /* [CP] Check Pods Manifest.lock */,
 				125C1D302727347E0053377B /* Sources */,
 				125C1D312727347E0053377B /* Frameworks */,
 				125C1D322727347E0053377B /* Resources */,
-				233EAB26A177117D020CCAD4 /* [CP] Embed Pods Frameworks */,
+				D314FB35A123032521AC3023 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -229,6 +243,7 @@
 				TargetAttributes = {
 					125C1D332727347E0053377B = {
 						CreatedOnToolsVersion = 12.4;
+						LastSwiftMigration = 1340;
 					};
 				};
 			};
@@ -269,24 +284,7 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		233EAB26A177117D020CCAD4 /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-FirestoreDemo/Pods-FirestoreDemo-frameworks-${CONFIGURATION}-input-files.xcfilelist",
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-FirestoreDemo/Pods-FirestoreDemo-frameworks-${CONFIGURATION}-output-files.xcfilelist",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-FirestoreDemo/Pods-FirestoreDemo-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		C2F8C3160D43332A356F3DA2 /* [CP] Check Pods Manifest.lock */ = {
+		BDA81399E9DF874B44C7C96C /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -306,6 +304,23 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		D314FB35A123032521AC3023 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-FirestoreDemo/Pods-FirestoreDemo-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-FirestoreDemo/Pods-FirestoreDemo-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-FirestoreDemo/Pods-FirestoreDemo-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
@@ -331,10 +346,12 @@
 				125C1D382727347E0053377B /* AppDelegate.swift in Sources */,
 				12CD91382727420400F3C5C8 /* SMSViewController.swift in Sources */,
 				121FD1AA273868E50034B476 /* HomeViewController.swift in Sources */,
+				128C297B28C3BA000022BDAC /* MenuViewController.swift in Sources */,
 				12742FE227AD94D100360551 /* PatientRegisterationViewController.swift in Sources */,
 				121ABB3427BE3FB0008247EF /* baseVC.swift in Sources */,
 				121ABB2E27BAE575008247EF /* SnapCenterLayout.swift in Sources */,
 				125C1D3A2727347E0053377B /* SceneDelegate.swift in Sources */,
+				128C297928C3B9D70022BDAC /* HamburgerViewController.swift in Sources */,
 				128F2EBE2780FF5A009248EB /* CodeTextFieldViewController.swift in Sources */,
 				12742FE427AE99B400360551 /* CollectionViewCell.swift in Sources */,
 				12C80860286B8CAE0076316A /* CenterViewFlowLayout.swift in Sources */,
@@ -407,6 +424,10 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				"ARCHS[sdk=iphoneos*]" = (
+					x86_64,
+					"$(ARCHS_STANDARD)",
+				);
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
@@ -440,6 +461,8 @@
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
+				EXCLUDED_ARCHS = "";
+				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_NO_COMMON_BLOCKS = YES;
@@ -501,6 +524,8 @@
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				EXCLUDED_ARCHS = "";
+				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
@@ -512,6 +537,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 14.4;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
 				SWIFT_COMPILATION_MODE = wholemodule;
 				SWIFT_OPTIMIZATION_LEVEL = "-O";
@@ -521,14 +547,16 @@
 		};
 		125C1D49272734810053377B /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = B8F2ECD3D14CE3E2433C8C9E /* Pods-FirestoreDemo.debug.xcconfig */;
+			baseConfigurationReference = DB3A368296B06DDC77C24767 /* Pods-FirestoreDemo.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = FirestoreDemo/FirestoreDemo.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 3797M245X7;
+				EXCLUDED_ARCHS = "";
 				INFOPLIST_FILE = FirestoreDemo/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 15.2;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -538,6 +566,8 @@
 				PRODUCT_BUNDLE_IDENTIFIER = othmanshahrouri.FirestoreDemo;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
+				SWIFT_OBJC_BRIDGING_HEADER = "FirestoreDemo/Views/menu Views /FirestoreDemo-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -545,14 +575,16 @@
 		};
 		125C1D4A272734810053377B /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 21CB5D798C2E6742933DBE03 /* Pods-FirestoreDemo.release.xcconfig */;
+			baseConfigurationReference = 22F582D5C026814817EBBDDF /* Pods-FirestoreDemo.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = FirestoreDemo/FirestoreDemo.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 3797M245X7;
+				EXCLUDED_ARCHS = "";
 				INFOPLIST_FILE = FirestoreDemo/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 15.2;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -562,6 +594,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = othmanshahrouri.FirestoreDemo;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
+				SWIFT_OBJC_BRIDGING_HEADER = "FirestoreDemo/Views/menu Views /FirestoreDemo-Bridging-Header.h";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
