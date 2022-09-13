@@ -14,7 +14,7 @@ protocol CustomSegmentedControlDelegate:class {
 class CustomSegmentedControl: UIView {
     private var buttonTitles:[String]!
     private var buttons: [UIButton]!
-    private var selectorView: UIView!
+    public var selectorView: UIView!
     
     var textColor:UIColor = .black
     var selectorViewColor: UIColor = .red
@@ -49,6 +49,7 @@ class CustomSegmentedControl: UIView {
         UIView.animate(withDuration: 0.2) {
             self.selectorView.frame.origin.x = selectorPosition
         }
+        
     }
     
     @objc func buttonAction(sender:UIButton) {
@@ -69,7 +70,7 @@ class CustomSegmentedControl: UIView {
 
 //Configuration View
 extension CustomSegmentedControl {
-    private func updateView() {
+    public func updateView() {
         createButton()
         configSelectorView()
         configStackView()
@@ -88,7 +89,7 @@ extension CustomSegmentedControl {
         stack.rightAnchor.constraint(equalTo: self.rightAnchor).isActive = true
     }
     
-    private func configSelectorView() {
+    public func configSelectorView() {
         let selectorWidth = frame.width / CGFloat(self.buttonTitles.count)
         selectorView = UIView(frame: CGRect(x: 0, y: self.frame.height, width: selectorWidth, height: 2))
         selectorView.backgroundColor = selectorViewColor

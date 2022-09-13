@@ -30,6 +30,10 @@
 		12742FE227AD94D100360551 /* PatientRegisterationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12742FE127AD94D100360551 /* PatientRegisterationViewController.swift */; };
 		12742FE427AE99B400360551 /* CollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12742FE327AE99B400360551 /* CollectionViewCell.swift */; };
 		12742FE627AEC19C00360551 /* ReadingCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12742FE527AEC19C00360551 /* ReadingCard.swift */; };
+		127BC34A28CAD2B500CB3FDA /* SideMenuModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 127BC34928CAD2B500CB3FDA /* SideMenuModel.swift */; };
+		127BC34D28CAD31000CB3FDA /* SideMenuCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 127BC34B28CAD31000CB3FDA /* SideMenuCell.swift */; };
+		127BC34E28CAD31000CB3FDA /* SideMenuCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 127BC34C28CAD31000CB3FDA /* SideMenuCell.xib */; };
+		127BC35028CAD52400CB3FDA /* SideMenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 127BC34F28CAD52400CB3FDA /* SideMenuViewController.swift */; };
 		128C297928C3B9D70022BDAC /* HamburgerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 128C297828C3B9D70022BDAC /* HamburgerViewController.swift */; };
 		128C297B28C3BA000022BDAC /* MenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 128C297A28C3BA000022BDAC /* MenuViewController.swift */; };
 		128F2EBE2780FF5A009248EB /* CodeTextFieldViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 128F2EBD2780FF5A009248EB /* CodeTextFieldViewController.swift */; };
@@ -74,6 +78,10 @@
 		12742FE127AD94D100360551 /* PatientRegisterationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PatientRegisterationViewController.swift; sourceTree = "<group>"; };
 		12742FE327AE99B400360551 /* CollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CollectionViewCell.swift; sourceTree = "<group>"; };
 		12742FE527AEC19C00360551 /* ReadingCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReadingCard.swift; sourceTree = "<group>"; };
+		127BC34928CAD2B500CB3FDA /* SideMenuModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SideMenuModel.swift; sourceTree = "<group>"; };
+		127BC34B28CAD31000CB3FDA /* SideMenuCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SideMenuCell.swift; sourceTree = "<group>"; };
+		127BC34C28CAD31000CB3FDA /* SideMenuCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SideMenuCell.xib; sourceTree = "<group>"; };
+		127BC34F28CAD52400CB3FDA /* SideMenuViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SideMenuViewController.swift; sourceTree = "<group>"; };
 		128C297828C3B9D70022BDAC /* HamburgerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HamburgerViewController.swift; sourceTree = "<group>"; };
 		128C297A28C3BA000022BDAC /* MenuViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuViewController.swift; sourceTree = "<group>"; };
 		128F2EBD2780FF5A009248EB /* CodeTextFieldViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CodeTextFieldViewController.swift; sourceTree = "<group>"; };
@@ -104,6 +112,7 @@
 		124B52052780572900902CA8 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				127BC32428CA552700CB3FDA /* New Group */,
 				128C297728C3B9BD0022BDAC /* Menu views */,
 				121FD1A9273868E50034B476 /* HomeViewController.swift */,
 				125C1D3B2727347E0053377B /* PhoneViewController.swift */,
@@ -113,6 +122,10 @@
 				1245197727C81ADC00818174 /* ChartViewController.swift */,
 				12CD913E272745DB00F3C5C8 /* DoctorViewController.swift */,
 				12610D93286E15960076816C /* PDFViewController.swift */,
+				127BC34928CAD2B500CB3FDA /* SideMenuModel.swift */,
+				127BC34B28CAD31000CB3FDA /* SideMenuCell.swift */,
+				127BC34C28CAD31000CB3FDA /* SideMenuCell.xib */,
+				127BC34F28CAD52400CB3FDA /* SideMenuViewController.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -154,6 +167,13 @@
 				12671A84286B09380067E5C2 /* GoogleService-Info.plist */,
 			);
 			path = FirestoreDemo;
+			sourceTree = "<group>";
+		};
+		127BC32428CA552700CB3FDA /* New Group */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = "New Group";
 			sourceTree = "<group>";
 		};
 		128C297728C3B9BD0022BDAC /* Menu views */ = {
@@ -272,6 +292,7 @@
 			files = (
 				125C1D44272734810053377B /* LaunchScreen.storyboard in Resources */,
 				12671A85286B09380067E5C2 /* GoogleService-Info.plist in Resources */,
+				127BC34E28CAD31000CB3FDA /* SideMenuCell.xib in Resources */,
 				125C1D41272734810053377B /* Assets.xcassets in Resources */,
 				1228641A27B11EEA00B449B1 /* MarkaziText-Bold.ttf in Resources */,
 				1228641E27B11EF700B449B1 /* MarkaziText-Medium.ttf in Resources */,
@@ -334,6 +355,7 @@
 				125C1D3C2727347E0053377B /* PhoneViewController.swift in Sources */,
 				1293F42A27C80CC8009D0440 /* CustomValueFormatter.swift in Sources */,
 				12CD913527273A7C00F3C5C8 /* AuthManager.swift in Sources */,
+				127BC35028CAD52400CB3FDA /* SideMenuViewController.swift in Sources */,
 				1250E3A728632B07004A7158 /* CustomSegmentedControl.swift in Sources */,
 				1293F42827C80CC1009D0440 /* CustomChartFormatter.swift in Sources */,
 				124E9388273878B40091F395 /* PatientViewController.swift in Sources */,
@@ -344,6 +366,7 @@
 				1293F42627C80CB7009D0440 /* XAxisWeekRenderer.swift in Sources */,
 				12742FE627AEC19C00360551 /* ReadingCard.swift in Sources */,
 				125C1D382727347E0053377B /* AppDelegate.swift in Sources */,
+				127BC34D28CAD31000CB3FDA /* SideMenuCell.swift in Sources */,
 				12CD91382727420400F3C5C8 /* SMSViewController.swift in Sources */,
 				121FD1AA273868E50034B476 /* HomeViewController.swift in Sources */,
 				128C297B28C3BA000022BDAC /* MenuViewController.swift in Sources */,
@@ -355,6 +378,7 @@
 				128F2EBE2780FF5A009248EB /* CodeTextFieldViewController.swift in Sources */,
 				12742FE427AE99B400360551 /* CollectionViewCell.swift in Sources */,
 				12C80860286B8CAE0076316A /* CenterViewFlowLayout.swift in Sources */,
+				127BC34A28CAD2B500CB3FDA /* SideMenuModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

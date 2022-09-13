@@ -7,8 +7,12 @@
 import Firebase
 import UIKit
 
-class PatientViewController:UIViewController, UICollectionViewDataSource, UICollectionViewDelegate,UITabBarDelegate, UITabBarControllerDelegate,HamburgerViewControllerDelegate {
+class PatientViewController:UIViewController, UICollectionViewDataSource, UICollectionViewDelegate,UITabBarDelegate, UITabBarControllerDelegate, UITableViewDelegate{
+
     
+    
+    @IBOutlet weak var afterEattingbtn: UIButton!
+    @IBOutlet weak var beforeEattingbtn: UIButton!
     @IBOutlet weak var collectionViewTwo: UICollectionView!
     @IBOutlet weak var collectionViewOne: UICollectionView!
     @IBOutlet private weak var collectionViewLayout: UICollectionViewFlowLayout!
@@ -22,13 +26,37 @@ class PatientViewController:UIViewController, UICollectionViewDataSource, UIColl
     var doctorID:String!
     var openedDate:String!
     
+    //Side Menu
+    @IBOutlet var sideMenuBtn: UIBarButtonItem!
     
-    @IBOutlet weak var hamburgerView: UIView!
-    @IBOutlet weak var leadingConstraintForHamburgerView: NSLayoutConstraint!
     
-    @IBOutlet weak var backViewForHamburger: UIView!
+    private var sideMenuViewController: SideMenuViewController!
+    private var sideMenuRevealWidth: CGFloat = 260
+    private let paddingForRotation: CGFloat = 150
+    private var isExpanded: Bool = false
     
- 
+    // Expand/Collapse the side menu by changing trailing's constant
+    private var sideMenuTrailingConstraint: NSLayoutConstraint!
+    
+    private var revealSideMenuOnTop: Bool = true
+    
+    private var sideMenuShadowView: UIView!
+    
+    private var draggingIsEnabled: Bool = false
+    private var panBaseLocation: CGFloat = 0.0
+    
+    @IBAction open func revealSideMenu() {
+        self.sideMenuState(expanded: self.isExpanded ? false : true)
+    }
+  
+ //personal info vars
+ var userName = ""
+ var diabetesType = ""
+ var height = ""
+ var weight = ""
+ var birthdate = ""
+ var docID = ""
+ var nationalID = ""
     
     var weeksCount = UserDefaults.standard.integer(forKey: "weeksCount")
     var timer: Timer?
@@ -56,10 +84,9 @@ class PatientViewController:UIViewController, UICollectionViewDataSource, UIColl
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        //self.hamburgerViewController?.delegate = self
-        self.backViewForHamburger.isHidden = true
-       // self.mainBackView.layer.cornerRadius = 40
-        //self.mainBackView.clipsToBounds = true
+       
+        
+      
         doctorID = defaults.string(forKey: "doctorID")
         Patient.sharedInstance.doctorID = doctorID
         Patient.sharedInstance.weeksCount = weeksCount
@@ -77,8 +104,8 @@ class PatientViewController:UIViewController, UICollectionViewDataSource, UIColl
         bottomSheet.clipsToBounds = true
         
         //makes UIView clickable
-        let tap = UITapGestureRecognizer(target: self, action: #selector(dismissSheet))
-        view.addGestureRecognizer(tap)
+//        let tap = UITapGestureRecognizer(target: self, action: #selector(dismissSheet))
+//        view.addGestureRecognizer(tap)
 
         Patient.sharedInstance.afterReadings = fetchReadings(tag: 1)
         Patient.sharedInstance.beforeReadings = fetchReadings(tag: 2)
@@ -128,7 +155,7 @@ class PatientViewController:UIViewController, UICollectionViewDataSource, UIColl
         }
         
         
-       
+       fetchPersonalInfo()
         let nowString = formatter.string(from: now2)
         //set opened date to current date
         defaults.set(nowString, forKey: "openedDate")
@@ -146,7 +173,88 @@ class PatientViewController:UIViewController, UICollectionViewDataSource, UIColl
 //        self.mainBackView.layer.cornerRadius = 40
 //        self.mainBackView.clipsToBounds = true
         
+        
+        
+        
+        // Side Menu Gestures
+            let panGestureRecognizer = UIPanGestureRecognizer(target: self, action: #selector(handlePanGesture))
+            panGestureRecognizer.delegate = self
+            view.addGestureRecognizer(panGestureRecognizer)
+        
+        self.sideMenuShadowView = UIView(frame: self.view.bounds)
+        self.sideMenuShadowView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
+        self.sideMenuShadowView.backgroundColor = .black
+        self.sideMenuShadowView.alpha = 0.0
+        let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(TapGestureRecognizer))
+        tapGestureRecognizer.numberOfTapsRequired = 1
+        tapGestureRecognizer.delegate = self
+        view.addGestureRecognizer(tapGestureRecognizer)
+        if self.revealSideMenuOnTop {
+            view.insertSubview(self.sideMenuShadowView, at: 2)
+        }
+        
+        // Side Menu
+        // Side Menu
+        let storyboard = UIStoryboard(name: "Main", bundle: Bundle.main)
+        self.sideMenuViewController = storyboard.instantiateViewController(withIdentifier: "SideMenuID") as? SideMenuViewController
+        self.sideMenuViewController.defaultHighlightedCell = 0 // Default Highlighted Cell
+        self.sideMenuViewController.delegate = self
+        view.insertSubview(self.sideMenuViewController!.view, at: self.revealSideMenuOnTop ? 7 : 0)
+        addChild(self.sideMenuViewController!)
+        self.sideMenuViewController!.didMove(toParent: self)
+        
+        
+        print("fuck22")
+        
+        // Side Menu AutoLayout
+        
+        self.sideMenuViewController.view.translatesAutoresizingMaskIntoConstraints = false
+        
+        if self.revealSideMenuOnTop {
+            self.sideMenuTrailingConstraint = self.sideMenuViewController.view.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: +self.sideMenuRevealWidth + self.paddingForRotation)
+            self.sideMenuTrailingConstraint.isActive = true
+        }
+        NSLayoutConstraint.activate([
+            self.sideMenuViewController.view.widthAnchor.constraint(equalToConstant: self.sideMenuRevealWidth),
+            self.sideMenuViewController.view.bottomAnchor.constraint(equalTo: view.bottomAnchor),
+            self.sideMenuViewController.view.topAnchor.constraint(equalTo: view.topAnchor)
+        ])
+        
+        // ...
+        
+        
+        //sideMenuViewController.view.isUserInteractionEnabled = true
+          //  sideMenuViewController.view.sendSubviewToBack(beforeEattingbtn)
+//        self.view.bringSubviewToFront(self.sideMenuViewController.view)
+       // beforeEattingbtn.layer.zPosition = -1
+    
+        // Default Main View Controller
+       // showViewController(viewController: UINavigationController.self, storyboardId: "HomeNavID")
+        
+        
+        sideMenuBtn.target = revealViewController()
+                sideMenuBtn.action = #selector(revealViewController()?.revealSideMenu)
+        
+        //sideMenuViewController.sideMenuTableView.delegate = self
+       // sideMenuViewController.sideMenuTableView.dataSource = self
+        
+        
     }
+    
+    
+    override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
+        super.viewWillTransition(to: size, with: coordinator)
+        coordinator.animate { _ in
+            if self.revealSideMenuOnTop {
+                self.sideMenuTrailingConstraint.constant = self.isExpanded ? 0 : (-self.sideMenuRevealWidth - self.paddingForRotation)
+            }
+        }
+    }
+    
+    
+    
+    
+    
     
 //    override func viewDidDisappear(_ animated: Bool) {
 //
@@ -159,147 +267,21 @@ class PatientViewController:UIViewController, UICollectionViewDataSource, UIColl
 //        }
 //    }
     
-    @IBAction func tappedOnHamburgerbackView(_ sender: UITapGestureRecognizer) {
-        
-        self.hideHamburgerView()
-    }
-    
-    func hideHamburgerMenu() {
-        self.hideHamburgerView()
-    }
-    
-    private func hideHamburgerView()
-    {
-        UIView.animate(withDuration: 0.1) {
-            self.leadingConstraintForHamburgerView.constant = 0
-            self.view.layoutIfNeeded()
-        } completion: { (status) in
-            self.backViewForHamburger.alpha = 0.0
-            UIView.animate(withDuration: 0.1) {
-                self.leadingConstraintForHamburgerView.constant = 280
-                self.view.layoutIfNeeded()
-            } completion: { (status) in
-                self.backViewForHamburger.isHidden = true
-                self.isHamburgerMenuShown = false
-            }
-        }
-    }
-    @IBAction func showHamburgerMenu(_ sender: Any) {
-        
-//        if let vc = storyboard?.instantiateViewController(withIdentifier: "mo") as? HamburgerViewController {
-//            print("fuckydo")
-//            tabBarController?.navigationController?.pushViewController(vc, animated: true)
-//
-//            let transition = CATransition()
-//            transition.duration = 0.5
-//            transition.type = CATransitionType.push
-//            transition.subtype = CATransitionSubtype.fromRight
-//            transition.timingFunction = CAMediaTimingFunction(name:CAMediaTimingFunctionName.easeInEaseOut)
-//            view.window!.layer.add(transition, forKey: kCATransition)
-//            present(vc, animated: false, completion: nil)
-//
-//            //present(vc, animated: true, completion: nil)
-//           }
-        
-        
-
-        UIView.animate(withDuration: 0.1) {
-            self.leadingConstraintForHamburgerView.constant = 10
-            self.view.layoutIfNeeded()
-        } completion: { (status) in
-            self.backViewForHamburger.alpha = 0.75
-            self.backViewForHamburger.isHidden = false
-            UIView.animate(withDuration: 0.1) {
-                self.leadingConstraintForHamburgerView.constant = -280
-                self.view.layoutIfNeeded()
-            } completion: { (status) in
-                self.isHamburgerMenuShown = true
-            }
-
-        }
-
-        self.backViewForHamburger.isHidden = false
-        
-    }
-    
-    var hamburgerViewController : HamburgerViewController?
    
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if (segue.identifier == "hamburgerSegue")
-        {
-            print("omg")
-            if let controller = segue.destination as? HamburgerViewController
-            {
-                print("omg2")
-                self.hamburgerViewController = controller
-                self.hamburgerViewController?.delegate = self
-            }
-        }
-    }
+   
+    
     
   
-    private var isHamburgerMenuShown:Bool = false
-    private var beginPoint:CGFloat = 0.0
-    private var difference:CGFloat = 0.0
+
   
     
     
     
-    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        if (isHamburgerMenuShown)
-        {
-             if let touch = touches.first
-            {
-                let location = touch.location(in: backViewForHamburger)
-                beginPoint = location.x
-            }
-        }
-    }
+
     
-    override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
-        if (isHamburgerMenuShown)
-        {
-            if let touch = touches.first
-            {
-                let location = touch.location(in: backViewForHamburger)
-                
-                let differenceFromBeginPoint = beginPoint - location.x
-                
-                if (differenceFromBeginPoint>0 || differenceFromBeginPoint<280)
-                {
-                    difference = differenceFromBeginPoint
-                    self.leadingConstraintForHamburgerView.constant = differenceFromBeginPoint
-                    self.backViewForHamburger.alpha = 0.75+(0.75*differenceFromBeginPoint/280)
-                }
-            }
-        }
-    }
+
     
-    override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
-        if (isHamburgerMenuShown)
-        {
-            if (difference>140)
-            {
-                UIView.animate(withDuration: 0.1) {
-                    self.leadingConstraintForHamburgerView.constant = -280
-                } completion: { (status) in
-                    self.backViewForHamburger.alpha = 0.0
-                    self.isHamburgerMenuShown = false
-                    self.backViewForHamburger.isHidden = true
-                }
-            }
-            else{
-                print("fml")
-                UIView.animate(withDuration: 0.1) {
-                    self.leadingConstraintForHamburgerView.constant = 0
-                } completion: { (status) in
-                    self.backViewForHamburger.alpha = 0
-                    self.isHamburgerMenuShown = true
-                    self.backViewForHamburger.isHidden = false
-                }
-            }
-        }
-    }
+    
 
 
 
@@ -543,6 +525,36 @@ class PatientViewController:UIViewController, UICollectionViewDataSource, UIColl
     
     //MARK: Firestore
 
+    func fetchPersonalInfo(){
+        let patient = self.db.collection("doctors").document(self.doctorID).collection("patients").document(Auth.auth().currentUser!.uid)
+        patient.getDocument { document, error in
+            
+            
+            if let document = document,document.exists {
+                guard let dataDescription = document.data() else {
+                    print("------------------------------------------------------------------------------------")
+                    print("error empty document")
+                    print("------------------------------------------------------------------------------------")
+                    return
+                    
+                }
+                self.userName = dataDescription["Name"] as? String  ?? "no name"
+                self.diabetesType = dataDescription["DiabetesType"] as? String  ?? "no diabetes type"
+                self.height = dataDescription["Height"] as? String  ?? "no height"
+                self.weight = dataDescription["Weight"] as? String  ?? "no weight"
+                self.birthdate = dataDescription["birthDate"] as? String  ?? "no birthdate"
+                self.docID = dataDescription["doctorID"] as? String  ?? "no doctor ID"
+                self.nationalID = dataDescription["nationalID"] as? String  ?? "no national ID"
+                print("my name is \(self.userName) \(self.diabetesType) \(self.height) \(self.weight) \(self.docID) \(self.birthdate) ")
+                
+                
+            
+            
+        }
+    }
+    }
+    
+    
     func fetchReadings(tag: Int) -> [String]{
        //decides which array needs to be fetched from firestore
        var readingsType = ""
@@ -727,32 +739,6 @@ extension PatientViewController {
         }
     }
     
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-
-    
-    
-    
 }
 
 
@@ -859,3 +845,244 @@ extension Date {
     
     
  
+extension PatientViewController: SideMenuViewControllerDelegate {
+    func selectedCell(_ row: Int) {
+        switch row {
+        case 0:
+            // Home
+            print("home1")
+            if let vc = storyboard?.instantiateViewController(withIdentifier: "PatientR") as? PatientRegisterationViewController {
+                vc.typeVC = "edit" //change flag so form opens in editting mode not registeration
+             
+                vc.userName = userName
+                vc.diabetesType = diabetesType
+                vc.height = height
+                vc.weight = weight
+                vc.birthdate = birthdate
+                vc.docID = docID
+                vc.nationalID = nationalID
+                
+                  navigationController?.pushViewController(vc, animated: true)
+         
+            }
+        case 1:
+            
+            print("home2")
+        default:
+            print("broke")
+            break
+        }
+        
+        // Collapse side menu with animation
+        DispatchQueue.main.async { self.sideMenuState(expanded: false) }
+    }
+    
+    func showViewController<T: UIViewController>(viewController: T.Type, storyboardId: String) -> () {
+        // Remove the previous View
+        for subview in view.subviews {
+            if subview.tag == 99 {
+                subview.removeFromSuperview()
+            }
+        }
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        let vc = storyboard.instantiateViewController(withIdentifier: storyboardId) as! T
+        vc.view.tag = 99
+        view.insertSubview(vc.view, at: self.revealSideMenuOnTop ? 0 : 2)
+        addChild(vc)
+        if !self.revealSideMenuOnTop {
+            if isExpanded {
+                vc.view.frame.origin.x = self.sideMenuRevealWidth
+            }
+            if self.sideMenuShadowView != nil {
+                vc.view.addSubview(self.sideMenuShadowView)
+            }
+        }
+        vc.didMove(toParent: self)
+    }
+    
+    func sideMenuState(expanded: Bool) {
+        if expanded {
+            self.animateSideMenu(targetPosition: self.revealSideMenuOnTop ? 0 : self.sideMenuRevealWidth) { _ in
+                self.isExpanded = true
+                print("yaudu")
+                self.tabBarController?.tabBar.isHidden = true
+
+            }
+            // Animate Shadow (Fade In)
+           
+
+            UIView.animate(withDuration: 0.7) {
+                self.sideMenuShadowView.alpha = 0.6
+                self.tabBarController?.tabBar.alpha = 0
+                self.afterEattingbtn.isEnabled = false
+                self.navigationItem.setRightBarButton(nil, animated: true)
+            }
+           
+           
+        }
+        else {
+            self.animateSideMenu(targetPosition: self.revealSideMenuOnTop ? (self.sideMenuRevealWidth + self.paddingForRotation) : 0) { _ in
+                self.isExpanded = false
+                
+                self.tabBarController?.tabBar.isHidden = false
+
+            }
+            // Animate Shadow (Fade Out)
+            UIView.animate(withDuration: 0.7) {
+                self.sideMenuShadowView.alpha = 0.0
+                self.tabBarController?.tabBar.alpha = 1
+                self.afterEattingbtn.isEnabled = true
+                self.navigationItem.setRightBarButton(self.sideMenuBtn, animated: true)
+
+            }
+        }
+    }
+    
+    func animateSideMenu(targetPosition: CGFloat, completion: @escaping (Bool) -> ()) {
+        UIView.animate(withDuration: 0.5, delay: 0, usingSpringWithDamping: 1.0, initialSpringVelocity: 0, options: .layoutSubviews, animations: {
+            if self.revealSideMenuOnTop {
+                self.sideMenuTrailingConstraint.constant = targetPosition
+                self.view.layoutIfNeeded()
+            }
+            else {
+                self.view.subviews[1].frame.origin.x = targetPosition
+            }
+        }, completion: completion)
+    }
+}
+extension UIViewController {
+    
+    // With this extension you can access the MainViewController from the child view controllers.
+    func revealViewController() -> PatientViewController? {
+        var viewController: UIViewController? = self
+        
+        if viewController != nil && viewController is PatientViewController {
+         
+            return viewController! as? PatientViewController
+        }
+        while (!(viewController is PatientViewController) && viewController?.parent != nil) {
+            
+            viewController = viewController?.parent
+        }
+        if viewController is PatientViewController {
+           
+            return viewController as? PatientViewController
+        }
+        return nil
+    }
+    // Call this Button Action from the View Controller you want to Expand/Collapse when you tap a button
+    
+    
+}
+
+extension PatientViewController: UIGestureRecognizerDelegate {
+    
+    @objc func TapGestureRecognizer(sender: UITapGestureRecognizer) {
+        if sender.state == .ended {
+            if self.isExpanded {
+                self.sideMenuState(expanded: false)
+            }
+        }
+    }
+
+    // Close side menu when you tap on the shadow background view
+    func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldReceive touch: UITouch) -> Bool {
+        if (touch.view?.isDescendant(of: self.sideMenuViewController.view))! {
+            return false
+        }
+        return true
+    }
+    
+    // Dragging Side Menu
+    @objc private func handlePanGesture(sender: UIPanGestureRecognizer) {
+        
+        // ...
+
+        let position: CGFloat = sender.translation(in: self.view).x
+        let velocity: CGFloat = sender.velocity(in: self.view).x
+
+        switch sender.state {
+        case .began:
+
+            // If the user tries to expand the menu more than the reveal width, then cancel the pan gesture
+            if velocity > 0, self.isExpanded {
+                sender.state = .cancelled
+            }
+
+            // If the user swipes right but the side menu hasn't expanded yet, enable dragging
+            if velocity > 0, !self.isExpanded {
+                self.draggingIsEnabled = true
+            }
+            // If user swipes left and the side menu is already expanded, enable dragging they collapsing the side menu)
+            else if velocity < 0, self.isExpanded {
+                self.draggingIsEnabled = true
+            }
+
+            if self.draggingIsEnabled {
+                // If swipe is fast, Expand/Collapse the side menu with animation instead of dragging
+                let velocityThreshold: CGFloat = 550
+                if abs(velocity) > velocityThreshold {
+                    self.sideMenuState(expanded: self.isExpanded ? false : true)
+                    self.draggingIsEnabled = false
+                    return
+                }
+
+                if self.revealSideMenuOnTop {
+                    self.panBaseLocation = 0.0
+                    if self.isExpanded {
+                        self.panBaseLocation = self.sideMenuRevealWidth
+                    }
+                }
+            }
+
+        case .changed:
+
+            // Expand/Collapse side menu while dragging
+            if self.draggingIsEnabled {
+                if self.revealSideMenuOnTop {
+                    // Show/Hide shadow background view while dragging
+                    let xLocation: CGFloat = self.panBaseLocation + position
+                    let percentage = (xLocation * 150 / self.sideMenuRevealWidth) / self.sideMenuRevealWidth
+
+                    let alpha = percentage >= 0.6 ? 0.6 : percentage
+                    self.sideMenuShadowView.alpha = alpha
+
+                    // Move side menu while dragging
+                    if xLocation <= self.sideMenuRevealWidth {
+                        self.sideMenuTrailingConstraint.constant = xLocation - self.sideMenuRevealWidth
+                    }
+                }
+                else {
+                    if let recogView = sender.view?.subviews[1] {
+                       // Show/Hide shadow background view while dragging
+                        let percentage = (recogView.frame.origin.x * 150 / self.sideMenuRevealWidth) / self.sideMenuRevealWidth
+
+                        let alpha = percentage >= 0.6 ? 0.6 : percentage
+                        self.sideMenuShadowView.alpha = alpha
+
+                        // Move side menu while dragging
+                        if recogView.frame.origin.x <= self.sideMenuRevealWidth, recogView.frame.origin.x >= 0 {
+                            recogView.frame.origin.x = recogView.frame.origin.x + position
+                            sender.setTranslation(CGPoint.zero, in: view)
+                        }
+                    }
+                }
+            }
+        case .ended:
+            self.draggingIsEnabled = false
+            // If the side menu is half Open/Close, then Expand/Collapse with animationse with animation
+            if self.revealSideMenuOnTop {
+                let movedMoreThanHalf = self.sideMenuTrailingConstraint.constant > -(self.sideMenuRevealWidth * 0.5)
+                self.sideMenuState(expanded: movedMoreThanHalf)
+            }
+            else {
+                if let recogView = sender.view?.subviews[1] {
+                    let movedMoreThanHalf = recogView.frame.origin.x > self.sideMenuRevealWidth * 0.5
+                    self.sideMenuState(expanded: movedMoreThanHalf)
+                }
+            }
+        default:
+            break
+        }
+    }
+}

@@ -7,8 +7,13 @@
 
 import Firebase
 import UIKit
+import MASegmentedControl
 
-class PatientRegisterationViewController: UIViewController,UITextFieldDelegate {
+class PatientRegisterationViewController: UIViewController,UITextFieldDelegate,CustomSegmentedControlDelegate {
+    func change(to index: Int) {
+        print("index changed")
+    }
+    
     @IBOutlet var nameField: UITextField!
     @IBOutlet var nationalIDField: UITextField!
     @IBOutlet var doctorIDField: UITextField!
@@ -20,8 +25,20 @@ class PatientRegisterationViewController: UIViewController,UITextFieldDelegate {
     @IBOutlet var diabetesLabel: UILabel!
     @IBOutlet var birthdateLabel: UILabel!
    
+    
+    var userName = ""
+    var diabetesType = ""
+    var height = ""
+    var weight = ""
+    var birthdate = ""
+    var docID = ""
+    var nationalID = ""
+    
+    
     let diabetesOptions = ["سكري ٣","سكري ٢","سكري ١"]
   
+    var typeVC = "register" //a flag to differentiate between registeration and edit mode
+    
     //lab counter stored in user defaults to count number of labs user imported
     var labsCounter = 0
     var weeksCount = 1
@@ -33,9 +50,7 @@ class PatientRegisterationViewController: UIViewController,UITextFieldDelegate {
     
     @IBOutlet var segmentedDiabets: CustomSegmentedControl!{
         didSet{
-            segmentedDiabets.setButtonTitles(buttonTitles: diabetesOptions)
-            segmentedDiabets.selectorViewColor = UIColor(red: 188/255, green: 209/255, blue: 204/255, alpha: 1)
-            segmentedDiabets.selectorTextColor = UIColor(red: 188/255, green: 209/255, blue: 204/255, alpha: 1)
+    
         }
             
         }
@@ -54,10 +69,50 @@ class PatientRegisterationViewController: UIViewController,UITextFieldDelegate {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         //daysBtnMenu.isHidden = true
-        navigationController?.navigationBar.isHidden = true
+        
+        let selectorPosition = segmentedDiabets.frame.width/CGFloat(diabetesOptions.count) * CGFloat(1)
+//        selectedIndex = buttonIndex
+        segmentedDiabets.setIndex(index: 1)
+//        delegate?.change(to: selectedIndex)
+//
+        segmentedDiabets.selectorView.frame.origin.x = selectorPosition
+       
+        //segmentedDiabets.selectorView = segmentedDiabets.
+        if typeVC == "register"{
+            navigationController?.navigationBar.isHidden = true
+            
+        } else {
+            tabBarController?.tabBar.layer.zPosition = -1
+            nameField.text = userName
+            nationalIDField.text = nationalID
+            birthDateField.text = birthdate
+            patientHeight.text = height
+            patientWeight.text = weight
+            doctorIDField.text = docID
+//            if(diabetesType == diabetesOptions[0]) {
+//                segmentedDiabets.setIndex(index: 2)
+//
+//            }
+//            else if(diabetesType == diabetesOptions[1]){
+//                segmentedDiabets.setIndex(index: 1)
+//            }
+//            else{
+//                segmentedDiabets.setIndex(index: 2)
+//            }
+           
+        
+           
+        }
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        tabBarController?.tabBar.layer.zPosition = 0
     }
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        segmentedDiabets.configSelectorView()
         self.setBackgroundImage("greenBG", contentMode: .scaleAspectFit)
         
         defaults.set(labsCounter, forKey: "labsCounter")
@@ -65,7 +120,8 @@ class PatientRegisterationViewController: UIViewController,UITextFieldDelegate {
       // scrollView.touch
        // self.myScrollview.panGestureRecognizer.delaysTouchesBegan = true
 
-        
+       
+        segmentedDiabets.delegate = self
         
         
         let now = Date()
@@ -366,7 +422,7 @@ class PatientRegisterationViewController: UIViewController,UITextFieldDelegate {
     @IBAction func submitPressed(_ sender: UIButton) {
         print(diabetesOptions[segmentedDiabets.selectedIndex])
         
-        if let Patientname = nameField.text,let doctorID  = doctorIDField.text, let patientHeight = patientHeight.text, let patientWeight = patientWeight.text,let birthDate = birthDateField.text{
+        if let Patientname = nameField.text,let doctorID  = doctorIDField.text, let patientHeight = patientHeight.text, let patientWeight = patientWeight.text,let birthDate = birthDateField.text,let nationalID = nationalIDField.text{
  
             
             let defualts = UserDefaults.standard
@@ -375,7 +431,7 @@ class PatientRegisterationViewController: UIViewController,UITextFieldDelegate {
             let newPatient = db.collection("doctors").document(doctorID).collection("patients").document(Auth.auth().currentUser!.uid)
             
             
-            newPatient.setData(["Name":Patientname,"birthDate":birthDate,"Height":patientHeight,"Weight":patientWeight,"DiabetesType":diabetesOptions[segmentedDiabets.selectedIndex],"ID":newPatient.documentID,"doctorID":doctorID])
+            newPatient.setData(["Name":Patientname,"birthDate":birthDate,"Height":patientHeight,"Weight":patientWeight,"DiabetesType":diabetesOptions[segmentedDiabets.selectedIndex],"ID":newPatient.documentID,"doctorID":doctorID,"nationalID":nationalID])
             
             
             

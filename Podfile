@@ -16,6 +16,8 @@ pod 'Firebase/Analytics'
 
 
 pod 'Charts','~> 3.4'
+pod 'MASegmentedControl'
+
 
 
 end
