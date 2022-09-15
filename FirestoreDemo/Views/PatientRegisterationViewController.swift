@@ -25,6 +25,7 @@ class PatientRegisterationViewController: UIViewController,UITextFieldDelegate,C
     @IBOutlet var diabetesLabel: UILabel!
     @IBOutlet var birthdateLabel: UILabel!
    
+    @IBOutlet weak var submitBtn: UIButton!
     
     var userName = ""
     var diabetesType = ""
@@ -46,14 +47,31 @@ class PatientRegisterationViewController: UIViewController,UITextFieldDelegate,C
     
     let defaults = UserDefaults.standard
     
+
     
-    
-    @IBOutlet var segmentedDiabets: CustomSegmentedControl!{
-        didSet{
-    
-        }
+    @IBOutlet weak var segmentedDiabets: MASegmentedControl! {
+        didSet {
+            
+            //Set this booleans to adapt control
+            segmentedDiabets.itemsWithText = true
+            segmentedDiabets.fillEqually = true
+            segmentedDiabets.bottomLineThumbView = true
+            segmentedDiabets.titlesFont = UIFont(name: "TimesNewRomanPS-BoldMT", size: 20)
+            
+            segmentedDiabets.setSegmentedWith(items: diabetesOptions)
+            segmentedDiabets.padding = 2
+            segmentedDiabets.textColor = #colorLiteral(red: 0.6000000238, green: 0.6000000238, blue: 0.6000000238, alpha: 1)
+            segmentedDiabets.selectedTextColor = UIColor(red: 188/255, green: 209/255, blue: 204/255, alpha: 1)
+            segmentedDiabets.thumbViewColor =  UIColor(red: 188/255, green: 209/255, blue: 204/255, alpha: 1)
             
         }
+    }
+   
+    
+    
+    
+    
+    
     
     
     
@@ -68,41 +86,43 @@ class PatientRegisterationViewController: UIViewController,UITextFieldDelegate,C
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        //daysBtnMenu.isHidden = true
+   
+
         
-        let selectorPosition = segmentedDiabets.frame.width/CGFloat(diabetesOptions.count) * CGFloat(1)
-//        selectedIndex = buttonIndex
-        segmentedDiabets.setIndex(index: 1)
-//        delegate?.change(to: selectedIndex)
-//
-        segmentedDiabets.selectorView.frame.origin.x = selectorPosition
-       
-        //segmentedDiabets.selectorView = segmentedDiabets.
         if typeVC == "register"{
             navigationController?.navigationBar.isHidden = true
+           // segmentedDiabets.selectedSegmentIndex = 1
             
         } else {
             tabBarController?.tabBar.layer.zPosition = -1
+           
+
+            submitBtn.imageView?.image = UIImage(named: "saveButton")
             nameField.text = userName
             nationalIDField.text = nationalID
             birthDateField.text = birthdate
             patientHeight.text = height
             patientWeight.text = weight
             doctorIDField.text = docID
-//            if(diabetesType == diabetesOptions[0]) {
-//                segmentedDiabets.setIndex(index: 2)
-//
-//            }
-//            else if(diabetesType == diabetesOptions[1]){
-//                segmentedDiabets.setIndex(index: 1)
-//            }
-//            else{
-//                segmentedDiabets.setIndex(index: 2)
-//            }
-           
-        
+            if(diabetesType == diabetesOptions[0]) {
+                segmentedDiabets.selectedSegmentIndex = 0
+
+            }
+            else if(diabetesType == diabetesOptions[1]){
+                segmentedDiabets.selectedSegmentIndex = 1
+            }
+            else{
+                segmentedDiabets.selectedSegmentIndex = 2
+            }
+//            segmentedDiabets.selectedSegmentIndex = 0
+////
+//            print("fuck dia \(diabetesOptions[0])")
+            //segmentedDiabets.selectedSegmentIndex = 2
            
         }
+       
+       
+    
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -112,7 +132,7 @@ class PatientRegisterationViewController: UIViewController,UITextFieldDelegate,C
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        segmentedDiabets.configSelectorView()
+        
         self.setBackgroundImage("greenBG", contentMode: .scaleAspectFit)
         
         defaults.set(labsCounter, forKey: "labsCounter")
@@ -121,7 +141,7 @@ class PatientRegisterationViewController: UIViewController,UITextFieldDelegate,C
        // self.myScrollview.panGestureRecognizer.delaysTouchesBegan = true
 
        
-        segmentedDiabets.delegate = self
+        
         
         
         let now = Date()
@@ -350,6 +370,7 @@ class PatientRegisterationViewController: UIViewController,UITextFieldDelegate,C
         let tap = UITapGestureRecognizer(target: self, action: #selector(dismissMyKeyboard))
         view.addGestureRecognizer(tap)
         
+     
         
     }
     
@@ -418,9 +439,13 @@ class PatientRegisterationViewController: UIViewController,UITextFieldDelegate,C
         patientWeight.resignFirstResponder()
         //diabetesBtnMenu.dismissDropDown()
     }
+    
+
+    
+    
 
     @IBAction func submitPressed(_ sender: UIButton) {
-        print(diabetesOptions[segmentedDiabets.selectedIndex])
+       // print(diabetesOptions[segmentedDiabets.selectedIndex])
         
         if let Patientname = nameField.text,let doctorID  = doctorIDField.text, let patientHeight = patientHeight.text, let patientWeight = patientWeight.text,let birthDate = birthDateField.text,let nationalID = nationalIDField.text{
  
@@ -431,12 +456,16 @@ class PatientRegisterationViewController: UIViewController,UITextFieldDelegate,C
             let newPatient = db.collection("doctors").document(doctorID).collection("patients").document(Auth.auth().currentUser!.uid)
             
             
-            newPatient.setData(["Name":Patientname,"birthDate":birthDate,"Height":patientHeight,"Weight":patientWeight,"DiabetesType":diabetesOptions[segmentedDiabets.selectedIndex],"ID":newPatient.documentID,"doctorID":doctorID,"nationalID":nationalID])
+            newPatient.setData(["Name":Patientname,"birthDate":birthDate,"Height":patientHeight,"Weight":patientWeight,"DiabetesType":diabetesOptions[segmentedDiabets.selectedSegmentIndex],"ID":newPatient.documentID,"doctorID":doctorID,"nationalID":nationalID])
             
             
             
+            if(typeVC == "register"){//only set empty arrays at registeration to avoid removing user's data if they entered edit form
+                newPatient.collection("weeks").document("week\(1)").setData(["afterReadings":[],"afterTimes":[],"deltaAfterTimes":[],"beforeReadings":[],"beforeTimes":[],"deltaBeforeTimes":[]])
+                
+            }
             
-            newPatient.collection("weeks").document("week\(1)").setData(["afterReadings":[],"afterTimes":[],"deltaAfterTimes":[],"beforeReadings":[],"beforeTimes":[],"deltaBeforeTimes":[]])
+            typeVC = "register"
             let storyboard = UIStoryboard(name: "Main", bundle: nil)
             let mainTabBarController = storyboard.instantiateViewController(identifier: "MainTabBarController")
                 

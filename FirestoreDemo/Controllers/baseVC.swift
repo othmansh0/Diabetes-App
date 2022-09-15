@@ -7,6 +7,7 @@
 class Patient {
     static let sharedInstance = Patient()
     var doctorID: String!
+    var patientName: String!
     var weeksCount:Int!
     var beforeReadings = [String]()
     var beforeTimes = [String]()

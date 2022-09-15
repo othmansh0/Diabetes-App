@@ -788,6 +788,7 @@ PODS:
   - Libuv-gRPC/Implementation (0.0.10):
     - Libuv-gRPC/Interface (= 0.0.10)
   - Libuv-gRPC/Interface (0.0.10)
+  - MASegmentedControl (0.0.5)
   - nanopb (2.30909.0):
     - nanopb/decode (= 2.30909.0)
     - nanopb/encode (= 2.30909.0)
@@ -803,6 +804,7 @@ DEPENDENCIES:
   - Firebase/Storage
   - FirebaseAuth
   - FirebaseFirestoreSwift
+  - MASegmentedControl
 
 SPEC REPOS:
   trunk:
@@ -831,6 +833,7 @@ SPEC REPOS:
     - GTMSessionFetcher
     - leveldb-library
     - Libuv-gRPC
+    - MASegmentedControl
     - nanopb
     - PromisesObjC
 
@@ -860,9 +863,10 @@ SPEC CHECKSUMS:
   GTMSessionFetcher: 681175626052e03fdde7952f7e9c7a9785719506
   leveldb-library: 50c7b45cbd7bf543c81a468fe557a16ae3db8729
   Libuv-gRPC: 55e51798e14ef436ad9bc45d12d43b77b49df378
+  MASegmentedControl: 9b58f9ba3a562a739b63b29e4ca2b9dc4d9c62cb
   nanopb: b552cce312b6c8484180ef47159bc0f65a1f0431
   PromisesObjC: ab77feca74fa2823e7af4249b8326368e61014cb
 
-PODFILE CHECKSUM: 63f97a71e7864655ef9674947b5918f9872d2f46
+PODFILE CHECKSUM: 0299a7f4b3541bf0b213cd4fce3cccc2f60d8d23
 
 COCOAPODS: 1.11.3

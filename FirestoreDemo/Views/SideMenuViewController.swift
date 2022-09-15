@@ -14,6 +14,7 @@ class SideMenuViewController: UIViewController {
     
     @IBOutlet weak var headerImageView: UIImageView!
     @IBOutlet weak var sideMenuTableView: UITableView!
+    @IBOutlet weak var patientName: UILabel!
     
     
     var delegate: SideMenuViewControllerDelegate?
@@ -38,17 +39,16 @@ class SideMenuViewController: UIViewController {
         self.sideMenuTableView.separatorStyle = .singleLine
         sideMenuTableView.separatorColor = .white
         sideMenuTableView.allowsSelection = true
-       
+        
         // Set Highlighted Cell
 //        DispatchQueue.main.async {
 //            let defaultRow = IndexPath(row: self.defaultHighlightedCell, section: 0)
 //            self.sideMenuTableView.selectRow(at: defaultRow, animated: false, scrollPosition: .none)
 //        }
         sideMenuTableView.allowsSelection = true
-        // Footer
-       // self.footerLabel.textColor = UIColor.white
-        //self.footerLabel.font = UIFont.systemFont(ofSize: 12, weight: .bold)
-        //self.footerLabel.text = "Version 1.1"
+  
+        
+        patientName.text = Patient.sharedInstance.patientName
         
         // Register TableView Cell
         self.sideMenuTableView.register(SideMenuCell.nib, forCellReuseIdentifier: SideMenuCell.identifier)

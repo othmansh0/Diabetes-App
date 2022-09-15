@@ -109,6 +109,11 @@
 			<key>isShown</key>
 			<false/>
 		</dict>
+		<key>MASegmentedControl.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
 		<key>Pods-FirestoreDemo.xcscheme</key>
 		<dict>
 			<key>isShown</key>

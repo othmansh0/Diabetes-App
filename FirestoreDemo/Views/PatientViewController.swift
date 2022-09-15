@@ -11,6 +11,7 @@ class PatientViewController:UIViewController, UICollectionViewDataSource, UIColl
 
     
     
+    @IBOutlet weak var patientName: UILabel!
     @IBOutlet weak var afterEattingbtn: UIButton!
     @IBOutlet weak var beforeEattingbtn: UIButton!
     @IBOutlet weak var collectionViewTwo: UICollectionView!
@@ -81,15 +82,34 @@ class PatientViewController:UIViewController, UICollectionViewDataSource, UIColl
     var blurEffect = UIBlurEffect()
 
     private var indexOfCellBeforeDragging = 0
+    
+    
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        doctorID = defaults.string(forKey: "doctorID")
+        Patient.sharedInstance.doctorID = doctorID
+        Patient.sharedInstance.weeksCount = weeksCount
+        DispatchQueue.main.async {
+            self.fetchPersonalInfo()
+            Patient.sharedInstance.patientName = self.userName
+            self.patientName.text = self.userName
+            self.patientName.textAlignment = .left
+            print("fuck patient \(self.patientName.text)")
+            
+        }
+        
+        
+        
+    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
        
         
+       
       
-        doctorID = defaults.string(forKey: "doctorID")
-        Patient.sharedInstance.doctorID = doctorID
-        Patient.sharedInstance.weeksCount = weeksCount
+       
         //weeksCount = defaults.integer(forKey: "weeksCount")
        print("weeks count in vc is \(weeksCount)")
         tabBarController?.tabBar.layer.cornerRadius = 15
@@ -155,24 +175,15 @@ class PatientViewController:UIViewController, UICollectionViewDataSource, UIColl
         }
         
         
-       fetchPersonalInfo()
+       
+        
         let nowString = formatter.string(from: now2)
         //set opened date to current date
         defaults.set(nowString, forKey: "openedDate")
         print("opened date as current date is \(nowString)")
         
         //MARK: Side Menu
-//        let vc = ContainerViewController()
-//        //vc.navVC?.view.backgroundColor = .blue
-//        addChild(vc)
-//        view.addSubview(vc.view)
-//        vc.didMove(toParent: self)
-        
-        //new solution
-//        self.backViewForHamburger.isHidden = true
-//        self.mainBackView.layer.cornerRadius = 40
-//        self.mainBackView.clipsToBounds = true
-        
+
         
         
         
@@ -231,13 +242,14 @@ class PatientViewController:UIViewController, UICollectionViewDataSource, UIColl
         // Default Main View Controller
        // showViewController(viewController: UINavigationController.self, storyboardId: "HomeNavID")
         
+        sideMenuViewController.view.layer.zPosition = 2
         
         sideMenuBtn.target = revealViewController()
                 sideMenuBtn.action = #selector(revealViewController()?.revealSideMenu)
         
         //sideMenuViewController.sideMenuTableView.delegate = self
        // sideMenuViewController.sideMenuTableView.dataSource = self
-        
+       
         
     }
     
@@ -526,6 +538,9 @@ class PatientViewController:UIViewController, UICollectionViewDataSource, UIColl
     //MARK: Firestore
 
     func fetchPersonalInfo(){
+       
+        
+        
         let patient = self.db.collection("doctors").document(self.doctorID).collection("patients").document(Auth.auth().currentUser!.uid)
         patient.getDocument { document, error in
             
@@ -853,7 +868,7 @@ extension PatientViewController: SideMenuViewControllerDelegate {
             print("home1")
             if let vc = storyboard?.instantiateViewController(withIdentifier: "PatientR") as? PatientRegisterationViewController {
                 vc.typeVC = "edit" //change flag so form opens in editting mode not registeration
-             
+               
                 vc.userName = userName
                 vc.diabetesType = diabetesType
                 vc.height = height
@@ -895,6 +910,7 @@ extension PatientViewController: SideMenuViewControllerDelegate {
             }
             if self.sideMenuShadowView != nil {
                 vc.view.addSubview(self.sideMenuShadowView)
+                
             }
         }
         vc.didMove(toParent: self)
