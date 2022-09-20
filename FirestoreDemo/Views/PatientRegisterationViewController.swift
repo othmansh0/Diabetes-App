@@ -450,6 +450,10 @@ class PatientRegisterationViewController: UIViewController,UITextFieldDelegate,C
         if let Patientname = nameField.text,let doctorID  = doctorIDField.text, let patientHeight = patientHeight.text, let patientWeight = patientWeight.text,let birthDate = birthDateField.text,let nationalID = nationalIDField.text{
  
             
+            if doctorID.isEmpty {
+                alert(message: "Please enter your Doctor ID", title: "Missing entry")
+                return
+            }
             let defualts = UserDefaults.standard
             defualts.set(doctorID, forKey: "doctorID")
             

@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		12138E3D28D4DACF00D0549B /* LaunchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12138E3C28D4DACF00D0549B /* LaunchViewController.swift */; };
 		121ABB2E27BAE575008247EF /* SnapCenterLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 121ABB2D27BAE575008247EF /* SnapCenterLayout.swift */; };
 		121ABB3027BAE71D008247EF /* option2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 121ABB2F27BAE71D008247EF /* option2.swift */; };
 		121ABB3427BE3FB0008247EF /* baseVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 121ABB3327BE3FB0008247EF /* baseVC.swift */; };
@@ -48,6 +49,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		12138E3C28D4DACF00D0549B /* LaunchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LaunchViewController.swift; sourceTree = "<group>"; };
 		121ABB2D27BAE575008247EF /* SnapCenterLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SnapCenterLayout.swift; sourceTree = "<group>"; };
 		121ABB2F27BAE71D008247EF /* option2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = option2.swift; sourceTree = "<group>"; };
 		121ABB3327BE3FB0008247EF /* baseVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = baseVC.swift; sourceTree = "<group>"; };
@@ -126,6 +128,7 @@
 				127BC34B28CAD31000CB3FDA /* SideMenuCell.swift */,
 				127BC34C28CAD31000CB3FDA /* SideMenuCell.xib */,
 				127BC34F28CAD52400CB3FDA /* SideMenuViewController.swift */,
+				12138E3C28D4DACF00D0549B /* LaunchViewController.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -219,7 +222,6 @@
 				86B8280DA0CC34679489DEDB /* Pods-FirestoreDemo.debug.xcconfig */,
 				930FBF93F560D39CD5EEAD15 /* Pods-FirestoreDemo.release.xcconfig */,
 			);
-			name = Pods;
 			path = Pods;
 			sourceTree = "<group>";
 		};
@@ -363,6 +365,7 @@
 				1245197827C81ADC00818174 /* ChartViewController.swift in Sources */,
 				121ABB3027BAE71D008247EF /* option2.swift in Sources */,
 				1250E3A92864F431004A7158 /* LabCell.swift in Sources */,
+				12138E3D28D4DACF00D0549B /* LaunchViewController.swift in Sources */,
 				12CD913F272745DB00F3C5C8 /* DoctorViewController.swift in Sources */,
 				1293F42627C80CB7009D0440 /* XAxisWeekRenderer.swift in Sources */,
 				12742FE627AEC19C00360551 /* ReadingCard.swift in Sources */,

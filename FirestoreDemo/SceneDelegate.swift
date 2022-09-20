@@ -6,9 +6,10 @@
 //
 import FirebaseAuth
 import UIKit
+import Firebase
 
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
-
+    let db = Firestore.firestore()
     var window: UIWindow?
 
 
@@ -29,13 +30,20 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
             } else {
                 
              
+                print("im here right before tab controller")
+//
+//
+//                let mainTabBarController = storyboard.instantiateViewController(identifier: "MainTabBarController")
+//
+//                     (UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate)?.changeRootViewController(mainTabBarController)
+//                window.rootViewController = mainTabBarController
                 
+                let launchViewController = storyboard.instantiateViewController(identifier: "launchView")
                
+                                    (UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate)?.changeRootViewController(launchViewController)
+                               window.rootViewController = launchViewController
                 
-                let mainTabBarController = storyboard.instantiateViewController(identifier: "MainTabBarController")
                 
-                     (UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate)?.changeRootViewController(mainTabBarController)
-                window.rootViewController = mainTabBarController
             }
                 
            
@@ -95,6 +103,10 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         // change the root view controller to your specific view controller
         window.rootViewController = vc
     }
+    
+    
+    
+    
 
 }
 

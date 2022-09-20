@@ -48,7 +48,7 @@ class SideMenuViewController: UIViewController {
         sideMenuTableView.allowsSelection = true
   
         
-        patientName.text = Patient.sharedInstance.patientName
+        patientName.text = Patient.sharedInstance.userName
         
         // Register TableView Cell
         self.sideMenuTableView.register(SideMenuCell.nib, forCellReuseIdentifier: SideMenuCell.identifier)

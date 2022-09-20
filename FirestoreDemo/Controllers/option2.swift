@@ -11,7 +11,7 @@ class SnappingCollectionViewLayout: UICollectionViewFlowLayout {
         guard let collectionView = collectionView else { return super.targetContentOffset(forProposedContentOffset: proposedContentOffset, withScrollingVelocity: velocity) }
 
         var offsetAdjustment = CGFloat.greatestFiniteMagnitude
-        let horizontalOffset = proposedContentOffset.x + collectionView.contentInset.left
+        let horizontalOffset = (proposedContentOffset.x + collectionView.contentInset.left)
 
         let targetRect = CGRect(x: proposedContentOffset.x, y: 0, width: collectionView.bounds.size.width, height: collectionView.bounds.size.height)
 
@@ -24,6 +24,6 @@ class SnappingCollectionViewLayout: UICollectionViewFlowLayout {
             }
         })
 
-        return CGPoint(x: proposedContentOffset.x-27 + offsetAdjustment, y: proposedContentOffset.y)
+        return CGPoint(x: proposedContentOffset.x + offsetAdjustment, y: proposedContentOffset.y)
     }
 }

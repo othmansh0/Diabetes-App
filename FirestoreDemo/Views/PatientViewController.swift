@@ -90,25 +90,34 @@ class PatientViewController:UIViewController, UICollectionViewDataSource, UIColl
         doctorID = defaults.string(forKey: "doctorID")
         Patient.sharedInstance.doctorID = doctorID
         Patient.sharedInstance.weeksCount = weeksCount
-        DispatchQueue.main.async {
-            self.fetchPersonalInfo()
-            Patient.sharedInstance.patientName = self.userName
-            self.patientName.text = self.userName
-            self.patientName.textAlignment = .left
-            print("fuck patient \(self.patientName.text)")
-            
-        }
         
         
+//        DispatchQueue.main.async {
+//            self.fetchPersonalInfo()
+//            Patient.sharedInstance.patientName = self.userName
+//            self.patientName.text = Patient.sharedInstance.patientName
+//            self.patientName.textAlignment = .left
+//            print("fuck patient \(self.patientName.text)")
+//
+//        }
+        
+       
+       
+       
         
     }
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        patientName.text = userName
+        print(patientName.text)
+    }
+    
 
     override func viewDidLoad() {
         super.viewDidLoad()
-       
+        
         
        
-      
        
         //weeksCount = defaults.integer(forKey: "weeksCount")
        print("weeks count in vc is \(weeksCount)")
@@ -537,39 +546,6 @@ class PatientViewController:UIViewController, UICollectionViewDataSource, UIColl
     
     //MARK: Firestore
 
-    func fetchPersonalInfo(){
-       
-        
-        
-        let patient = self.db.collection("doctors").document(self.doctorID).collection("patients").document(Auth.auth().currentUser!.uid)
-        patient.getDocument { document, error in
-            
-            
-            if let document = document,document.exists {
-                guard let dataDescription = document.data() else {
-                    print("------------------------------------------------------------------------------------")
-                    print("error empty document")
-                    print("------------------------------------------------------------------------------------")
-                    return
-                    
-                }
-                self.userName = dataDescription["Name"] as? String  ?? "no name"
-                self.diabetesType = dataDescription["DiabetesType"] as? String  ?? "no diabetes type"
-                self.height = dataDescription["Height"] as? String  ?? "no height"
-                self.weight = dataDescription["Weight"] as? String  ?? "no weight"
-                self.birthdate = dataDescription["birthDate"] as? String  ?? "no birthdate"
-                self.docID = dataDescription["doctorID"] as? String  ?? "no doctor ID"
-                self.nationalID = dataDescription["nationalID"] as? String  ?? "no national ID"
-                print("my name is \(self.userName) \(self.diabetesType) \(self.height) \(self.weight) \(self.docID) \(self.birthdate) ")
-                
-                
-            
-            
-        }
-    }
-    }
-    
-    
     func fetchReadings(tag: Int) -> [String]{
        //decides which array needs to be fetched from firestore
        var readingsType = ""

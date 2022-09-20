@@ -14,7 +14,7 @@ import FirebaseFirestore
 import FirebaseAuth
 import FirebaseStorage
 import PDFKit
-class ChartViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, UIDocumentPickerDelegate{
+class ChartViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, UIDocumentPickerDelegate,UICollectionViewDelegateFlowLayout{
     
     @IBOutlet var labsCollectionView: UICollectionView!
     @IBOutlet var buttonCollectionView: UICollectionView!
@@ -52,7 +52,7 @@ class ChartViewController: UIViewController, UICollectionViewDelegate, UICollect
         buttonCollectionView.dataSource = self
         labsCollectionView.tag = 1
         buttonCollectionView.tag = 2
-        
+       
         if  labsCounter != 0 {
             for lab in 1...labsCounter {
                 labsCells.append(lab)
@@ -90,10 +90,12 @@ class ChartViewController: UIViewController, UICollectionViewDelegate, UICollect
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         if !labsCells.isEmpty{
+            labsCollectionView.isPagingEnabled = false
         let indexPath = IndexPath(item: labsCells.last!-1, section: 0)
             labsCollectionView.scrollToItem(at: indexPath, at: .left, animated: true)
             
         }
+        labsCollectionView.isPagingEnabled = true
     }
     
      
@@ -109,7 +111,13 @@ class ChartViewController: UIViewController, UICollectionViewDelegate, UICollect
         leftAxis.axisMinimum = -10
         leftAxis.axisMaximum = 100
         leftAxis.granularity = 20
-        leftAxis.drawGridLinesEnabled = false
+        leftAxis.labelTextColor = UIColor(red: 133/255, green: 179/255, blue: 187/255, alpha: 1)
+        leftAxis.axisLineColor = UIColor(red: 91/255, green: 122/255, blue: 128/255, alpha: 0.08)
+        leftAxis.drawAxisLineEnabled = false
+        leftAxis.axisLineWidth = 1.5
+        leftAxis.drawGridLinesEnabled = true
+        leftAxis.gridColor = UIColor(red: 91/255, green: 122/255, blue: 128/255, alpha: 0.08)
+        leftAxis.gridLineWidth = 1.5
         
         let rightAxis = chart.rightAxis
         rightAxis.enabled = false
@@ -119,8 +127,12 @@ class ChartViewController: UIViewController, UICollectionViewDelegate, UICollect
         xAxis.axisMinimum = 0
         xAxis.axisMaximum = 7
         xAxis.labelPosition = .bottom
+        xAxis.labelTextColor = UIColor(red: 133/255, green: 179/255, blue: 187/255, alpha: 1)
+
         xAxis.granularity = 1
         xAxis.drawGridLinesEnabled = false
+        xAxis.axisLineColor = UIColor(red: 91/255, green: 122/255, blue: 128/255, alpha: 0.08)
+        xAxis.axisLineWidth = 1.5
         //xAxis.setLabelCount(7, force: false)
         chart.xAxisRenderer = XAxisWeekRenderer(viewPortHandler: chart.viewPortHandler, xAxis: chart.xAxis, transformer: chart.getTransformer(forAxis: chart.leftAxis.axisDependency))
         xAxis.setLabelCount(7, force: true)
@@ -229,6 +241,17 @@ class ChartViewController: UIViewController, UICollectionViewDelegate, UICollect
             return labsCounter}
         return 1 //else return one cell just for add button
     }
+//    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+//
+//        let height = view.frame.size.height
+//        let width = view.frame.size.width
+//        // in case you you want the cell to be 40% of your controllers view
+//        return CGSize(width: width * 0.2, height: height * 0.3)
+//    }
+    
+    
+    
+    
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         if collectionView.tag == 2{
@@ -390,10 +413,12 @@ extension ChartViewController {
         labsCells.append(labsCounter)
         UserDefaults.standard.set(labsCounter, forKey: "labsCounter")
         //scroll to last cell that was added
-        let indexPath = IndexPath(item: labsCells.last!-1, section: 0)
-        labsCollectionView.scrollToItem(at: indexPath, at: .left, animated: true)
-        labsCollectionView.reloadData()
-
+  
+        //scroll to last cell that was added
+            
+        
+        
+        
         //labsCounter += 1
         //labsCells.append(labsCounter)
         //UserDefaults.standard.set(labsCounter, forKey: "labsCounter")
@@ -409,20 +434,29 @@ extension ChartViewController {
                 // Uh-oh, an error occurred!
                 return
               }
+                
+                self.labsCollectionView.isPagingEnabled = false
+                
+                let indexPath = IndexPath(item: self.labsCells.last!-1, section: 0)
+                self.labsCollectionView.reloadData()
+                self.labsCollectionView.scrollToItem(at: indexPath, at: .left, animated: true)
+             
+                self.labsCollectionView.isPagingEnabled = true
+
               // Metadata contains file metadata such as size, content-type.
               let size = metadata.size
               // You can also access to download URL after upload.
-                self.storageRef.downloadURL { (url, error) in
-                guard let downloadURL = url else {
-                  // Uh-oh, an error occurred!
-                    print("fuck no downloand url")
-                  return
-                }
-                    
-                    
-                  print("donwload URL is \(downloadURL)")
-                    
-              }
+//                self.storageRef.downloadURL { (url, error) in
+//                guard let downloadURL = url else {
+//                  // Uh-oh, an error occurred!
+//                    print("fuck no downloand url")
+//                  return
+//                }
+//                    
+//                    
+//                  print("donwload URL is \(downloadURL)")
+//                    
+//              }
             }
     }
 }
