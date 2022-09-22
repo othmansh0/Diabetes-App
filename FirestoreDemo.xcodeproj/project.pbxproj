@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		12138E3D28D4DACF00D0549B /* LaunchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12138E3C28D4DACF00D0549B /* LaunchViewController.swift */; };
+		1214ACB028DB6B0300BE02BE /* PatientTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1214ACAE28DB6B0300BE02BE /* PatientTableViewCell.swift */; };
+		1214ACB128DB6B0300BE02BE /* PatientTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1214ACAF28DB6B0300BE02BE /* PatientTableViewCell.xib */; };
 		121ABB2E27BAE575008247EF /* SnapCenterLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 121ABB2D27BAE575008247EF /* SnapCenterLayout.swift */; };
 		121ABB3027BAE71D008247EF /* option2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 121ABB2F27BAE71D008247EF /* option2.swift */; };
 		121ABB3427BE3FB0008247EF /* baseVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 121ABB3327BE3FB0008247EF /* baseVC.swift */; };
@@ -38,6 +40,7 @@
 		128C297928C3B9D70022BDAC /* HamburgerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 128C297828C3B9D70022BDAC /* HamburgerViewController.swift */; };
 		128C297B28C3BA000022BDAC /* MenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 128C297A28C3BA000022BDAC /* MenuViewController.swift */; };
 		128F2EBE2780FF5A009248EB /* CodeTextFieldViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 128F2EBD2780FF5A009248EB /* CodeTextFieldViewController.swift */; };
+		129157CD28DA321C0000705D /* PatientsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 129157CC28DA321C0000705D /* PatientsViewController.swift */; };
 		1293F42627C80CB7009D0440 /* XAxisWeekRenderer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1293F42527C80CB7009D0440 /* XAxisWeekRenderer.swift */; };
 		1293F42827C80CC1009D0440 /* CustomChartFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1293F42727C80CC1009D0440 /* CustomChartFormatter.swift */; };
 		1293F42A27C80CC8009D0440 /* CustomValueFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1293F42927C80CC7009D0440 /* CustomValueFormatter.swift */; };
@@ -50,6 +53,8 @@
 
 /* Begin PBXFileReference section */
 		12138E3C28D4DACF00D0549B /* LaunchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LaunchViewController.swift; sourceTree = "<group>"; };
+		1214ACAE28DB6B0300BE02BE /* PatientTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PatientTableViewCell.swift; sourceTree = "<group>"; };
+		1214ACAF28DB6B0300BE02BE /* PatientTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PatientTableViewCell.xib; sourceTree = "<group>"; };
 		121ABB2D27BAE575008247EF /* SnapCenterLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SnapCenterLayout.swift; sourceTree = "<group>"; };
 		121ABB2F27BAE71D008247EF /* option2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = option2.swift; sourceTree = "<group>"; };
 		121ABB3327BE3FB0008247EF /* baseVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = baseVC.swift; sourceTree = "<group>"; };
@@ -87,6 +92,7 @@
 		128C297828C3B9D70022BDAC /* HamburgerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HamburgerViewController.swift; sourceTree = "<group>"; };
 		128C297A28C3BA000022BDAC /* MenuViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuViewController.swift; sourceTree = "<group>"; };
 		128F2EBD2780FF5A009248EB /* CodeTextFieldViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CodeTextFieldViewController.swift; sourceTree = "<group>"; };
+		129157CC28DA321C0000705D /* PatientsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PatientsViewController.swift; sourceTree = "<group>"; };
 		1293F42527C80CB7009D0440 /* XAxisWeekRenderer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = XAxisWeekRenderer.swift; sourceTree = "<group>"; };
 		1293F42727C80CC1009D0440 /* CustomChartFormatter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomChartFormatter.swift; sourceTree = "<group>"; };
 		1293F42927C80CC7009D0440 /* CustomValueFormatter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomValueFormatter.swift; sourceTree = "<group>"; };
@@ -111,6 +117,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		1214ACAD28DB6AE700BE02BE /* tableView */ = {
+			isa = PBXGroup;
+			children = (
+				1214ACAE28DB6B0300BE02BE /* PatientTableViewCell.swift */,
+				1214ACAF28DB6B0300BE02BE /* PatientTableViewCell.xib */,
+			);
+			path = tableView;
+			sourceTree = "<group>";
+		};
 		124B52052780572900902CA8 /* Views */ = {
 			isa = PBXGroup;
 			children = (
@@ -122,7 +137,7 @@
 				12742FE127AD94D100360551 /* PatientRegisterationViewController.swift */,
 				124E9387273878B40091F395 /* PatientViewController.swift */,
 				1245197727C81ADC00818174 /* ChartViewController.swift */,
-				12CD913E272745DB00F3C5C8 /* DoctorViewController.swift */,
+				129157CB28DA31FE0000705D /* Doctor */,
 				12610D93286E15960076816C /* PDFViewController.swift */,
 				127BC34928CAD2B500CB3FDA /* SideMenuModel.swift */,
 				127BC34B28CAD31000CB3FDA /* SideMenuCell.swift */,
@@ -204,6 +219,16 @@
 				121ABB3327BE3FB0008247EF /* baseVC.swift */,
 			);
 			path = Controllers;
+			sourceTree = "<group>";
+		};
+		129157CB28DA31FE0000705D /* Doctor */ = {
+			isa = PBXGroup;
+			children = (
+				1214ACAD28DB6AE700BE02BE /* tableView */,
+				12CD913E272745DB00F3C5C8 /* DoctorViewController.swift */,
+				129157CC28DA321C0000705D /* PatientsViewController.swift */,
+			);
+			path = Doctor;
 			sourceTree = "<group>";
 		};
 		1293F42427C80C8F009D0440 /* Chart */ = {
@@ -294,6 +319,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				125C1D44272734810053377B /* LaunchScreen.storyboard in Resources */,
+				1214ACB128DB6B0300BE02BE /* PatientTableViewCell.xib in Resources */,
 				12671A85286B09380067E5C2 /* GoogleService-Info.plist in Resources */,
 				127BC34E28CAD31000CB3FDA /* SideMenuCell.xib in Resources */,
 				125C1D41272734810053377B /* Assets.xcassets in Resources */,
@@ -360,8 +386,10 @@
 				12CD913527273A7C00F3C5C8 /* AuthManager.swift in Sources */,
 				127BC35028CAD52400CB3FDA /* SideMenuViewController.swift in Sources */,
 				1250E3A728632B07004A7158 /* CustomSegmentedControl.swift in Sources */,
+				129157CD28DA321C0000705D /* PatientsViewController.swift in Sources */,
 				1293F42827C80CC1009D0440 /* CustomChartFormatter.swift in Sources */,
 				124E9388273878B40091F395 /* PatientViewController.swift in Sources */,
+				1214ACB028DB6B0300BE02BE /* PatientTableViewCell.swift in Sources */,
 				1245197827C81ADC00818174 /* ChartViewController.swift in Sources */,
 				121ABB3027BAE71D008247EF /* option2.swift in Sources */,
 				1250E3A92864F431004A7158 /* LabCell.swift in Sources */,

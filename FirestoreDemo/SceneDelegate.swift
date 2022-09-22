@@ -25,9 +25,15 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
             let defaults = UserDefaults.standard
             let accountType = defaults.integer(forKey: "accountType")
             if (accountType == 0) {
-                let viewController = storyboard.instantiateViewController(withIdentifier: "Doctor") as! DoctorViewController
-                self.window?.rootViewController = viewController
-            } else {
+                
+                print("i got called")
+               // let viewController = storyboard.instantiateViewController(withIdentifier: "Doctor") as! DoctorViewController
+                let launchViewController = storyboard.instantiateViewController(identifier: "PatientsView")
+                (UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate)?.changeRootViewController(launchViewController)
+           window.rootViewController = launchViewController
+                
+                //self.window?.rootViewController = viewController
+            } else { // patient
                 
              
                 print("im here right before tab controller")
@@ -49,7 +55,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
            
 //            let navigationController = UINavigationController.init(rootViewController: viewController)
             
-        } else {
+        } else {//Home page
           
             let storyboard = UIStoryboard.init(name: "Main", bundle: nil)
 
