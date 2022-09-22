@@ -100,7 +100,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="MQG-sq-wZC" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2047.826086956522" y="150.66964285714286"/>
+            <point key="canvasLocation" x="2957.971014492754" y="150.66964285714286"/>
         </scene>
         <!--Phone View Controller-->
         <scene sceneID="tne-QT-ifu">
@@ -231,7 +231,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2907.2463768115945" y="134.59821428571428"/>
+            <point key="canvasLocation" x="3817.3913043478265" y="134.59821428571428"/>
         </scene>
         <!--View Controller-->
         <scene sceneID="w8w-3U-rtv">
@@ -338,7 +338,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="c0D-iM-T9p" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3626.0869565217395" y="121.875"/>
+            <point key="canvasLocation" x="4536.231884057971" y="121.875"/>
         </scene>
         <!--Launch View Controller-->
         <scene sceneID="YAF-Ig-k7r">
@@ -563,7 +563,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Enn-9U-7KX" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="284" y="151"/>
+            <point key="canvasLocation" x="1192.753623188406" y="150.66964285714286"/>
         </scene>
         <!--Patients View Controller-->
         <scene sceneID="lpZ-OX-x9Z">
@@ -574,37 +574,47 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="ed0-fh-MoV">
-                                <rect key="frame" x="0.0" y="188" width="414" height="708"/>
+                                <rect key="frame" x="0.0" y="232" width="414" height="664"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <sections/>
                             </tableView>
+                            <searchBar clipsSubviews="YES" contentMode="right" semanticContentAttribute="forceRightToLeft" searchBarStyle="minimal" translatesAutoresizingMaskIntoConstraints="NO" id="cAM-lX-fKX">
+                                <rect key="frame" x="16" y="159" width="382" height="56"/>
+                                <color key="backgroundColor" red="0.85490196078431369" green="0.89411764705882346" blue="0.89803921568627454" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <color key="barTintColor" red="0.85490196080000003" green="0.89411764709999997" blue="0.8980392157" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <offsetWrapper key="searchTextPositionAdjustment" horizontal="0.0" vertical="0.0"/>
+                                <offsetWrapper key="searchFieldBackgroundPositionAdjustment" horizontal="0.0" vertical="0.0"/>
+                                <textInputTraits key="textInputTraits"/>
+                                <scopeButtonTitles>
+                                    <string>Title</string>
+                                    <string>Title</string>
+                                </scopeButtonTitles>
+                            </searchBar>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="GzB-gH-8qm"/>
                         <color key="backgroundColor" red="0.94509803921568625" green="0.96078431372549022" blue="0.96078431372549022" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="ed0-fh-MoV" firstAttribute="centerX" secondItem="Ztj-5E-g6C" secondAttribute="centerX" id="52l-QC-7AX"/>
+                            <constraint firstAttribute="trailing" secondItem="cAM-lX-fKX" secondAttribute="trailing" constant="16" id="71k-se-qML"/>
+                            <constraint firstItem="cAM-lX-fKX" firstAttribute="leading" secondItem="Ztj-5E-g6C" secondAttribute="leading" constant="16" id="8Wb-u2-TvA"/>
                             <constraint firstItem="ed0-fh-MoV" firstAttribute="leading" secondItem="GzB-gH-8qm" secondAttribute="leading" id="JBd-41-3vY"/>
+                            <constraint firstItem="ed0-fh-MoV" firstAttribute="top" secondItem="cAM-lX-fKX" secondAttribute="bottom" constant="17" id="NRE-QD-FKN"/>
                             <constraint firstItem="ed0-fh-MoV" firstAttribute="top" secondItem="GzB-gH-8qm" secondAttribute="top" constant="140" id="Of0-sk-96z"/>
                             <constraint firstAttribute="bottom" secondItem="ed0-fh-MoV" secondAttribute="bottom" id="hxn-IP-CMa"/>
                         </constraints>
                     </view>
+                    <navigationItem key="navigationItem" id="bom-hV-ksN"/>
                     <connections>
                         <outlet property="patientsTableView" destination="ed0-fh-MoV" id="ACd-Tg-Myy"/>
-                        <outlet property="searchDisplayController" destination="wW1-uw-MGF" id="hkb-CR-oIc"/>
+                        <outlet property="searchBar" destination="cAM-lX-fKX" id="mDw-ca-BoY"/>
+                        <outlet property="searchBarLeading" destination="8Wb-u2-TvA" id="jcF-YO-LUW"/>
+                        <outlet property="searchBarTrailing" destination="71k-se-qML" id="aca-V5-InG"/>
                         <outlet property="tableViewHeight" destination="Of0-sk-96z" id="yJQ-jc-j53"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="oad-JV-Uf6" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-                <searchDisplayController id="wW1-uw-MGF">
-                    <connections>
-                        <outlet property="delegate" destination="jxu-0v-Rjz" id="a30-rK-5jh"/>
-                        <outlet property="searchContentsController" destination="jxu-0v-Rjz" id="4Ij-kJ-S6a"/>
-                        <outlet property="searchResultsDataSource" destination="jxu-0v-Rjz" id="xvm-rE-EuT"/>
-                        <outlet property="searchResultsDelegate" destination="jxu-0v-Rjz" id="5NU-pY-QVC"/>
-                    </connections>
-                </searchDisplayController>
             </objects>
-            <point key="canvasLocation" x="-1630.4347826086957" y="147.99107142857142"/>
+            <point key="canvasLocation" x="-720.28985507246387" y="147.99107142857142"/>
         </scene>
         <!--Doctor View Controller-->
         <scene sceneID="W6C-t6-l8X">
@@ -1352,7 +1362,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="wLC-vv-r4z" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1203" y="151"/>
+            <point key="canvasLocation" x="2113.0434782608695" y="150.66964285714286"/>
         </scene>
         <!--Side Menu View Controller-->
         <scene sceneID="U6q-7g-xSt">
@@ -1472,6 +1482,24 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="v39-VN-POp" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="4295.652173913044" y="860.49107142857144"/>
+        </scene>
+        <!--Search-->
+        <scene sceneID="cKO-Vg-VoU">
+            <objects>
+                <navigationController storyboardIdentifier="PatientsNav" title="Search" automaticallyAdjustsScrollViewInsets="NO" id="b7D-kb-wRI" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="5NK-dl-hWA">
+                        <rect key="frame" x="0.0" y="48" width="414" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="jxu-0v-Rjz" kind="relationship" relationship="rootViewController" id="2ip-fG-BlU"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Rnd-If-v6f" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-1630.4347826086957" y="147.99107142857142"/>
         </scene>
     </scenes>
     <resources>

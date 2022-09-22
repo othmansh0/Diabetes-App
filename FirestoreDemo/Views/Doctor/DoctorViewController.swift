@@ -64,15 +64,17 @@ class DoctorViewController: UIViewController {
             newDocument.setData(["Name": name, "NationalID": nationalID, "ID": newDocument.documentID,"DoctorGovID":doctorGovID])
 //
             let storyboard = UIStoryboard(name: "Main", bundle: nil)
-            let PatientsViewController = storyboard.instantiateViewController(identifier: "PatientsView")
+            let PatientsViewController = storyboard.instantiateViewController(identifier: "PatientsNav")
 
 //                 This is to get the SceneDelegate object from your view controller
 //                 then call the change root view controller function to change to main tab bar
                 (UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate)?.changeRootViewController(PatientsViewController)
             
 //            if let vc = storyboard?.instantiateViewController(withIdentifier: "PatientsView") as? PatientsViewController {
-//                vc.modalPresentationStyle = .fullScreen
-//                present(vc, animated: true)
+//               // vc.modalPresentationStyle = .fullScreen
+//                navigationController?.pushViewController(vc, animated: true)
+//                present(navigationController!, animated: true, completion: nil)
+//               // present(vc, animated: true)
 //            }
         }
         
