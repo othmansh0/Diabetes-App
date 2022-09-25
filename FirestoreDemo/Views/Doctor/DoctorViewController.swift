@@ -15,10 +15,46 @@ class DoctorViewController: UIViewController {
     @IBOutlet weak var cardView: UIView!
     @IBOutlet weak var doctorGovID: UITextField!
     @IBOutlet weak var btnBottomConstraint: NSLayoutConstraint!
+    
     let db = Firestore.firestore()
     var tempConstraint:Int!
+    var typeVC = "register" //a flag to differentiate between registeration and edit mode
+    
+    var userName = ""
+    var docGovID = ""
+    var nationalID = ""
+    
+    
+    let defaults = UserDefaults.standard
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        if typeVC == "register"{
+            navigationController?.navigationBar.isHidden = true
+           // segmentedDiabets.selectedSegmentIndex = 1
+            
+        } else {
+           // tabBarController?.tabBar.layer.zPosition = -1
+           
+
+            addButton.imageView?.image = UIImage(named: "saveButton")
+            nameField.text = userName
+            nationalIDField.text = nationalID
+           // birthDateField.text = birthdate
+            //patientHeight.text = height
+            //patientWeight.text = weight
+            doctorGovID.text = docGovID
+          
+
+           
+        }
+    }
+    
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        print("doctor id from defaults is \(defaults.string(forKey: "doctorID"))")
         self.setBackgroundImage("greenBG", contentMode: .scaleAspectFit)
         tempConstraint = Int(btnBottomConstraint.constant)
         cardView.layer.cornerRadius = 40
@@ -57,6 +93,8 @@ class DoctorViewController: UIViewController {
                 return
             }
             let doctorID = name[0...2] + String(Int.random(in: 0...1000))
+            
+            defaults.setValue(doctorID, forKey: "doctorID")
             print(doctorID)
             //Way 3 add specific document ID
             let newDocument = db.collection("doctors").document("\(doctorID)")

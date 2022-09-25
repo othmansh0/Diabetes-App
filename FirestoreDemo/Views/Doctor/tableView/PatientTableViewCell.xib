@@ -20,21 +20,21 @@
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="rt1-Bp-DZf">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="87"/>
                         <subviews>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="person.circle" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="ReR-oE-YOi">
-                                <rect key="frame" x="236" y="11" width="65" height="65.666666666666671"/>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="patientPerson" translatesAutoresizingMaskIntoConstraints="NO" id="ReR-oE-YOi">
+                                <rect key="frame" x="244" y="10" width="60" height="60"/>
                                 <color key="tintColor" red="0.52156862745098043" green="0.6470588235294118" blue="0.6705882352941176" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="65" id="Lwy-rO-d0y"/>
+                                    <constraint firstAttribute="width" constant="60" id="Lwy-rO-d0y"/>
                                 </constraints>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="عثمان شحروري" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MoV-49-NRW">
-                                <rect key="frame" x="129" y="33" width="99" height="21"/>
+                                <rect key="frame" x="137" y="25" width="99" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" red="0.52156862749999999" green="0.64705882349999999" blue="0.6705882353" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="0j2-JK-k01">
-                                <rect key="frame" x="8" y="39" width="9" height="9"/>
+                                <rect key="frame" x="21" y="39" width="9" height="9"/>
                                 <color key="backgroundColor" red="0.83137254901960778" green="0.94117647058823528" blue="0.87058823529411766" alpha="0.52739548841059603" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="9" id="AP5-l3-uVC"/>
@@ -43,7 +43,7 @@
                                 </constraints>
                             </view>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="مرتفع" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mDl-iM-MMG">
-                                <rect key="frame" x="201" y="55" width="27" height="14.333333333333329"/>
+                                <rect key="frame" x="209" y="47" width="27" height="14.333333333333336"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                 <color key="textColor" red="0.52156862749999999" green="0.64705882349999999" blue="0.6705882353" alpha="0.63" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
@@ -59,20 +59,20 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
-                            <constraint firstItem="0j2-JK-k01" firstAttribute="leading" secondItem="rt1-Bp-DZf" secondAttribute="leading" constant="8" id="1Qb-cl-Jnu"/>
+                            <constraint firstItem="0j2-JK-k01" firstAttribute="leading" secondItem="rt1-Bp-DZf" secondAttribute="leading" constant="21" id="1Qb-cl-Jnu"/>
                             <constraint firstItem="mDl-iM-MMG" firstAttribute="trailing" secondItem="MoV-49-NRW" secondAttribute="trailing" id="6M1-aP-vhX"/>
-                            <constraint firstItem="MoV-49-NRW" firstAttribute="centerY" secondItem="rt1-Bp-DZf" secondAttribute="centerY" id="AK6-vl-imC"/>
+                            <constraint firstItem="MoV-49-NRW" firstAttribute="centerY" secondItem="rt1-Bp-DZf" secondAttribute="centerY" constant="-8" id="AK6-vl-imC"/>
                             <constraint firstAttribute="trailing" secondItem="5Qe-h3-nEt" secondAttribute="trailing" constant="1" id="F6p-K9-HaR"/>
-                            <constraint firstItem="5Qe-h3-nEt" firstAttribute="centerY" secondItem="ReR-oE-YOi" secondAttribute="centerY" constant="-1.5" id="GCc-4y-nn3"/>
-                            <constraint firstItem="ReR-oE-YOi" firstAttribute="trailing" secondItem="rt1-Bp-DZf" secondAttribute="trailingMargin" constant="-11" id="MGm-0J-GUy"/>
-                            <constraint firstItem="MoV-49-NRW" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="0j2-JK-k01" secondAttribute="trailing" constant="112" id="ff5-mm-ubq"/>
-                            <constraint firstItem="MoV-49-NRW" firstAttribute="centerY" secondItem="ReR-oE-YOi" secondAttribute="centerY" id="gTZ-7c-HQj"/>
+                            <constraint firstItem="5Qe-h3-nEt" firstAttribute="centerY" secondItem="ReR-oE-YOi" secondAttribute="centerY" constant="2" id="GCc-4y-nn3"/>
+                            <constraint firstItem="ReR-oE-YOi" firstAttribute="trailing" secondItem="rt1-Bp-DZf" secondAttribute="trailingMargin" constant="-8" id="MGm-0J-GUy"/>
+                            <constraint firstItem="MoV-49-NRW" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="0j2-JK-k01" secondAttribute="trailing" constant="107" id="ff5-mm-ubq"/>
+                            <constraint firstItem="MoV-49-NRW" firstAttribute="centerY" secondItem="ReR-oE-YOi" secondAttribute="centerY" constant="-4.5" id="gTZ-7c-HQj"/>
                             <constraint firstItem="ReR-oE-YOi" firstAttribute="top" secondItem="rt1-Bp-DZf" secondAttribute="top" constant="10.000000000000002" id="hPt-Uq-B4c"/>
-                            <constraint firstItem="5Qe-h3-nEt" firstAttribute="leading" secondItem="ReR-oE-YOi" secondAttribute="trailing" constant="15" id="kgQ-Ya-lNh"/>
+                            <constraint firstItem="5Qe-h3-nEt" firstAttribute="leading" secondItem="ReR-oE-YOi" secondAttribute="trailing" constant="12" id="kgQ-Ya-lNh"/>
                             <constraint firstItem="5Qe-h3-nEt" firstAttribute="top" secondItem="rt1-Bp-DZf" secondAttribute="top" constant="13" id="puH-Z1-upf"/>
                             <constraint firstItem="ReR-oE-YOi" firstAttribute="leading" secondItem="MoV-49-NRW" secondAttribute="trailing" constant="8" id="rg8-W3-GJh"/>
                             <constraint firstItem="mDl-iM-MMG" firstAttribute="top" secondItem="MoV-49-NRW" secondAttribute="bottom" constant="1" id="vXd-Oh-CEW"/>
-                            <constraint firstItem="0j2-JK-k01" firstAttribute="centerY" secondItem="MoV-49-NRW" secondAttribute="centerY" id="y3J-Ye-Q8B"/>
+                            <constraint firstItem="0j2-JK-k01" firstAttribute="centerY" secondItem="MoV-49-NRW" secondAttribute="centerY" constant="8" id="y3J-Ye-Q8B"/>
                         </constraints>
                     </view>
                 </subviews>
@@ -93,6 +93,6 @@
         </tableViewCell>
     </objects>
     <resources>
-        <image name="person.circle" catalog="system" width="128" height="123"/>
+        <image name="patientPerson" width="53" height="51"/>
     </resources>
 </document>

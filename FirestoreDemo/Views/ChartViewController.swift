@@ -101,12 +101,12 @@ class ChartViewController: UIViewController, UICollectionViewDelegate, UICollect
      
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        setupChart()
+        setupChart(chart: chart)
         setupChartData(beforeReadings: Patient.sharedInstance.beforeReadings, deltaBeforeTimes: Patient.sharedInstance.deltaBeforeTimes, afterReadings: Patient.sharedInstance.afterReadings, deltaAfterTimes: Patient.sharedInstance.deltaAfterTimes)
         
      }
     
-    private func setupChart() {
+    public func setupChart(chart:LineChartView) {
         let leftAxis = chart.leftAxis
         leftAxis.axisMinimum = -10
         leftAxis.axisMaximum = 100
@@ -156,7 +156,7 @@ class ChartViewController: UIViewController, UICollectionViewDelegate, UICollect
     }
     
     
-    private func setupChartData(beforeReadings:[String],deltaBeforeTimes:[String],afterReadings:[String],deltaAfterTimes:[String]) {
+    public func setupChartData(beforeReadings:[String],deltaBeforeTimes:[String],afterReadings:[String],deltaAfterTimes:[String]) {
         var lineChartEntry1: [ChartDataEntry] = []//before eatting
         var lineChartEntry2: [ChartDataEntry] = [] //after eatting
         

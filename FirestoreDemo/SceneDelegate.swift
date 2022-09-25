@@ -28,11 +28,24 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
                 
                 print("i got called")
                // let viewController = storyboard.instantiateViewController(withIdentifier: "Doctor") as! DoctorViewController
-                let launchViewController = storyboard.instantiateViewController(identifier: "PatientsNav")
-                (UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate)?.changeRootViewController(launchViewController)
-           window.rootViewController = launchViewController
                 
-                //self.window?.rootViewController = viewController
+                
+                
+                //------
+//                let launchViewController = storyboard.instantiateViewController(identifier: "PatientsNav")
+//                (UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate)?.changeRootViewController(launchViewController)
+//           window.rootViewController = launchViewController
+                //-----------
+                
+                
+                
+                
+                let launchViewController = storyboard.instantiateViewController(identifier: "launchView")
+               
+                                    (UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate)?.changeRootViewController(launchViewController)
+                               window.rootViewController = launchViewController
+                
+                
             } else { // patient
                 
              

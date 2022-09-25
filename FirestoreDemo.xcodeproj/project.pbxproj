@@ -18,6 +18,8 @@
 		1228641E27B11EF700B449B1 /* MarkaziText-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 1228642027B11EF700B449B1 /* MarkaziText-Medium.ttf */; };
 		1228642227B11EFD00B449B1 /* MarkaziText-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 1228642427B11EFD00B449B1 /* MarkaziText-Regular.ttf */; };
 		1228642627B11F0400B449B1 /* MarkaziText-SemiBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 1228642827B11F0400B449B1 /* MarkaziText-SemiBold.ttf */; };
+		122F8CB128DE2B1A00CEBDA3 /* HistoryDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 122F8CB028DE2B1A00CEBDA3 /* HistoryDetailViewController.swift */; };
+		122F8CB328DF55A900CEBDA3 /* DoctorLabsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 122F8CB228DF55A900CEBDA3 /* DoctorLabsViewController.swift */; };
 		1245197827C81ADC00818174 /* ChartViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1245197727C81ADC00818174 /* ChartViewController.swift */; };
 		124E9388273878B40091F395 /* PatientViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 124E9387273878B40091F395 /* PatientViewController.swift */; };
 		1250E3A728632B07004A7158 /* CustomSegmentedControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1250E3A628632B06004A7158 /* CustomSegmentedControl.swift */; };
@@ -33,6 +35,8 @@
 		12742FE227AD94D100360551 /* PatientRegisterationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12742FE127AD94D100360551 /* PatientRegisterationViewController.swift */; };
 		12742FE427AE99B400360551 /* CollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12742FE327AE99B400360551 /* CollectionViewCell.swift */; };
 		12742FE627AEC19C00360551 /* ReadingCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12742FE527AEC19C00360551 /* ReadingCard.swift */; };
+		12753BB728E0BDE800D693C8 /* baseVC2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12753BB628E0BDE800D693C8 /* baseVC2.swift */; };
+		12753BB928E0D8B700D693C8 /* SpinnerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12753BB828E0D8B700D693C8 /* SpinnerViewController.swift */; };
 		127BC34A28CAD2B500CB3FDA /* SideMenuModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 127BC34928CAD2B500CB3FDA /* SideMenuModel.swift */; };
 		127BC34D28CAD31000CB3FDA /* SideMenuCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 127BC34B28CAD31000CB3FDA /* SideMenuCell.swift */; };
 		127BC34E28CAD31000CB3FDA /* SideMenuCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 127BC34C28CAD31000CB3FDA /* SideMenuCell.xib */; };
@@ -48,6 +52,7 @@
 		12CD913527273A7C00F3C5C8 /* AuthManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12CD913427273A7C00F3C5C8 /* AuthManager.swift */; };
 		12CD91382727420400F3C5C8 /* SMSViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12CD91372727420400F3C5C8 /* SMSViewController.swift */; };
 		12CD913F272745DB00F3C5C8 /* DoctorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12CD913E272745DB00F3C5C8 /* DoctorViewController.swift */; };
+		12F86FF328DDC3690063142F /* PatientDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12F86FF228DDC3690063142F /* PatientDetailViewController.swift */; };
 		AFC7D2FF455758086D3D07F3 /* Pods_FirestoreDemo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9D369F0CA592096AE8C01494 /* Pods_FirestoreDemo.framework */; };
 /* End PBXBuildFile section */
 
@@ -68,6 +73,8 @@
 		1228642727B11F0400B449B1 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file; name = Base; path = "Base.lproj/MarkaziText-SemiBold.ttf"; sourceTree = "<group>"; };
 		1228642927B11F0500B449B1 /* en */ = {isa = PBXFileReference; lastKnownFileType = file; name = en; path = "en.lproj/MarkaziText-SemiBold.ttf"; sourceTree = "<group>"; };
 		1228642A27B3BB0200B449B1 /* FirestoreDemo.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = FirestoreDemo.entitlements; sourceTree = "<group>"; };
+		122F8CB028DE2B1A00CEBDA3 /* HistoryDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryDetailViewController.swift; sourceTree = "<group>"; };
+		122F8CB228DF55A900CEBDA3 /* DoctorLabsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DoctorLabsViewController.swift; sourceTree = "<group>"; };
 		1245197727C81ADC00818174 /* ChartViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChartViewController.swift; sourceTree = "<group>"; };
 		124E9387273878B40091F395 /* PatientViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PatientViewController.swift; sourceTree = "<group>"; };
 		1250E3A628632B06004A7158 /* CustomSegmentedControl.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomSegmentedControl.swift; sourceTree = "<group>"; };
@@ -85,6 +92,8 @@
 		12742FE127AD94D100360551 /* PatientRegisterationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PatientRegisterationViewController.swift; sourceTree = "<group>"; };
 		12742FE327AE99B400360551 /* CollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CollectionViewCell.swift; sourceTree = "<group>"; };
 		12742FE527AEC19C00360551 /* ReadingCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReadingCard.swift; sourceTree = "<group>"; };
+		12753BB628E0BDE800D693C8 /* baseVC2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = baseVC2.swift; sourceTree = "<group>"; };
+		12753BB828E0D8B700D693C8 /* SpinnerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpinnerViewController.swift; sourceTree = "<group>"; };
 		127BC34928CAD2B500CB3FDA /* SideMenuModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SideMenuModel.swift; sourceTree = "<group>"; };
 		127BC34B28CAD31000CB3FDA /* SideMenuCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SideMenuCell.swift; sourceTree = "<group>"; };
 		127BC34C28CAD31000CB3FDA /* SideMenuCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SideMenuCell.xib; sourceTree = "<group>"; };
@@ -100,6 +109,7 @@
 		12CD913427273A7C00F3C5C8 /* AuthManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthManager.swift; sourceTree = "<group>"; };
 		12CD91372727420400F3C5C8 /* SMSViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SMSViewController.swift; sourceTree = "<group>"; };
 		12CD913E272745DB00F3C5C8 /* DoctorViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DoctorViewController.swift; sourceTree = "<group>"; };
+		12F86FF228DDC3690063142F /* PatientDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PatientDetailViewController.swift; sourceTree = "<group>"; };
 		86B8280DA0CC34679489DEDB /* Pods-FirestoreDemo.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FirestoreDemo.debug.xcconfig"; path = "Target Support Files/Pods-FirestoreDemo/Pods-FirestoreDemo.debug.xcconfig"; sourceTree = "<group>"; };
 		930FBF93F560D39CD5EEAD15 /* Pods-FirestoreDemo.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FirestoreDemo.release.xcconfig"; path = "Target Support Files/Pods-FirestoreDemo/Pods-FirestoreDemo.release.xcconfig"; sourceTree = "<group>"; };
 		9D369F0CA592096AE8C01494 /* Pods_FirestoreDemo.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_FirestoreDemo.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -144,6 +154,7 @@
 				127BC34C28CAD31000CB3FDA /* SideMenuCell.xib */,
 				127BC34F28CAD52400CB3FDA /* SideMenuViewController.swift */,
 				12138E3C28D4DACF00D0549B /* LaunchViewController.swift */,
+				12753BB828E0D8B700D693C8 /* SpinnerViewController.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -217,6 +228,7 @@
 				12C8085F286B8CAE0076316A /* CenterViewFlowLayout.swift */,
 				121ABB2F27BAE71D008247EF /* option2.swift */,
 				121ABB3327BE3FB0008247EF /* baseVC.swift */,
+				12753BB628E0BDE800D693C8 /* baseVC2.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -227,6 +239,9 @@
 				1214ACAD28DB6AE700BE02BE /* tableView */,
 				12CD913E272745DB00F3C5C8 /* DoctorViewController.swift */,
 				129157CC28DA321C0000705D /* PatientsViewController.swift */,
+				12F86FF228DDC3690063142F /* PatientDetailViewController.swift */,
+				122F8CB028DE2B1A00CEBDA3 /* HistoryDetailViewController.swift */,
+				122F8CB228DF55A900CEBDA3 /* DoctorLabsViewController.swift */,
 			);
 			path = Doctor;
 			sourceTree = "<group>";
@@ -389,20 +404,25 @@
 				129157CD28DA321C0000705D /* PatientsViewController.swift in Sources */,
 				1293F42827C80CC1009D0440 /* CustomChartFormatter.swift in Sources */,
 				124E9388273878B40091F395 /* PatientViewController.swift in Sources */,
+				12F86FF328DDC3690063142F /* PatientDetailViewController.swift in Sources */,
 				1214ACB028DB6B0300BE02BE /* PatientTableViewCell.swift in Sources */,
 				1245197827C81ADC00818174 /* ChartViewController.swift in Sources */,
 				121ABB3027BAE71D008247EF /* option2.swift in Sources */,
 				1250E3A92864F431004A7158 /* LabCell.swift in Sources */,
 				12138E3D28D4DACF00D0549B /* LaunchViewController.swift in Sources */,
 				12CD913F272745DB00F3C5C8 /* DoctorViewController.swift in Sources */,
+				12753BB928E0D8B700D693C8 /* SpinnerViewController.swift in Sources */,
 				1293F42627C80CB7009D0440 /* XAxisWeekRenderer.swift in Sources */,
 				12742FE627AEC19C00360551 /* ReadingCard.swift in Sources */,
 				125C1D382727347E0053377B /* AppDelegate.swift in Sources */,
 				127BC34D28CAD31000CB3FDA /* SideMenuCell.swift in Sources */,
+				122F8CB128DE2B1A00CEBDA3 /* HistoryDetailViewController.swift in Sources */,
 				12CD91382727420400F3C5C8 /* SMSViewController.swift in Sources */,
 				121FD1AA273868E50034B476 /* HomeViewController.swift in Sources */,
 				128C297B28C3BA000022BDAC /* MenuViewController.swift in Sources */,
 				12742FE227AD94D100360551 /* PatientRegisterationViewController.swift in Sources */,
+				12753BB728E0BDE800D693C8 /* baseVC2.swift in Sources */,
+				122F8CB328DF55A900CEBDA3 /* DoctorLabsViewController.swift in Sources */,
 				121ABB3427BE3FB0008247EF /* baseVC.swift in Sources */,
 				121ABB2E27BAE575008247EF /* SnapCenterLayout.swift in Sources */,
 				125C1D3A2727347E0053377B /* SceneDelegate.swift in Sources */,

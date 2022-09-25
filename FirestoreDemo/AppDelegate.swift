@@ -22,6 +22,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         //set navigation bar buttons tint for whole app 
         UINavigationBar.appearance().tintColor = UIColor(red: 52/255, green: 91/255, blue: 99/255, alpha: 1)
       
+        
         doctorID = UserDefaults.standard.string(forKey: "doctorID")
         Patient.sharedInstance.doctorID = doctorID
         
