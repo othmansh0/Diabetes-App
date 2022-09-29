@@ -15,7 +15,7 @@ class SideMenuViewController: UIViewController {
     @IBOutlet weak var headerImageView: UIImageView!
     @IBOutlet weak var sideMenuTableView: UITableView!
     @IBOutlet weak var patientName: UILabel!
-    
+    var name = ""
     
     var delegate: SideMenuViewControllerDelegate?
     var defaultHighlightedCell: Int = 0
@@ -48,7 +48,7 @@ class SideMenuViewController: UIViewController {
         sideMenuTableView.allowsSelection = true
   
         
-        patientName.text = Patient.sharedInstance.userName
+        patientName.text = name
         
         // Register TableView Cell
         self.sideMenuTableView.register(SideMenuCell.nib, forCellReuseIdentifier: SideMenuCell.identifier)
@@ -89,16 +89,16 @@ extension SideMenuViewController: UITableViewDataSource {
         cell.titleLabel.text = self.menu[indexPath.row].title
         
         // Highlighted color
-        let myCustomSelectionColorView = UIView()
-        myCustomSelectionColorView.backgroundColor = #colorLiteral(red: 0.9421719313, green: 0.9421718717, blue: 0.9421718717, alpha: 1)
-        cell.selectedBackgroundView = myCustomSelectionColorView
+//        let myCustomSelectionColorView = UIView()
+//        myCustomSelectionColorView.backgroundColor = #colorLiteral(red: 0.9421719313, green: 0.9421718717, blue: 0.9421718717, alpha: 1)
+//        cell.selectedBackgroundView = myCustomSelectionColorView
         return cell
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         self.delegate?.selectedCell(indexPath.row)
         // ...
-        
+        tableView.deselectRow(at: indexPath, animated: true)
         // Remove highlighted color when you press the 'Profile' and 'Like us on facebook' cell
 //        if indexPath.row == 4 || indexPath.row == 6 {
 //            tableView.deselectRow(at: indexPath, animated: true)

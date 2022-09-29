@@ -218,6 +218,7 @@ class PatientViewController:UIViewController, UICollectionViewDataSource, UIColl
         let storyboard = UIStoryboard(name: "Main", bundle: Bundle.main)
         self.sideMenuViewController = storyboard.instantiateViewController(withIdentifier: "SideMenuID") as? SideMenuViewController
         self.sideMenuViewController.defaultHighlightedCell = 0 // Default Highlighted Cell
+        sideMenuViewController.name = userName
         self.sideMenuViewController.delegate = self
         view.insertSubview(self.sideMenuViewController!.view, at: self.revealSideMenuOnTop ? 7 : 0)
         addChild(self.sideMenuViewController!)
@@ -645,6 +646,7 @@ class PatientViewController:UIViewController, UICollectionViewDataSource, UIColl
         patient.updateData([readingsTime:FieldValue.arrayUnion([time])]) { error in
             print("error updating data")
         }
+
         if tag == 1 {
             patient.setData([readingsType:Patient.sharedInstance.afterReadings,deltaReadingsType:Patient.sharedInstance.deltaAfterTimes], merge: true)
             
@@ -653,6 +655,9 @@ class PatientViewController:UIViewController, UICollectionViewDataSource, UIColl
             patient.setData([readingsType:Patient.sharedInstance.beforeReadings,deltaReadingsType:Patient.sharedInstance.deltaBeforeTimes], merge: true)
         }
         
+        //setting reading indicator to false so doctor can see there's unviewed data for each patient
+        let doc = self.db.collection("doctors").document(doctorID!).collection("patients").document(Auth.auth().currentUser!.uid)
+        doc.setData(["isVisited":false], merge: true)
   
 
     

@@ -6,6 +6,8 @@
 //
 
 import UIKit
+import Firebase
+import FirebaseStorage
 
 class DoctorLabsViewController: UIViewController {
     
@@ -15,12 +17,19 @@ class DoctorLabsViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         //navigationController?.title = "المختبرات"
+        labsCollectionView.reloadData()
+        print("labs in labs view  \(labs)")
     }
     
+    var labs = [String]()
+    var userID = ""
+    let storageRef = Storage.storage().reference()
+
+    var flagy = 0
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        
+        print("flagy is \(flagy)")
         let navigationBarAppearance = UINavigationBarAppearance()
         navigationBarAppearance.backgroundColor = UIColor(red: 241/255, green: 245/255, blue: 245/255, alpha: 1)
         navigationBarAppearance.backgroundColor = UIColor(red: 235/255, green: 240/255, blue: 240/255, alpha: 1)
@@ -66,15 +75,64 @@ class DoctorLabsViewController: UIViewController {
 
 extension DoctorLabsViewController:UICollectionViewDelegate,UICollectionViewDataSource{
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 20
+        return labs.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "labReading", for: indexPath)
-        cell.layer.cornerRadius = 15
+        if let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "labReading", for: indexPath) as? LabCell{
+            cell.layer.cornerRadius = 15
+            var labReadingNum = labs[indexPath.item].replacingOccurrences(of: "lab", with: "")
+            labReadingNum = labReadingNum.replacingOccurrences(of: ".pdf", with: "")
+            cell.labReadingLabel.text = "مختبر \(labReadingNum)"
+            return cell
+        }
+       
         
-        return cell
+        
+        return UICollectionViewCell()
     }
     
-    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        
+        let child = SpinnerViewController()
+        //
+        //                   // add the spinner view controller
+                        self.addChild(child)
+                        child.view.frame = self.view.frame
+                        self.view.addSubview(child.view)
+                       child.didMove(toParent: self)
+        
+        let currentUser = userID
+                    // Create a reference to the file you want to download
+                    let fileRef = storageRef.child("\(currentUser)/labs/\(labs[indexPath.item])")
+                    
+                    // Create local filesystem URL
+                    let tmporaryDirectoryURL = FileManager.default.temporaryDirectory
+                    let localURL = tmporaryDirectoryURL.appendingPathComponent("\(labs[indexPath.item])")
+
+                    // Download to the local filesystem
+                    let downloadTask = fileRef.write(toFile: localURL) { url, error in
+                      if let error = error {
+                        // Uh-oh, an error occurred!
+                          self.alert(message: error.localizedDescription)
+                      } else {
+                        // Local file URL for "images/island.jpg" is returned
+                          
+                          //self.presentActivityViewController(withUrl: url!) (can be used to show activityController ie sharing a file)
+                          
+                          //Shows pdf in a detailView so it can get navBar
+                          child.willMove(toParent: nil)
+                                   child.view.removeFromSuperview()
+                                   child.removeFromParent()
+                                   
+                            
+                          if let vc = self.storyboard?.instantiateViewController(identifier: "detailViewController") as? PDFViewController {
+                              vc.pdfURL = url
+                               self.navigationController?.pushViewController(vc, animated: true)
+                                              }
+                        
+                      }
+                    }
+    }
 }
+

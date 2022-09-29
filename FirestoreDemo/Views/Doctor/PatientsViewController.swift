@@ -6,8 +6,10 @@
 //
 
 import UIKit
-
+import Firebase
 class PatientsViewController: UIViewController{
+    
+    let db = Firestore.firestore()
     
     @IBOutlet weak var menuBtn: UIButton!
     
@@ -24,6 +26,7 @@ class PatientsViewController: UIViewController{
     
     @IBOutlet weak var drPersonBtm: NSLayoutConstraint!
     
+    @IBOutlet weak var doctorName: UILabel!
     
     //Side Menu
    
@@ -50,9 +53,11 @@ class PatientsViewController: UIViewController{
     var userName = "othman "
     var docGovID = "1234"
     var nationalID = "1234"
-    
+    let defaults = UserDefaults.standard
+    var doctorID: String!
     
     let names = Patients.sharedInstance.names
+    let patientsID = Patients.sharedInstance.patientsID
     var filteredNames = [String]()
     
     override func viewWillAppear(_ animated: Bool) {
@@ -62,6 +67,20 @@ class PatientsViewController: UIViewController{
         navigationController?.isNavigationBarHidden = true
         
         navigationView.layer.zPosition = -1
+        
+        let doctor = self.db.collection("doctors").document(doctorID!).collection("patients")
+    
+        fetchISVisited { result in
+            switch result{
+            case .success(let count):
+                self.patientsTableView.reloadData()
+            
+            case .failure(let count):
+                return
+            }
+   
+        }
+        
       
         
     }
@@ -77,14 +96,15 @@ class PatientsViewController: UIViewController{
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        print("step 4")
+        doctorName.text = userName
         print("patients count in patients view is \(Patients.sharedInstance.names.count)")
-
         filteredNames = names
         navigationView.layer.cornerRadius = 15
         //remove back word from navigation button item for next view
         navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
         
-        
+        doctorID = defaults.string(forKey: "doctorID")
         
         //navigationController?.isToolbarHidden = true
         // navigationController?.isNavigationBarHidden = true
@@ -169,6 +189,7 @@ class PatientsViewController: UIViewController{
         let storyboard = UIStoryboard(name: "Main", bundle: Bundle.main)
         self.sideMenuViewController = storyboard.instantiateViewController(withIdentifier: "SideMenuID") as? SideMenuViewController
         self.sideMenuViewController.defaultHighlightedCell = 0 // Default Highlighted Cell
+        sideMenuViewController.name = userName
         self.sideMenuViewController.delegate = self
         view.insertSubview(self.sideMenuViewController!.view, at: self.revealSideMenuOnTop ? 7 : 0)
         addChild(self.sideMenuViewController!)
@@ -250,7 +271,7 @@ class PatientsViewController: UIViewController{
     
     @IBAction func menuButton(_ sender: UIButton) {
         print("menu button pressed")
-        
+        searchBar.resignFirstResponder()
        // sideMenuViewController.view.layer.zPosition = 2
         
         //menuBtn.target = revealViewController()
@@ -259,7 +280,70 @@ class PatientsViewController: UIViewController{
         
     }
     
+    enum NetworkError: Error {
+        case badURL
+    }
     
+    
+    func fetchISVisited(completionHandler: @escaping (Result<Int, NetworkError>) -> Void)  {
+       
+        let doctor = self.db.collection("doctors").document(doctorID!).collection("patients")
+    
+        doctor.getDocuments { querySnapshot, err in
+            
+            if let err = err {
+                print("error getting patients")
+                self.alert(message: "error getting patients")
+                completionHandler(.failure(.badURL))
+                return
+            }
+            
+            else {
+                
+                let child = SpinnerViewController()
+
+                   // add the spinner view controller
+                self.addChild(child)
+                child.view.frame = self.view.frame
+                self.view.addSubview(child.view)
+               child.didMove(toParent: self)
+                
+                //iterating over patients collection getting their names and IDs
+                for document in querySnapshot!.documents {
+                    let tempPatient = Patient()
+                   // self.myUserID = document.documentID
+                    print("------------------------------------------------------------------------------------------------------------")
+
+                    print("\(document.documentID) => \(document.data())")
+                    print("------------------------------------------------------------------------------------------------------------")
+
+                    let dataDescription = document.data()
+                    Patients.sharedInstance.patientsID.append(document.documentID)
+                    Patients.sharedInstance.names.append(dataDescription["Name"] as? String  ?? "no name")
+                   
+              
+                    tempPatient.isVisited = dataDescription["isVisited"] as? Bool ?? false
+                    Patients.sharedInstance.allPatients[document.documentID]?.isVisited = tempPatient.isVisited // append pateint object to allPatients dictionary
+                    
+                   
+                        print("fucky must be after week1")
+                    
+                   // self.fetchPersonalInfo(userID: document.documentID,getNameOnly: true)
+                }
+                child.willMove(toParent: nil)
+                child.view.removeFromSuperview()
+                child.removeFromParent()
+                print("step 1")
+                completionHandler(.success(5))
+
+                
+               
+              
+            }
+            
+        }
+    
+    }
 }
 
 
@@ -280,6 +364,12 @@ extension PatientsViewController:UITableViewDataSource,UITableViewDelegate {
             //cell.patientName.text = "haha"
             cell.patientName.text = filteredNames[indexPath.row]
             
+            if Patients.sharedInstance.allPatients[patientsID[indexPath.row]]?.isVisited == true {
+                cell.readStatusView.isHidden = true
+            } else {
+                cell.readStatusView.isHidden = false
+            }
+           //
             return cell
         }
         return UITableViewCell()
@@ -289,6 +379,10 @@ extension PatientsViewController:UITableViewDataSource,UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         print("cell got selected")
         if let vc = storyboard?.instantiateViewController(withIdentifier: "PatientDetail") as? PatientDetailViewController {
+            vc.userID = Patients.sharedInstance.patientsID[indexPath.row]
+            Patients.sharedInstance.allPatients[patientsID[indexPath.row]]?.isVisited = true
+            let doc = self.db.collection("doctors").document(doctorID).collection("patients").document(patientsID[indexPath.row])
+            doc.setData(["isVisited":true], merge: true)
             navigationController?.pushViewController(vc, animated: true)
         }
     }
@@ -533,6 +627,7 @@ extension PatientsViewController: UIGestureRecognizerDelegate {
                 self.sideMenuState(expanded: false)
             }
         }
+        searchBar.resignFirstResponder()
     }
 
     // Close side menu when you tap on the shadow background view

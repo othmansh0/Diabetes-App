@@ -460,7 +460,7 @@ class PatientRegisterationViewController: UIViewController,UITextFieldDelegate,C
             let newPatient = db.collection("doctors").document(doctorID).collection("patients").document(Auth.auth().currentUser!.uid)
             
             
-            newPatient.setData(["Name":Patientname,"birthDate":birthDate,"Height":patientHeight,"Weight":patientWeight,"DiabetesType":diabetesOptions[segmentedDiabets.selectedSegmentIndex],"ID":newPatient.documentID,"doctorID":doctorID,"nationalID":nationalID])
+            newPatient.setData(["Name":Patientname,"birthDate":birthDate,"Height":patientHeight,"Weight":patientWeight,"DiabetesType":diabetesOptions[segmentedDiabets.selectedSegmentIndex],"ID":newPatient.documentID,"doctorID":doctorID,"nationalID":nationalID,"isVisited":true])
             
             
             

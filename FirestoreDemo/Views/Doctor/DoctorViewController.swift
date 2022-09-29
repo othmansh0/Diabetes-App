@@ -24,6 +24,7 @@ class DoctorViewController: UIViewController {
     var docGovID = ""
     var nationalID = ""
     
+    let lineColor = UIColor(red: 117/255, green: 121/255, blue: 122/255, alpha: 0.26)
     
     let defaults = UserDefaults.standard
     override func viewWillAppear(_ animated: Bool) {
@@ -35,9 +36,10 @@ class DoctorViewController: UIViewController {
             
         } else {
            // tabBarController?.tabBar.layer.zPosition = -1
-           
+            navigationController?.navigationBar.backgroundColor = .clear
+          
 
-            addButton.imageView?.image = UIImage(named: "saveButton")
+            addButton.imageView?.image = UIImage(named: "saveButton2")
             nameField.text = userName
             nationalIDField.text = nationalID
            // birthDateField.text = birthdate
@@ -54,8 +56,17 @@ class DoctorViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        //Showing bottomBorder only of textFields
+        nameField.addBottomBorder(lineColor, height: 1)
+        nameField.borderStyle = .none
+        nationalIDField.addBottomBorder(lineColor, height: 1)
+        nationalIDField.borderStyle = .none
+        doctorGovID.addBottomBorder(lineColor, height: 1)
+        doctorGovID.borderStyle = .none
+      
+        
         print("doctor id from defaults is \(defaults.string(forKey: "doctorID"))")
-        self.setBackgroundImage("greenBG", contentMode: .scaleAspectFit)
+        //self.setBackgroundImage("greenBG", contentMode: .scaleAspectFit)
         tempConstraint = Int(btnBottomConstraint.constant)
         cardView.layer.cornerRadius = 40
         let tap = UITapGestureRecognizer(target: self, action: #selector(dismissMyKeyboard))

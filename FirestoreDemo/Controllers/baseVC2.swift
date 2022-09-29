@@ -16,7 +16,7 @@ class Patients {
     var allPatients =  [String: Patient]()
 
     
-    
+    //user => patient object => dictData = fetched data then weeksDicr[week] = dict data
     
 
 }

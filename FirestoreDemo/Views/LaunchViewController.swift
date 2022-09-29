@@ -9,19 +9,18 @@ import UIKit
 import Firebase
 class LaunchViewController: UIViewController {
     let db = Firestore.firestore()
-            
+    var delta2 = [String]()
     let defaults = UserDefaults.standard
-    
+    var doctorID: String!
     var activityView: UIActivityIndicatorView?
-
-
+   
     override func viewDidLoad() {
         super.viewDidLoad()
         print("in launch screen")
         performSegue(withIdentifier: "tabSegue", sender: self)
         // Do any additional setup after loading the view.
         
-      
+        doctorID = defaults.string(forKey: "doctorID")
     }
     enum NetworkError: Error {
         case badURL
@@ -41,10 +40,68 @@ class LaunchViewController: UIViewController {
                 fetchPatientsInfo() { result in
                 switch result {
                 case .success(let count):
+                   
+                    
                     print("\(count) unread messages.")
-                    let storyboard = UIStoryboard(name: "Main", bundle: nil)
-                    let PatientsViewController = storyboard.instantiateViewController(identifier: "PatientsNav")
-                        (UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate)?.changeRootViewController(PatientsViewController)
+                    print(Patients.sharedInstance.allPatients.count)
+                    //call fetch weeks here iterate over all patients keys
+                   
+                    
+                 
+                     
+                    //iterate over all users in docotr collection
+                    for myUserID in Patients.sharedInstance.patientsID {
+                        self.fetchWeeks(doctorID: self.doctorID, userID: myUserID) { result in
+                            switch result {
+                                
+                            case .success(let weeks):
+                                print("weeks array  is \(weeks)")
+                                //iterating over all weeks for each user
+                                for week in weeks {
+                                    self.fetchReadings(doctorID: self.doctorID, userID:myUserID , week: week) { result in
+                                        switch result {
+                                        case .success(let tuple1):
+                                            //print("tuple 1:\(tuple1.readings)")
+                                           // Patients.sharedInstance.allPatients["rxJtmu839HZMEv7AdOtotHkQ7pD3"]?.dictData =
+                                            //Patients.sharedInstance.allPatients["rxJtmu839HZMEv7AdOtotHkQ7pD3"]?.weeksData[week] = Patients.sharedInstance.allPatients["rxJtmu839HZMEv7AdOtotHkQ7pD3"]?.dictData
+                                            
+                                            //setting fetched data (dictData from fetchReadings) in weeksDict
+                                            Patients.sharedInstance.allPatients[myUserID]?.setWeekData(week: week)
+                                            
+                                            print("shared instance \(Patients.sharedInstance.allPatients[myUserID]!.weeksData[week]!["afterReadings"])")
+                                            //print("shared instance 2 \(Patients.sharedInstance.allPatients[myUserID]!.weeksData[week]!["beforeTimes"])")
+                                            let storyboard = UIStoryboard(name: "Main", bundle: nil)
+                                            let PatientsViewController = storyboard.instantiateViewController(identifier: "PatientsNav")
+                                                (UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate)?.changeRootViewController(PatientsViewController)
+                                        case .failure(let error):
+                                            print(error.localizedDescription)
+                                        }
+                                    }
+                                }
+                                
+                                
+                                
+                            case .failure(let error):
+                                print(error.localizedDescription)
+                                
+                            }
+                        }
+                    }
+                    
+                    
+                    
+                    
+
+                     
+                   
+                    
+                    print("------------------------------------------------------------------------------------------------------------")
+
+                    print("before going to next view we got weeks")
+                    print("------------------------------------------------------------------------------------------------------------")
+                    //call fetch readings for each patient
+                    
+                    
                 case .failure(let error):
                     print(error.localizedDescription)
                     
@@ -158,11 +215,8 @@ class LaunchViewController: UIViewController {
     
     func fetchPatientsInfo(completionHandler: @escaping (Result<Int, NetworkError>) -> Void)  {
        
-        
-        
-        let doctorID = defaults.string(forKey: "doctorID")
         let doctor = self.db.collection("doctors").document(doctorID!).collection("patients")
-        
+    
         doctor.getDocuments { querySnapshot, err in
             
             if let err = err {
@@ -185,10 +239,15 @@ class LaunchViewController: UIViewController {
                 //iterating over patients collection getting their names and IDs
                 for document in querySnapshot!.documents {
                     let tempPatient = Patient()
+                   // self.myUserID = document.documentID
+                    print("------------------------------------------------------------------------------------------------------------")
+
                     print("\(document.documentID) => \(document.data())")
+                    print("------------------------------------------------------------------------------------------------------------")
+
                     let dataDescription = document.data()
-                    //Patients.sharedInstance.patientsID.append(document.documentID)
-                   // Patients.sharedInstance.names.append(dataDescription["Name"] as? String  ?? "no name")
+                    Patients.sharedInstance.patientsID.append(document.documentID)
+                    Patients.sharedInstance.names.append(dataDescription["Name"] as? String  ?? "no name")
                    
                     
                     tempPatient.userName = dataDescription["Name"] as? String  ?? "no name"
@@ -198,49 +257,19 @@ class LaunchViewController: UIViewController {
                     tempPatient.birthdate = dataDescription["birthDate"] as? String  ?? "no birthdate"
                     tempPatient.docID = dataDescription["doctorID"] as? String  ?? "no doctor ID"
                     tempPatient.nationalID = dataDescription["nationalID"] as? String  ?? "no national ID"
+                    tempPatient.history = dataDescription["History"] as? String  ?? ""
+                    tempPatient.isVisited = dataDescription["isVisited"] as? Bool ?? false
                     Patients.sharedInstance.allPatients[document.documentID] = tempPatient // append pateint object to allPatients dictionary
                     
                    
-                    
-                    
-                    //start another query to get all weeks readings
-                    let weeks = self.db.collection("doctors").document(doctorID!).collection("patients").document(document.documentID).collection("weeks")
-
-                    weeks.getDocuments { querySnapshot2, error in
-                     
-                            if let error = error {
-                                print("error getting patients")
-                                self.alert(message: "error getting patients")
-                                completionHandler(.failure(.badURL))
-                                return
-                            }
-                            
-                            else {
-                                //iterating over patients collection getting their names and IDs
-                                for document in querySnapshot2!.documents {
-                      
-                                    print("weeks are r => \(document.data())")
-                                    let dataDescription = document.data()
-                                    //Patients.sharedInstance.patientsID.append(document.documentID)
-                                   // Patients.sharedInstance.names.append(dataDescription["Name"] as? String  ?? "no name")
-                                   
-                                    
-                                
-                                    
-                                    
-                                   // self.fetchPersonalInfo(userID: document.documentID,getNameOnly: true)
-                                }
-                              
-                              
-                            }
-                       
-                    }
+                        print("fucky must be after week1")
                     
                    // self.fetchPersonalInfo(userID: document.documentID,getNameOnly: true)
                 }
                 child.willMove(toParent: nil)
                 child.view.removeFromSuperview()
                 child.removeFromParent()
+                print("step 1")
                 completionHandler(.success(5))
 
                 
@@ -252,85 +281,109 @@ class LaunchViewController: UIViewController {
     
     }
     
+//
     
+    func fetchWeeks(doctorID:String,userID:String,completionHandler: @escaping (Result<[String], NetworkError>) -> Void)  {
+       
+        
+        var weeks = [String]()
+       
+        let doctor = self.db.collection("doctors").document(doctorID).collection("patients").document(userID).collection("weeks")
     
-    
-    public func fetchReadings(readingType: Int,doctorID:String,userID:String,weeksCount1:Int) -> [String]{
-       //decides which array needs to be fetched from firestore
-       var readingsType = ""
-        var timesType = ""
-        var deltaReadingsType = ""
-       var readingsArray = [String]()
-       var TimesArray = [String]()
-        var deltaTimesArray = [String]()
-        if readingType == 1 {
-            readingsType = "afterReadings"
-            timesType = "afterTimes"
-            deltaReadingsType = "deltaAfterTimes"
-           // print("tag is\(tag)")
-        } else { readingsType = "beforeReadings"
-            timesType = "beforeTimes"
-            deltaReadingsType = "deltaBeforeTimes"
-            //print("tag is\(tag)")
+        doctor.getDocuments { querySnapshot, err in
+            
+            if let err = err {
+                print("error getting patients")
+                self.alert(message: "error getting patients")
+                completionHandler(.failure(.badURL))
+                return
+            }
+            
+            else {
+                
+                let child = SpinnerViewController()
+
+                   // add the spinner view controller
+                self.addChild(child)
+                child.view.frame = self.view.frame
+                self.view.addSubview(child.view)
+               child.didMove(toParent: self)
+                
+                //iterating over patients collection getting their names and IDs
+                for document in querySnapshot!.documents {
+                    print("desc is \(document.documentID)")
+                    weeks.append(document.documentID)
+                    //arr.append(doc?.documentID ?? "no week")
+              
+                }
+                child.willMove(toParent: nil)
+                child.view.removeFromSuperview()
+                child.removeFromParent()
+                print("step 2")
+                completionHandler(.success(weeks))
+
+            }
+            
         }
+       
+    }
+    //(readings: [String], readingsTimes: [String],delta:[String])
+    
+    //fetch readings and stores them in dictData in patient object
+    public func fetchReadings(doctorID:String,userID:String,week:String,completionHandler: @escaping (Result<Int,NetworkError>) -> Void)  {
+
+        
+       var afterReadings = [String]()
+       var afterTimes = [String]()
+        var deltaAfterTimes = [String]()
+        
+        var beforeReadings = [String]()
+        var beforeTimes = [String]()
+         var deltaBeforeTimes = [String]()
         
         //get ref of patient
-        
-        DispatchQueue.main.async {
-             let patient = self.db.collection("doctors").document(doctorID).collection("patients").document(userID).collection("weeks").document("week\(weeksCount1)")
-           
+  let patient = self.db.collection("doctors").document(doctorID).collection("patients").document(userID).collection("weeks").document(week)
+
             print(patient)
-            
+
             patient.getDocument { document, error in
                 if let document = document,document.exists {
                     guard let dataDescription = document.data() else {
                         print("------------------------------------------------------------------------------------")
                         print("error empty document")
                         print("------------------------------------------------------------------------------------")
+                        completionHandler(.failure(.badURL))
                         return
-                        
+
                     }
-                    //print("------------------------------------------------------------------------------------")
-                   // print("Document data: \(dataDescription)")
-                    //print("------------------------------------------------------------------------------------")
-                    
+                
+
                     //fetch arrays from firebase
-                    readingsArray = dataDescription[readingsType] as? [String] ?? ["error fetching array from firebase"]
-        
-                    TimesArray = dataDescription[timesType] as? [String] ?? ["error fetching array from firebase"]
+                    afterReadings = dataDescription["afterReadings"] as? [String] ?? ["error fetching array from firebase"]
+                    afterTimes = dataDescription["afterTimes"] as? [String] ?? ["error fetching array from firebase"]
+                    deltaAfterTimes = dataDescription["deltaAfterTimes"] as? [String] ?? ["error fetching array from firebase"]
                     
-                   
-                    if readingType == 1 {
-                        Patient.sharedInstance.afterReadings = readingsArray.reversed()
-                        
-                        Patient.sharedInstance.afterTimes = TimesArray.reversed()
-                        deltaTimesArray = dataDescription[deltaReadingsType] as? [String] ?? ["error fetching array from firebase"]
-               
-                        Patient.sharedInstance.deltaAfterTimes = deltaTimesArray.reversed()
-                    } else {
-                        Patient.sharedInstance.beforeReadings = readingsArray.reversed()
-                        Patient.sharedInstance.beforeTimes = TimesArray.reversed()
-                        deltaTimesArray = dataDescription[deltaReadingsType] as? [String] ?? ["error fetching array from firebase"]
-                      
-                        Patient.sharedInstance.deltaBeforeTimes = deltaTimesArray.reversed()
-                    }
-                    
-                    
+                    beforeReadings = dataDescription["beforeReadings"] as? [String] ?? ["error fetching array from firebase"]
+                    beforeTimes = dataDescription["beforeTimes"] as? [String] ?? ["error fetching array from firebase"]
+                    deltaBeforeTimes = dataDescription["deltaBeforeTimes"] as? [String] ?? ["error fetching array from firebase"]
                   
-           
-                    print("------------------------------------------------------------------------------------")
-                    print(readingsArray)
-                    print("------------------------------------------------------------------------------------")
-                    //return readingsArray
-                } else {
+                    Patients.sharedInstance.allPatients[userID]?.dictData["afterReadings"] = afterReadings
+                    Patients.sharedInstance.allPatients[userID]?.dictData["afterTimes"] = afterTimes
+                    Patients.sharedInstance.allPatients[userID]?.dictData["deltaAfterTimes"] = deltaAfterTimes
+                    
+                    Patients.sharedInstance.allPatients[userID]?.dictData["beforeReadings"] = beforeReadings
+                    Patients.sharedInstance.allPatients[userID]?.dictData["beforeTimes"] = beforeTimes
+                    Patients.sharedInstance.allPatients[userID]?.dictData["deltaBeforeTimes"] = deltaBeforeTimes
+                    
+                    print("step 3")
+                    
+                    completionHandler(.success(6))
+} else {
                     print("error")
                     return
                 }
             }
-            
-        }
-        
-        return readingsArray
+
     }
 
 }

@@ -657,6 +657,7 @@
                     </view>
                     <navigationItem key="navigationItem" largeTitleDisplayMode="never" id="bom-hV-ksN"/>
                     <connections>
+                        <outlet property="doctorName" destination="blH-n9-gaL" id="TEl-Xl-uTU"/>
                         <outlet property="drPersonBtm" destination="mbJ-Oq-atK" id="pNb-mw-0tY"/>
                         <outlet property="menuBtn" destination="TmD-wh-mS2" id="PTe-Vm-m3R"/>
                         <outlet property="navBottomConstraint" destination="M88-3l-5ve" id="90g-Bm-pZa"/>
@@ -685,7 +686,7 @@
                                 <color key="backgroundColor" systemColor="tintColor"/>
                             </view>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="right" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="12" adjustsFontForContentSizeCategory="YES" translatesAutoresizingMaskIntoConstraints="NO" id="i5F-ve-b5S">
-                                <rect key="frame" x="168.5" y="394" width="77.5" height="29"/>
+                                <rect key="frame" x="168.5" y="394" width="77" height="29"/>
                                 <attributedString key="attributedText">
                                     <fragment content="الأسبوع  1">
                                         <attributes>
@@ -697,16 +698,19 @@
                                 </attributedString>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="BRA-Ic-cah">
-                                <rect key="frame" x="262" y="394" width="16" height="29"/>
+                            <button opaque="NO" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="BRA-Ic-cah">
+                                <rect key="frame" x="261.5" y="394" width="16" height="29"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="29" id="Hna-la-0fh"/>
                                     <constraint firstAttribute="width" constant="16" id="syq-jB-kTn"/>
                                 </constraints>
                                 <state key="normal" title="Button"/>
                                 <buttonConfiguration key="configuration" style="plain" image="smallForward"/>
+                                <connections>
+                                    <action selector="navigateChart:" destination="rGM-mt-BEg" eventType="touchUpInside" id="BZ9-md-mU8"/>
+                                </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="k9Y-l1-XGt">
+                            <button opaque="NO" tag="2" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="k9Y-l1-XGt">
                                 <rect key="frame" x="136.5" y="394" width="16" height="29"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="29" id="t31-S7-mN7"/>
@@ -714,6 +718,9 @@
                                 </constraints>
                                 <state key="normal" title="Button"/>
                                 <buttonConfiguration key="configuration" style="plain" image="smallBackward"/>
+                                <connections>
+                                    <action selector="navigateChart:" destination="rGM-mt-BEg" eventType="touchUpInside" id="V6O-pe-Tfk"/>
+                                </connections>
                             </button>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="NrC-sm-hRS">
                                 <rect key="frame" x="0.0" y="441" width="414" height="455"/>
@@ -790,6 +797,7 @@
                         <outlet property="chaetBtmConstraint" destination="brM-hk-6QC" id="pnY-rN-cTi"/>
                         <outlet property="historyTextView" destination="7TW-k4-HOD" id="fye-j6-yge"/>
                         <outlet property="lineChart" destination="fns-5a-VkB" id="yqu-iK-Q57"/>
+                        <outlet property="patientName" destination="InX-vO-tfD" id="SkA-0u-xd4"/>
                         <outlet property="textViewBtmCons" destination="XxX-Ha-TAf" id="LUT-5Z-cpg"/>
                         <outlet property="textViewTopCons" destination="VO3-Md-5Tw" id="me0-ai-sXg"/>
                         <outlet property="weeksLabel" destination="i5F-ve-b5S" id="JLK-dx-byv"/>
@@ -877,7 +885,7 @@
                                             </textField>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fP8-QJ-5zb">
                                                 <rect key="frame" x="53" y="702" width="308" height="35"/>
-                                                <state key="normal" image="next button">
+                                                <state key="normal" image="nextButton2">
                                                     <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 </state>
                                                 <connections>
@@ -933,7 +941,7 @@
                             </scrollView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="g0B-jd-tnF"/>
-                        <color key="backgroundColor" red="0.72941178080000002" green="0.8156862855" blue="0.78823530669999997" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                        <color key="backgroundColor" red="0.54963350300000002" green="0.66994088890000003" blue="0.69400984050000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="AdH-bT-mxp" firstAttribute="bottom" secondItem="mAg-VC-ayF" secondAttribute="bottom" id="3Iv-ed-KHc"/>
                             <constraint firstItem="AdH-bT-mxp" firstAttribute="top" secondItem="g0B-jd-tnF" secondAttribute="top" id="9xw-hN-LTf"/>
@@ -1810,6 +1818,7 @@
         <image name="largeNextArrow1x" width="35" height="35"/>
         <image name="multiply" width="11" height="11"/>
         <image name="next button" width="308" height="35"/>
+        <image name="nextButton2" width="308" height="35"/>
         <image name="patientButton" width="158" height="198"/>
         <image name="patientIcon" width="26" height="26"/>
         <image name="person.circle" catalog="system" width="128" height="123"/>

@@ -19,6 +19,9 @@ class Patient {
     var birthdate: String!
     var docID: String!
     var nationalID: String!
+    var history:String!
+    var isVisited:Bool!
+    var firebaseUID:String!
     
     
     
@@ -34,6 +37,15 @@ class Patient {
     var deltaAfterTimes = [String]() //stores timeInterval of each reading to be plotted on chart
     
     
+    var dictData = ["afterReadings":[String](),"afterTimes":[String](),"deltaAfterTimes":[String](),"beforeReadings":[String](),"beforeTimes":[String](),"deltaBeforeTimes":[String]()]
+    //dictionary of all weeks String:Dictonart
+   // var weeks = ["week1":dictData]
+    var weeksData : [String:[String : [String]]] = [String:[String : [String]]]()
+    
+    
+    func setWeekData(week:String){
+        self.weeksData[week] = self.dictData
+    }
     public func setupChart(chart:LineChartView,beforeColor:UIColor,afterColor:UIColor,axisColor:UIColor,labelColor:UIColor) {
         let leftAxis = chart.leftAxis
         leftAxis.axisMinimum = -10
@@ -125,9 +137,12 @@ class Patient {
             if Double(forY2[i]) != 0 {
                 let dataEntry = ChartDataEntry(x: Double(forX2[i])!, y: Double(forY2[i])!)
                 lineChartEntry2.append(dataEntry)
+               
             }
             
         }
+        lineChartEntry1.sort(by: { $0.x < $1.x })
+        lineChartEntry2.sort(by: { $0.x < $1.x })
         
         let dataSet = LineChartDataSet(entries: lineChartEntry1, label: "قبل الأكل")
         
@@ -135,6 +150,8 @@ class Patient {
         
         data.addDataSet(dataSet)
         data.addDataSet(dataSet2)
+        
+        
         //before eating line design
         dataSet.setColor(beforeColor)
         dataSet.fillColor = .white
