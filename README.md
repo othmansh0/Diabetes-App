@@ -1,2 +1,2 @@
 # Diabetes-App
-## Screen Shota
+## Screen Shots
