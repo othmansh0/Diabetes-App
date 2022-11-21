@@ -1,4 +1,4 @@
 # Diabetes-App
 ### Screen Shots
-<img src="Patient Views.jpg" width="600" height="490">
+<img src="Patient Views.jpg">
 Patient Views.jpg
