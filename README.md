@@ -1,5 +1,5 @@
 # Diabetes-App
 ### Screen Shots
-####Patient App:
+Patient App:
 <img src="Patient Views.png" width="900">
 
