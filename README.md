@@ -2,11 +2,14 @@
 
 ### Screen Shots
 Patient App:
-<img src="Patient Views.png" width="900">
+<img src="https://user-images.githubusercontent.com/51544418/208235512-d1538846-d0c1-42a8-ba3d-027859fa4320.png">
+<img src="https://user-images.githubusercontent.com/51544418/208235513-3cc663e0-a97b-40f9-8387-6ab39f0dd475.png">
 Doctor App:
-<img src="Doctor Views.png" width="900">
+<img src="https://user-images.githubusercontent.com/51544418/208235519-2d96f3a7-3f7b-487d-b2cc-12c7a09ad41b.png">
+<img src="https://user-images.githubusercontent.com/51544418/208235521-751abebe-0f13-4646-85ec-d70caaae491f.png">
+<img src="https://user-images.githubusercontent.com/51544418/208235522-f028fa7d-2f97-43c9-b976-c8b69019f5d9.png">
 Sign UP Views:
-<img src="Sign UP Views 2.png" width="900">
+<img src="https://user-images.githubusercontent.com/51544418/208235527-662db60c-800a-4e34-9df3-da0b00c088cf.png">
 
 ---
 
